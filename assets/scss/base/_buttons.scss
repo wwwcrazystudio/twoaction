@@ -1,0 +1,21 @@
+%btn {
+  font-size: rem(14px);
+  padding: rem(16px 32px);
+  text-decoration: none;
+  border-radius: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+%btn-accent {
+  @extend %btn;
+  background-color: $accent;
+  color: #fff;
+}
+
+%btn-main {
+  @extend %btn;
+  background-color: $main;
+  color: #fff;
+}
