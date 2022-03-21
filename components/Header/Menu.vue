@@ -28,7 +28,7 @@ export default Vue.extend({
     @include unlist;
 
     display: flex;
-    align-items: start;
+    align-items: flex-start;
   }
 
   &__item {

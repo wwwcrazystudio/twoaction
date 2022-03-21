@@ -4,9 +4,7 @@
       <div class="container">
         <div class="advantages__primary">
           <div
-            class="
-              advantages__primary-advantage advantages__primary-advantage--about
-            "
+            class="advantages__primary-advantage advantages__primary-advantage--about"
           >
             <div class="advantages__primary-advantage-title">
               TwoAction - платформа для рекламы
@@ -21,10 +19,7 @@
             </NuxtLink>
           </div>
           <div
-            class="
-              advantages__primary-advantage
-              advantages__primary-advantage--monetize
-            "
+            class="advantages__primary-advantage advantages__primary-advantage--monetize"
           >
             <div class="advantages__primary-advantage-title">
               Начните монетизировать аудиторию
@@ -85,7 +80,6 @@
     </div>
   </div>
 </template>
-
 
 <style lang="scss" scoped>
 .advantages {

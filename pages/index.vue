@@ -3,6 +3,23 @@
     <LandingHero class="frontpage__hero" />
     <LandingAdvantages class="frontpage__advantages" />
     <LandingServices class="frontpage__services" />
+    <LandingBestGroups
+      class="frontpage__best-groups frontpage__best-groups--tg"
+      heading="Самые надежные каналы Telegram"
+      :link-img="require('~/assets/img/icons/tgblue.png')"
+      link-text="Все каналы"
+      :items="tgGroups"
+      color="main"
+    />
+    <LandingBestGroups
+      class="frontpage__best-groups frontpage__best-groups--inst"
+      heading="Самые надежные группы Instagram"
+      :link-img="require('~/assets/img/icons/instablue.png')"
+      link-text="Все группы"
+      :items="tgGroups"
+      color="accent"
+    />
+    <LandingTestimonials class="frontpage__testimonials" />
   </div>
 </template>
 
@@ -11,6 +28,52 @@ import Vue from 'vue'
 
 export default Vue.extend({
   layout: 'landing',
+  data() {
+    return {
+      tgGroups: [
+        {
+          img: require('~/assets/img/placeholder/group1.png'),
+          title: 'Crypto BIT',
+          count: '1 268 846',
+        },
+        {
+          img: require('~/assets/img/placeholder/group2.png'),
+          title: 'Marvel/DC',
+          count: '1 268 846',
+        },
+        {
+          img: require('~/assets/img/placeholder/group3.png'),
+          title: 'Новости | SIGEN.pro',
+          count: '1 268 846',
+        },
+        {
+          img: require('~/assets/img/placeholder/group4.png'),
+          title: 'Media SIGEN.pro',
+          count: '1 268 846',
+        },
+        {
+          img: require('~/assets/img/placeholder/group5.png'),
+          title: 'Business marketing',
+          count: '1 268 846',
+        },
+        {
+          img: require('~/assets/img/placeholder/group6.png'),
+          title: 'DeCenter',
+          count: '1 268 846',
+        },
+        {
+          img: require('~/assets/img/placeholder/group7.png'),
+          title: 'DOUBLE TOP',
+          count: '1 268 846',
+        },
+        {
+          img: require('~/assets/img/placeholder/group8.png'),
+          title: 'TON Community RUS',
+          count: '1 268 846',
+        },
+      ],
+    }
+  },
 })
 </script>
 
@@ -29,5 +92,10 @@ export default Vue.extend({
     }
   }
 
+  &__best-groups {
+    &--inst {
+      background-color: #fafafd;
+    }
+  }
 }
 </style>
