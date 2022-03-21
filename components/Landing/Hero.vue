@@ -18,9 +18,7 @@
             </div>
             <div class="hero__advantage-item-count">5 324</div>
             <div
-              class="
-                hero__advantage-item-title hero__advantage-item-title--main
-              "
+              class="hero__advantage-item-title hero__advantage-item-title--main"
             >
               <span>телеграм</span>
               каналов
@@ -34,9 +32,7 @@
             </div>
             <div class="hero__advantage-item-count">7 182</div>
             <div
-              class="
-                hero__advantage-item-title hero__advantage-item-title--accent
-              "
+              class="hero__advantage-item-title hero__advantage-item-title--accent"
             >
               <span>инстаграм</span>
               каналов
@@ -50,9 +46,7 @@
             </div>
             <div class="hero__advantage-item-count">12 843 573</div>
             <div
-              class="
-                hero__advantage-item-title hero__advantage-item-title--main
-              "
+              class="hero__advantage-item-title hero__advantage-item-title--main"
             >
               суммарный
               <span>охват</span>
@@ -220,12 +214,12 @@
     right: 100px;
 
     @media (max-width: 1800px) {
-        right: 0;
+      right: 0;
     }
 
     @media (max-width: 1500px) {
-        left: 500px;
-        right: unset;
+      left: 500px;
+      right: unset;
     }
 
     &-deco {

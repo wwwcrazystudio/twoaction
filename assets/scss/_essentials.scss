@@ -3,13 +3,13 @@ $container-max-widths: (
   md: 720px,
   lg: 960px,
   xl: 1140px,
-  xxl: 1416px
+  xxl: 1416px,
 );
 
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
-@import "~sass-rem/rem";
-@import "mixins/utility";
-@import "base/variables";
-@import "base/buttons"; 
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '~sass-rem/rem';
+@import 'mixins/utility';
+@import 'base/variables';
+@import 'base/buttons';
