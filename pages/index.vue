@@ -1,5 +1,5 @@
 <template>
-  <div class="frontpage">
+  <main class="frontpage">
     <LandingHero class="frontpage__hero" />
     <LandingAdvantages class="frontpage__advantages" />
     <LandingServices class="frontpage__services" />
@@ -26,7 +26,7 @@
     <LandingPromotion class="frontpage__promotion" />
     <LandingClientPromotion class="frontpage__client-promotion" />
     <LandingBanners class="frontpage__banners" />
-  </div>
+  </main>
 </template>
 
 <script lang="ts">

@@ -1,5 +1,5 @@
 <template>
-  <div class="best-groups">
+  <section class="best-groups">
     <div class="container">
       <div class="best-groups__wrap">
         <div class="best-groups__head">
@@ -195,7 +195,7 @@
         <NuxtLink to="/" class="best-groups__btn">Каталог</NuxtLink>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">

@@ -1,5 +1,5 @@
 <template>
-  <div class="services">
+  <section class="services">
     <div class="services__wrap">
       <div class="container">
         <h2 class="services__heading">Наши услуги</h2>
@@ -127,7 +127,7 @@
         </ul>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>

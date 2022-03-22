@@ -1,5 +1,5 @@
 <template>
-  <div class="hero">
+  <section class="hero">
     <div class="container">
       <div class="hero__wrap">
         <h1 class="hero__heading">
@@ -81,7 +81,7 @@
         + 864
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>

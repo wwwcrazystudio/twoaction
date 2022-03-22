@@ -1,5 +1,5 @@
 <template>
-  <div class="testimonials">
+  <section class="testimonials">
     <div class="container">
       <div class="testimonials__wrap">
         <h2 class="testimonials__heading">К нам возвращаются</h2>
@@ -64,7 +64,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">

@@ -1,5 +1,5 @@
 <template>
-  <div class="client-promotion">
+  <section class="client-promotion">
     <div class="container">
       <div class="client-promotion__wrap">
         <h2 class="client-promotion__heading">Площадке</h2>
@@ -7,7 +7,7 @@
         <StepsList class="client-promotion__steps-list" :steps="steps" />
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">

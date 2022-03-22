@@ -35,7 +35,7 @@ export default Vue.extend({
       id: undefined,
     }
   },
-  created(this: any) {
+  mounted(this: any) {
     this.id = uuid() as string
   },
   methods: {
