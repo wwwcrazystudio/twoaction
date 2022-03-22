@@ -123,6 +123,8 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .footer {
   background-color: $main;
+  position: relative;
+  z-index: 20;
 
   &__wrap {
     padding: rem(64px 0);

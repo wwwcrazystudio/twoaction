@@ -1,5 +1,5 @@
 <template>
-  <div class="advantages">
+  <section class="advantages">
     <div class="advantages__wrap">
       <div class="container">
         <div class="advantages__primary">
@@ -69,7 +69,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>

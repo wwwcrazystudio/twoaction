@@ -1,5 +1,5 @@
 <template>
-  <div class="banners">
+  <section class="banners">
     <div class="container">
       <div class="banners__wrap">
         <div class="banners__list">
@@ -23,7 +23,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>

@@ -1,5 +1,5 @@
 <template>
-  <div class="promotion">
+  <section class="promotion">
     <div class="container">
       <div class="promotion__wrap">
         <div class="promotion__head">
@@ -17,7 +17,7 @@
         <NuxtLink to="/" class="promotion__btn">Стать рекламодателем</NuxtLink>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">

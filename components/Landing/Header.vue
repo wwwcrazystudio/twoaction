@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <header class="header">
     <div class="container">
       <div class="header__wrap">
         <NuxtLink to="/" class="header__logo">
@@ -18,7 +18,7 @@
         <NuxtLink to="/" class="header__btn">Приступить</NuxtLink>
       </div>
     </div>
-  </div>
+  </header>
 </template>
 
 <script lang="ts">
