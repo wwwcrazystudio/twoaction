@@ -88,8 +88,12 @@ export default Vue.extend({
         slidesPerView: 2,
         spaceBetween: 16,
         breakpoints: {
-          991: {
+          1400: {
             slidesPerView: 4,
+            spaceBetween: 32,
+          },
+          991: {
+            slidesPerView: 3,
             spaceBetween: 32,
           },
           640: {
@@ -222,6 +226,7 @@ export default Vue.extend({
     font-size: rem(13.5px);
     line-height: rem(24px);
     margin-bottom: rem(35px);
+    height: 72px;
   }
 
   &__foot {

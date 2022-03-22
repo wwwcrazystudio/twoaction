@@ -3,36 +3,27 @@
     <div class="advantages__wrap">
       <div class="container">
         <div class="advantages__primary">
-          <div
-            class="advantages__primary-advantage advantages__primary-advantage--about"
-          >
-            <div class="advantages__primary-advantage-title">
-              TwoAction - платформа для рекламы
-            </div>
-            <div class="advantages__primary-advantage-description">
-              Биржа с огромным количеством релевантных групп для размещения
-              рекламы
-            </div>
-            <NuxtLink to="/" class="advantages__primary-advantage-link">
-              Зарегистрироваться
-              <img src="~/assets/img/icons/arrow.png" alt="" />
-            </NuxtLink>
-          </div>
-          <div
-            class="advantages__primary-advantage advantages__primary-advantage--monetize"
-          >
-            <div class="advantages__primary-advantage-title">
-              Начните монетизировать аудиторию
-            </div>
-            <div class="advantages__primary-advantage-description">
-              Удобная площадка с простой и доступной возможностью монетизировать
-              свою аудиторию в Instagram или Telegram
-            </div>
-            <NuxtLink to="/" class="advantages__primary-advantage-link">
-              Выбрать сообщество
-              <img src="~/assets/img/icons/arrow.png" alt="" />
-            </NuxtLink>
-          </div>
+          <AdvantageBanner
+            class="advantages__advantage-banner"
+            color="main"
+            title="TwoAction - платформа для рекламы"
+            description="Биржа с огромным количеством релевантных групп для размещения
+              рекламы"
+            type="link"
+            url="/"
+            link-text="Зарегистрироваться"
+            :img="require('~/assets/img/icons/superman.svg')"
+          />
+          <AdvantageBanner
+            class="advantages__advantage-banner"
+            color="main-light"
+            title="Начните монетизировать аудиторию"
+            description="Удобная площадка с простой и доступной возможностью монетизировать свою аудиторию в Instagram или Telegram"
+            type="link"
+            url="/"
+            link-text="Выбрать сообщество"
+            :img="require('~/assets/img/icons/piggy.svg')"
+          />
         </div>
         <div class="advantages__secondary">
           <div class="advantages__advantage-item">
@@ -94,68 +85,11 @@
     margin-bottom: rem(46px);
 
     @include media-breakpoint-down(xxl) {
+      gap: rem(24px);
+    }
+
+    @include media-breakpoint-down(xl) {
       grid-template-columns: repeat(1, 1fr);
-      gap: rem(32px);
-    }
-  }
-
-  &__primary-advantage {
-    padding: rem(42px 50px);
-    border-radius: 20px;
-
-    &--about {
-      background-color: $main;
-      background-image: url('~/assets/img/icons/superman.svg');
-      background-position: 100% 0%;
-      background-repeat: no-repeat;
-      color: #fff;
-
-      .advantages__primary-advantage-link img {
-        filter: grayscale(100) brightness(100);
-      }
-    }
-
-    &--monetize {
-      background: rgba(0, 133, 229, 0.04);
-      color: #464a4b;
-      background-image: url('~/assets/img/icons/piggy.svg');
-      background-position: 100% 100%;
-      background-repeat: no-repeat;
-
-      .advantages__primary-advantage {
-        &-title {
-          color: $main;
-        }
-        &-link {
-          color: $main;
-        }
-      }
-    }
-
-    &-title {
-      font-weight: 500;
-      font-size: rem(22px);
-      margin-bottom: rem(20px);
-    }
-
-    &-description {
-      font-weight: 500;
-      font-size: rem(13.5px);
-      margin-bottom: rem(25px);
-      max-width: 400px;
-    }
-
-    &-link {
-      font-weight: 500;
-      font-size: rem(14px);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-
-      img {
-        margin-left: rem(8px);
-      }
     }
   }
 

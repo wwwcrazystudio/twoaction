@@ -24,6 +24,8 @@
       :items="testimonials"
     />
     <LandingPromotion class="frontpage__promotion" />
+    <LandingClientPromotion class="frontpage__client-promotion" />
+    <LandingBanners class="frontpage__banners" />
   </div>
 </template>
 
