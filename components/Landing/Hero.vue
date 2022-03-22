@@ -213,6 +213,10 @@
     top: 95px;
     right: 100px;
 
+    img {
+      max-height: 90vh;
+    }
+
     @media (max-width: 1800px) {
       right: 0;
     }
@@ -241,6 +245,11 @@
       &--1 {
         left: 0;
         top: 110px;
+
+        @media (max-width: 1500px) {
+          left: 150px;
+          top: 50px;
+        }
       }
 
       &--2 {

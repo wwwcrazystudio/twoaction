@@ -12,54 +12,49 @@
           </div>
         </div>
 
-        <ul class="promotion__steps-list">
-          <li class="promotion__steps-item">
-            <div class="promotion__steps-item-img">
-              <img src="~/assets/img/icons/step1.svg" alt="" />
-            </div>
-            <div class="promotion__steps-item-title">Шаг 1</div>
-            <div class="promotion__steps-item-description">
-              <b>Выбираете подходящую группу из всего каталога,</b> в
-              соответствии с необходимой статистикой группы
-            </div>
-          </li>
-          <li class="promotion__steps-item">
-            <div class="promotion__steps-item-img">
-              <img src="~/assets/img/icons/step2.svg" alt="" />
-            </div>
-            <div class="promotion__steps-item-title">Шаг 2</div>
-            <div class="promotion__steps-item-description">
-              <b>Заполняете анкету, выбираете шаблоны</b> рекламного материала
-              или загружаете свои
-            </div>
-          </li>
-          <li class="promotion__steps-item">
-            <div class="promotion__steps-item-img">
-              <img src="~/assets/img/icons/step3.svg" alt="" />
-            </div>
-            <div class="promotion__steps-item-title">Шаг 3</div>
-            <div class="promotion__steps-item-description">
-              <b>Выбираете комплексную отправку</b> рекламного заказа (больше 1
-              группы) или одиночную
-            </div>
-          </li>
-          <li class="promotion__steps-item">
-            <div class="promotion__steps-item-img">
-              <img src="~/assets/img/icons/step4.svg" alt="" />
-            </div>
-            <div class="promotion__steps-item-title">Шаг 4</div>
-            <div class="promotion__steps-item-description">
-              <b>Подтверждаете заказ</b> и отслеживаете активность!Наслаждайтесь
-              результатом и не дамайте о лишнем.
-            </div>
-          </li>
-        </ul>
+        <StepsList class="promotion__steps-list" :steps="steps" />
 
         <NuxtLink to="/" class="promotion__btn">Стать рекламодателем</NuxtLink>
       </div>
     </div>
   </div>
 </template>
+
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
+  data() {
+    return {
+      steps: [
+        {
+          img: require('~/assets/img/icons/step1.svg'),
+          title: 'Шаг 1',
+          description:
+            '<b>Выбираете подходящую группу из всего каталога,</b> в соответствии с необходимой статистикой группы',
+        },
+        {
+          img: require('~/assets/img/icons/step2.svg'),
+          title: 'Шаг 2',
+          description:
+            '<b>Заполняете анкету, выбираете шаблоны</b> рекламного материала или загружаете свои',
+        },
+        {
+          img: require('~/assets/img/icons/step3.svg'),
+          title: 'Шаг 3',
+          description:
+            '  <b>Выбираете комплексную отправку</b> рекламного заказа (больше 1 группы) или одиночную',
+        },
+        {
+          img: require('~/assets/img/icons/step4.svg'),
+          title: 'Шаг 4',
+          description:
+            '<b>Подтверждаете заказ</b> и отслеживаете активность! Наслаждайтесь результатом и не дамайте о лишнем.',
+        },
+      ],
+    }
+  },
+})
+</script>
 
 <style lang="scss" scoped>
 .promotion {
@@ -70,6 +65,10 @@
     background-position: center;
     border-radius: 60px;
     padding: rem(52px 108px);
+
+    @include media-breakpoint-down(xxl) {
+      padding: rem(52px);
+    }
   }
 
   &__head {
@@ -103,53 +102,11 @@
     }
   }
 
-  &__steps {
-    &-list {
-      @include unlist;
-
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      gap: rem(40px);
-      margin-bottom: rem(46px);
-    }
-
-    &-item {
-      background: #ffffff;
-      box-shadow: 0px 14px 75px rgba(221, 121, 0, 0.23),
-        0px 1.75302px 9.39116px rgba(221, 121, 0, 0.115);
-      padding: rem(24px 32px);
-      padding-bottom: rem(40px);
-      border-radius: 24px;
-      text-align: center;
-
-      &-img {
-        width: 130px;
-        height: 130px;
-        margin: auto;
-        margin-bottom: rem(12px);
-
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-        }
-      }
-
-      &-title {
-        color: $main;
-        font-weight: 500;
-        font-size: rem(13px);
-        margin-bottom: rem(5px);
-      }
-
-      &-description {
-        font-size: rem(13.5px);
-        line-height: 180%;
-
-        b {
-          font-weight: 700;
-          display: block;
-        }
+  &__steps-list {
+    &::v-deep {
+      .steps-item__wrap {
+        box-shadow: 0px 14px 75px rgba(221, 121, 0, 0.23),
+          0px 1.75302px 9.39116px rgba(221, 121, 0, 0.115);
       }
     }
   }
