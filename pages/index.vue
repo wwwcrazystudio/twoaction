@@ -19,7 +19,11 @@
       :items="tgGroups"
       color="accent"
     />
-    <LandingTestimonials class="frontpage__testimonials" />
+    <LandingTestimonials
+      class="frontpage__testimonials"
+      :items="testimonials"
+    />
+    <LandingPromotion class="frontpage__promotion" />
   </div>
 </template>
 
@@ -70,6 +74,92 @@ export default Vue.extend({
           img: require('~/assets/img/placeholder/group8.png'),
           title: 'TON Community RUS',
           count: '1 268 846',
+        },
+      ],
+      testimonials: [
+        {
+          rating: '4.9',
+          tag: 'Подписчики',
+          img: require('~/assets/img/placeholder/testimonials1.png'),
+          title: 'K/On/Off',
+          content:
+            'Очень качественно и быстро!) Результатом полностью довольны)',
+          likes: '5k',
+          messages: '150',
+          date: '2 недели назад',
+        },
+        {
+          rating: '4.8',
+          tag: 'Активность',
+          img: require('~/assets/img/placeholder/testimonials2.png'),
+          title: 'Barton_Park',
+          content:
+            'Очень крутая подборка групп в обеих площадках! Обязательно воспользуюсь вашими услугами вновь.',
+          likes: '5k',
+          date: '2 недели назад',
+        },
+        {
+          rating: '4.9',
+          tag: 'Активность',
+          img: require('~/assets/img/placeholder/testimonials3.png'),
+          title: 'Physical Transformation',
+          content:
+            'Статистика групп невероятно совпадает! Не жалею затрат! Очень приятно)',
+          messages: '150',
+          date: '2 недели назад',
+        },
+        {
+          rating: '4.9',
+          tag: 'Площадка telegram',
+          img: require('~/assets/img/placeholder/testimonials4.png'),
+          title: 'Barton_Park',
+          content:
+            'Невероятный сервис, приятные клиенты и удобное взаимодействие. Рад сотрудничеству.',
+          likes: '5k',
+          messages: '150',
+          date: '2 недели назад',
+        },
+        {
+          rating: '4.9',
+          tag: 'Подписчики',
+          img: require('~/assets/img/placeholder/testimonials1.png'),
+          title: 'K/On/Off',
+          content:
+            'Очень качественно и быстро!) Результатом полностью довольны)',
+          likes: '5k',
+          messages: '150',
+          date: '2 недели назад',
+        },
+        {
+          rating: '4.8',
+          tag: 'Активность',
+          img: require('~/assets/img/placeholder/testimonials2.png'),
+          title: 'Barton_Park',
+          content:
+            'Очень крутая подборка групп в обеих площадках! Обязательно воспользуюсь вашими услугами вновь.',
+          likes: '5k',
+          date: '2 недели назад',
+        },
+        {
+          rating: '4.9',
+          tag: 'Активность',
+          img: require('~/assets/img/placeholder/testimonials3.png'),
+          title: 'Physical Transformation',
+          content:
+            'Статистика групп невероятно совпадает! Не жалею затрат! Очень приятно)',
+          messages: '150',
+          date: '2 недели назад',
+        },
+        {
+          rating: '4.9',
+          tag: 'Площадка telegram',
+          img: require('~/assets/img/placeholder/testimonials4.png'),
+          title: 'Barton_Park',
+          content:
+            'Невероятный сервис, приятные клиенты и удобное взаимодействие. Рад сотрудничеству.',
+          likes: '5k',
+          messages: '150',
+          date: '2 недели назад',
         },
       ],
     }
