@@ -29,10 +29,40 @@ export default Vue.extend({
 
     display: flex;
     align-items: flex-start;
+    margin: rem(0 -14px);
+
+    @include media-breakpoint-down(xxl) {
+      margin: rem(0 -7px);
+    }
+
+    @include media-breakpoint-down(xl) {
+      position: fixed;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: #fff;
+      margin: 0;
+      z-index: 100;
+    }
   }
 
   &__item {
     margin: rem(0 14px);
+
+    @include media-breakpoint-down(xxl) {
+      margin: rem(0 7px);
+    }
+
+    @include media-breakpoint-down(xl) {
+      margin-bottom: rem(8px);
+    }
   }
 
   &__link {
@@ -40,6 +70,10 @@ export default Vue.extend({
     font-size: rem(14px);
     color: #484848;
     text-decoration: none;
+
+    @include media-breakpoint-down(xl) {
+      font-size: rem(24px);
+    }
   }
 }
 </style>

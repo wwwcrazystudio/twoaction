@@ -28,4 +28,24 @@ body {
   overflow-x: hidden;
   font-family: 'Cera Pro', sans-serif;
   color: #484848;
+
+  @include media-breakpoint-down(sm) {
+    font-size: 12px;
+  }
+}
+
+.container {
+  @include media-breakpoint-down(md) {
+    padding: rem(0 20px);
+  }
+}
+
+@keyframes float {
+  from {
+    transform: translateY(-10px);
+  }
+
+  to {
+    transform: translateY(10px);
+  }
 }

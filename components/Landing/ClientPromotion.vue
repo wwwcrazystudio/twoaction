@@ -2,7 +2,7 @@
   <section class="client-promotion">
     <div class="container">
       <div class="client-promotion__wrap">
-        <h2 class="client-promotion__heading">Площадке</h2>
+        <h2 class="client-promotion__heading" data-aos="fade-down">Площадке</h2>
 
         <StepsList class="client-promotion__steps-list" :steps="steps" />
       </div>
@@ -50,11 +50,20 @@ export default Vue.extend({
 .client-promotion {
   &__wrap {
     padding: rem(80px 0);
+
+    @include media-breakpoint-down(lg) {
+      padding: rem(40px 0);
+    }
   }
 
   &__heading {
     margin-bottom: rem(58px);
     text-align: center;
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: rem(22px);
+      text-align: left;
+    }
   }
 }
 </style>

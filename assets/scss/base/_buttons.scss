@@ -6,6 +6,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
+  @include media-breakpoint-down(md) {
+    font-size: rem(13px);
+  }
 }
 
 %btn-accent {

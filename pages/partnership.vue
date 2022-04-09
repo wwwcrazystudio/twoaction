@@ -57,6 +57,10 @@ export default Vue.extend({
     padding-bottom: rem(50px);
     z-index: 10;
 
+    @include media-breakpoint-down(md) {
+      padding-top: rem(85px);
+    }
+
     &::after {
       content: '';
       background-color: $main;
@@ -75,12 +79,21 @@ export default Vue.extend({
     text-align: center;
     font-size: rem(48px);
     margin-bottom: rem(16px);
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(26px);
+    }
   }
 
   &__subheading {
     font-size: rem(13.5px);
     margin-bottom: rem(32px);
     text-align: center;
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(12px);
+      margin-bottom: rem(22px);
+    }
   }
 }
 
@@ -93,6 +106,10 @@ export default Vue.extend({
     border-radius: 20px;
     max-width: 880px;
     margin: auto;
+
+    @include media-breakpoint-down(md) {
+      padding: rem(26px 22px);
+    }
   }
 
   &__icon {
@@ -113,6 +130,11 @@ export default Vue.extend({
     font-size: rem(24px);
     margin-bottom: rem(24px);
     text-align: center;
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(16px);
+      margin-bottom: rem(14px);
+    }
   }
 
   &__description {
@@ -120,6 +142,11 @@ export default Vue.extend({
     line-height: 186%;
     margin-bottom: rem(38px);
     text-align: center;
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(12px);
+      margin-bottom: rem(28px);
+    }
 
     span {
       color: $main;

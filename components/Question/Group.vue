@@ -55,18 +55,32 @@ export default Vue.extend({
     padding-bottom: rem(66px);
     padding-top: rem(40px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+    @include media-breakpoint-down(md) {
+      padding-top: rem(22px);
+    }
   }
 
   &__heading {
     font-size: rem(36px);
     margin-bottom: rem(32px);
     color: #fff;
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(18px);
+      margin-bottom: rem(28px);
+    }
   }
 
   &__list {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: rem(64px);
+
+    @include media-breakpoint-down(md) {
+      gap: rem(20px);
+      grid-template-columns: 1fr;
+    }
   }
 
   &__list-col {
@@ -75,6 +89,10 @@ export default Vue.extend({
 
   &__question-item {
     margin-bottom: rem(28px);
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: rem(20px);
+    }
 
     &:last-of-type {
       margin-bottom: 0;

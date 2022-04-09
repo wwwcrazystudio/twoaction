@@ -46,6 +46,10 @@ export default Vue.extend({
     transition: 500ms;
     cursor: pointer;
 
+    @include media-breakpoint-down(lg) {
+      padding: rem(26px);
+    }
+
     &--expanded {
       background: #ffffff;
       color: #484848;
@@ -70,6 +74,11 @@ export default Vue.extend({
     font-size: rem(15px);
     margin-bottom: 0;
     position: relative;
+    padding-right: rem(30px);
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(13px);
+    }
 
     &::before,
     &::after {
@@ -103,6 +112,11 @@ export default Vue.extend({
     overflow: hidden;
     color: #fff;
     opacity: 0;
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(12px);
+      line-height: 170%;
+    }
 
     &--expanded {
       margin-top: rem(30px);

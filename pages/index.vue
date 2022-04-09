@@ -6,7 +6,7 @@
     <LandingBestGroups
       class="frontpage__best-groups frontpage__best-groups--tg"
       heading="Самые надежные каналы Telegram"
-      :link-img="require('~/assets/img/icons/tgblue.png')"
+      :link-img="require('~/assets/img/icons/telegram.svg')"
       link-text="Все каналы"
       :items="tgGroups"
       color="main"
@@ -14,7 +14,7 @@
     <LandingBestGroups
       class="frontpage__best-groups frontpage__best-groups--inst"
       heading="Самые надежные группы Instagram"
-      :link-img="require('~/assets/img/icons/instablue.png')"
+      :link-img="require('~/assets/img/icons/instagram.svg')"
       link-text="Все группы"
       :items="tgGroups"
       color="accent"
@@ -181,6 +181,13 @@ export default Vue.extend({
 
     @media (max-width: 1500px) {
       background-position: 300px 100%;
+    }
+
+    @include media-breakpoint-down(sm) {
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+      background-position: -100px -80px;
+      background-size: cover;
     }
   }
 
