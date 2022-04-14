@@ -280,14 +280,6 @@ export default Vue.extend({
     background-color: rgba(255, 175, 40, 0.14);
   }
 
-  &__hero {
-    padding-top: rem(160px);
-
-    @include media-breakpoint-down(md) {
-      padding-top: rem(85px);
-    }
-  }
-
   &__heading {
     text-align: center;
     font-size: rem(48px);

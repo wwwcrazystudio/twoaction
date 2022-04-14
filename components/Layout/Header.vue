@@ -57,28 +57,16 @@
 import Vue from 'vue'
 
 export default Vue.extend({
+  props: {
+    routes: {
+      type: Array,
+      default: () => [],
+    },
+  },
   data() {
     return {
       showMenu: true,
       type: 'Рекламодателям',
-      routes: [
-        {
-          label: 'Услуги',
-          route: '/',
-        },
-        {
-          label: 'Рекламодателю',
-          route: '/',
-        },
-        {
-          label: 'Площадке',
-          route: '/',
-        },
-        {
-          label: 'Отзывы',
-          route: '/',
-        },
-      ],
     }
   },
   computed: {
@@ -104,19 +92,21 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .header {
   position: absolute;
-  top: rem(35px);
+  top: 0;
   left: 0;
   right: 0;
   z-index: 120;
-
-  @include media-breakpoint-down(md) {
-    top: 20px;
-  }
+  border-bottom: 1px solid rgba(186, 186, 186, 0.2);
 
   &__wrap {
     display: flex;
     align-items: center;
     width: 100%;
+    padding: rem(35px 0);
+
+    @include media-breakpoint-down(md) {
+      padding: rem(20px 0);
+    }
   }
 
   &__logo {

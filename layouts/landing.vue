@@ -1,8 +1,8 @@
 <template>
   <div>
-    <LandingHeader />
+    <LayoutHeader type="landing" :routes="routes" />
     <Nuxt />
-    <LandingFooter />
+    <LayoutFooter />
   </div>
 </template>
 
@@ -11,6 +11,28 @@ import Vue from 'vue'
 import AOS from 'aos'
 
 export default Vue.extend({
+  data() {
+    return {
+      routes: [
+        {
+          label: 'Услуги',
+          route: '/',
+        },
+        {
+          label: 'Рекламодателю',
+          route: '/',
+        },
+        {
+          label: 'Площадке',
+          route: '/',
+        },
+        {
+          label: 'Отзывы',
+          route: '/',
+        },
+      ],
+    }
+  },
   mounted() {
     if (typeof window !== 'undefined')
       AOS.init({

@@ -52,14 +52,9 @@ export default Vue.extend({
 .partnership {
   &__wrap {
     background-color: rgba(255, 175, 40, 0.14);
-    padding-top: rem(160px);
     position: relative;
     padding-bottom: rem(50px);
     z-index: 10;
-
-    @include media-breakpoint-down(md) {
-      padding-top: rem(85px);
-    }
 
     &::after {
       content: '';
