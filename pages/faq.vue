@@ -280,20 +280,25 @@ export default Vue.extend({
     background-color: rgba(255, 175, 40, 0.14);
   }
 
-  &__hero {
-    padding-top: rem(160px);
-  }
-
   &__heading {
     text-align: center;
     font-size: rem(48px);
     margin-bottom: rem(16px);
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(26px);
+    }
   }
 
   &__subheading {
     font-size: rem(13.5px);
     margin-bottom: rem(32px);
     text-align: center;
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(12px);
+      margin-bottom: rem(22px);
+    }
   }
 
   &__search-form {
@@ -306,6 +311,10 @@ export default Vue.extend({
         padding: rem(26px 40px);
         background-color: #fff;
       }
+    }
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: rem(22px);
     }
   }
 
@@ -330,6 +339,10 @@ export default Vue.extend({
     position: relative;
     z-index: 1;
 
+    @include media-breakpoint-down(md) {
+      margin-top: rem(100px);
+    }
+
     &::before,
     &::after {
       content: '';
@@ -346,6 +359,10 @@ export default Vue.extend({
 
     &::before {
       top: -90px;
+
+      @include media-breakpoint-down(md) {
+        top: -60px;
+      }
     }
 
     &::after {
@@ -365,6 +382,11 @@ export default Vue.extend({
       margin-bottom: rem(46px);
       color: #fff;
       text-align: center;
+
+      @include media-breakpoint-down(md) {
+        font-size: rem(18px);
+        margin-bottom: rem(28px);
+      }
     }
   }
 
@@ -376,6 +398,10 @@ export default Vue.extend({
       0px 10px 30px rgba(29, 29, 29, 0.04);
     border-radius: 20px;
     padding: rem(32px 64px);
+
+    @include media-breakpoint-down(md) {
+      padding: rem(26px);
+    }
   }
 }
 
@@ -384,6 +410,11 @@ export default Vue.extend({
     font-weight: 500;
     text-align: center;
     margin-bottom: rem(30px);
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(14px);
+      margin-bottom: rem(22px);
+    }
 
     span {
       color: $main;
@@ -399,10 +430,18 @@ export default Vue.extend({
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: rem(34px);
+
+    @include media-breakpoint-down(md) {
+      display: block;
+    }
   }
 
   &__input {
     margin-bottom: rem(18px);
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: rem(12px);
+    }
   }
 
   &__textarea {
@@ -431,6 +470,10 @@ export default Vue.extend({
     margin: auto;
     color: rgba(72, 72, 72, 0.8);
     text-align: center;
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(12px);
+    }
   }
 
   &__link {
@@ -446,6 +489,15 @@ export default Vue.extend({
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: rem(54px);
+
+    @include media-breakpoint-down(lg) {
+      gap: rem(18px);
+    }
+
+    @include media-breakpoint-down(md) {
+      grid-template-columns: repeat(1, 1fr);
+      gap: rem(22px);
+    }
   }
 
   &__item {
@@ -455,6 +507,10 @@ export default Vue.extend({
       0px 10px 30px rgba(29, 29, 29, 0.04);
     border-radius: 20px;
     text-align: center;
+
+    @include media-breakpoint-down(md) {
+      padding: rem(26px 36px);
+    }
 
     &-icon {
       width: 52px;
@@ -473,6 +529,11 @@ export default Vue.extend({
       font-weight: 500;
       font-size: rem(18px);
       margin-bottom: rem(23px);
+
+      @include media-breakpoint-down(md) {
+        font-size: rem(16px);
+        margin-bottom: rem(14px);
+      }
     }
 
     &-description {
@@ -481,6 +542,11 @@ export default Vue.extend({
       max-width: 240px;
       margin: auto;
       margin-bottom: rem(20px);
+
+      @include media-breakpoint-down(md) {
+        font-size: rem(12px);
+        margin-bottom: rem(18px);
+      }
     }
 
     &-link {
@@ -488,6 +554,10 @@ export default Vue.extend({
       font-size: rem(14px);
       color: $main;
       text-decoration: none;
+
+      @include media-breakpoint-down(md) {
+        font-size: rem(13px);
+      }
     }
   }
 }

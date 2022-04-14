@@ -5,6 +5,8 @@
         v-for="(item, key) in steps"
         :key="key"
         :item="item"
+        data-aos="fade-down"
+        :data-aos-delay="100 * key"
         class="steps-list__step-item"
       />
     </ul>
@@ -26,12 +28,23 @@ export default Vue.extend({
     @include unlist;
 
     display: grid;
+    align-items: stretch;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: rem(40px);
     margin-bottom: rem(46px);
 
     @include media-breakpoint-down(xxl) {
       gap: rem(20px);
+    }
+
+    @include media-breakpoint-down(lg) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @include media-breakpoint-down(md) {
+      grid-template-columns: 1fr;
+      margin-bottom: rem(30px);
+      gap: rem(22px);
     }
   }
 }

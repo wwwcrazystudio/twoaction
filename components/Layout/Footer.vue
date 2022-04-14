@@ -7,7 +7,7 @@
             <NuxtLink to="/" class="footer__logo">
               <img src="~/assets/img/icons/logo-white.png" alt="" />
             </NuxtLink>
-            <div class="footer__payment-systems">
+            <div v-show="!isMobile" class="footer__payment-systems">
               <img src="~/assets/img/icons/payment-systems.svg" alt="" />
               Платежные системы
             </div>
@@ -29,6 +29,10 @@
                 title="Информация"
                 :links="menu3"
               />
+            </div>
+            <div v-show="isMobile" class="footer__payment-systems">
+              <img src="~/assets/img/icons/payment-systems.svg" alt="" />
+              Платежные системы
             </div>
           </div>
           <div class="footer__col">
@@ -62,13 +66,13 @@
 
           <div class="footer__links">
             <ul class="footer__links-list">
-              <li class="footer__link-item">
-                <NuxtLink to="/" class="footer__link">
+              <li class="footer__links-item">
+                <NuxtLink to="/" class="footer__links-link">
                   Пользовательское соглашение сервиса
                 </NuxtLink>
               </li>
-              <li class="footer__link-item">
-                <NuxtLink to="/" class="footer__link">
+              <li class="footer__links-item">
+                <NuxtLink to="/" class="footer__links-link">
                   Правила пользования
                 </NuxtLink>
               </li>
@@ -117,6 +121,11 @@ export default Vue.extend({
       ],
     }
   },
+  computed: {
+    isMobile(this: any): boolean {
+      return this.$isMobile()
+    },
+  },
 })
 </script>
 
@@ -128,12 +137,21 @@ export default Vue.extend({
 
   &__wrap {
     padding: rem(64px 0);
+
+    @include media-breakpoint-down(md) {
+      padding: rem(40px 0);
+    }
   }
 
   &__row {
     display: flex;
     justify-content: space-between;
     margin-bottom: rem(54px);
+
+    @include media-breakpoint-down(md) {
+      display: block;
+      margin-bottom: rem(22px);
+    }
   }
 
   &__menus {
@@ -144,16 +162,36 @@ export default Vue.extend({
     @include media-breakpoint-down(xxl) {
       gap: rem(16px);
     }
+
+    @include media-breakpoint-down(md) {
+      grid-template-columns: 1fr;
+      gap: rem(32px);
+      margin-bottom: rem(44px);
+    }
   }
 
   &__logo {
     margin-bottom: rem(36px);
     display: block;
+
+    img {
+      width: 100%;
+    }
+
+    @include media-breakpoint-down(md) {
+      max-width: 145px;
+      margin-bottom: rem(25px);
+    }
   }
 
   &__payment-systems {
     font-size: rem(13px);
     color: rgba(255, 255, 255, 0.8);
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(12px);
+      margin-bottom: rem(24px);
+    }
 
     img {
       display: block;
@@ -164,6 +202,11 @@ export default Vue.extend({
   &__foot {
     display: flex;
     align-items: center;
+
+    @include media-breakpoint-down(md) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
 
   &__copyright {
@@ -173,30 +216,60 @@ export default Vue.extend({
     align-items: center;
     color: #fff;
 
+    @include media-breakpoint-down(md) {
+      flex-direction: column;
+      font-size: rem(12px);
+      align-items: flex-start;
+    }
+
     span {
       font-weight: 400;
       margin-left: rem(10px);
       opacity: 0.6;
+
+      @include media-breakpoint-down(md) {
+        margin-left: 0;
+        margin-top: rem(24px);
+      }
     }
   }
 
   &__links {
     margin-left: auto;
 
+    @include media-breakpoint-down(md) {
+      margin-top: rem(8px);
+      margin-left: 0;
+    }
+
     &-list {
       @include unlist;
       display: flex;
+
+      @include media-breakpoint-down(md) {
+        flex-direction: column;
+      }
     }
 
     &-item {
       margin: rem(0 30px);
+
+      @include media-breakpoint-down(md) {
+        margin: 0;
+        margin-bottom: rem(8px);
+      }
     }
 
     &-link {
       font-weight: 500;
       font-size: rem(14px);
       text-decoration: none;
+      display: block;
       color: #fff;
+
+      @include media-breakpoint-down(md) {
+        font-size: rem(12px);
+      }
     }
   }
 }
@@ -215,6 +288,10 @@ export default Vue.extend({
     @include media-breakpoint-down(xxl) {
       padding: rem(16px);
       max-width: fit-content;
+    }
+
+    @include media-breakpoint-down(md) {
+      padding: rem(26px);
     }
   }
 
@@ -246,6 +323,10 @@ export default Vue.extend({
       font-size: rem(13px);
       margin-bottom: rem(4px);
       color: rgba(255, 255, 255, 0.8);
+
+      @include media-breakpoint-down(md) {
+        font-size: rem(12px);
+      }
     }
 
     &-link {
@@ -254,6 +335,10 @@ export default Vue.extend({
       color: #fff;
       text-decoration: none;
       white-space: nowrap;
+
+      @include media-breakpoint-down(md) {
+        font-size: rem(14px);
+      }
     }
   }
 }

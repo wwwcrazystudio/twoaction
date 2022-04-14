@@ -1,4 +1,11 @@
 export default {
+  target: 'static',
+  generate: {
+    fallback: '404.html',
+  },
+  router: {
+    base: '/twoaction/',
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'twoaction',
@@ -33,7 +40,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['./plugins/media.ts'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,

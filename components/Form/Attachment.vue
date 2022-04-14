@@ -73,8 +73,9 @@ export default Vue.extend({
 
   &__btn {
     margin-right: rem(18px);
-    width: 40px;
+    min-width: 40px;
     height: 40px;
+    flex-basis: 40px;
     background-color: $main;
     border-radius: 14px;
     display: flex;

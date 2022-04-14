@@ -10,6 +10,7 @@
             type="btn"
             url="/"
             :img="require('~/assets/img/icons/piggy2.svg')"
+            data-aos="fade-right"
           />
 
           <AdvantageBanner
@@ -19,6 +20,7 @@
             type="btn"
             url="/"
             :img="require('~/assets/img/icons/coworking.svg')"
+            data-aos="fade-left"
           />
         </div>
       </div>
@@ -30,6 +32,10 @@
 .banners {
   &__wrap {
     padding-bottom: rem(80px);
+
+    @include media-breakpoint-down(lg) {
+      padding-bottom: rem(40px);
+    }
   }
 
   &__list {
@@ -39,6 +45,35 @@
 
     @include media-breakpoint-down(xxl) {
       gap: rem(24px);
+    }
+
+    @include media-breakpoint-down(md) {
+      gap: rem(22px);
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
+  &__advantage-banner {
+    &::v-deep {
+      @include media-breakpoint-down(md) {
+        .advantage-banner__content {
+          max-width: 100%;
+        }
+
+        .advantage-banner__title {
+          margin-bottom: 140px;
+        }
+
+        .advantage-banner__btn {
+          width: 100%;
+        }
+
+        .advantage-banner__img {
+          top: 0;
+          left: 0;
+          max-width: 60%;
+        }
+      }
     }
   }
 }

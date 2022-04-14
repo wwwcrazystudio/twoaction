@@ -13,6 +13,7 @@
             url="/"
             link-text="Зарегистрироваться"
             :img="require('~/assets/img/icons/superman.svg')"
+            data-aos="fade-right"
           />
           <AdvantageBanner
             class="advantages__advantage-banner"
@@ -23,10 +24,15 @@
             url="/"
             link-text="Выбрать сообщество"
             :img="require('~/assets/img/icons/piggy.svg')"
+            data-aos="fade-left"
           />
         </div>
         <div class="advantages__secondary">
-          <div class="advantages__advantage-item">
+          <div
+            class="advantages__advantage-item"
+            data-aos="fade-down"
+            data-aos-delay="100"
+          >
             <div class="advantages__advantage-item-icon">
               <img src="~/assets/img/icons/ui.svg" alt="" />
             </div>
@@ -38,32 +44,36 @@
               взаимодействия с нашей платформой
             </div>
           </div>
-          <div class="advantages__secondary-advantages">
-            <div class="advantages__advantage-item">
-              <div class="advantages__advantage-item-icon">
-                <img src="~/assets/img/icons/stonks.svg" alt="" />
-              </div>
-              <div class="advantages__advantage-item-title">
-                Релевантные группы
-              </div>
-              <div class="advantages__advantage-item-description">
-                На бирже TwoAction было собрано огромное количество релевантных
-                групп с большим охватом аудитории
-              </div>
+          <div
+            class="advantages__advantage-item"
+            data-aos="fade-down"
+            data-aos-delay="200"
+          >
+            <div class="advantages__advantage-item-icon">
+              <img src="~/assets/img/icons/stonks.svg" alt="" />
+            </div>
+            <div class="advantages__advantage-item-title">
+              Релевантные группы
+            </div>
+            <div class="advantages__advantage-item-description">
+              На бирже TwoAction было собрано огромное количество релевантных
+              групп с большим охватом аудитории
             </div>
           </div>
-          <div class="advantages__secondary-advantages">
-            <div class="advantages__advantage-item">
-              <div class="advantages__advantage-item-icon">
-                <img src="~/assets/img/icons/quality.svg" alt="" />
-              </div>
-              <div class="advantages__advantage-item-title">
-                Качественный сервис
-              </div>
-              <div class="advantages__advantage-item-description">
-                Платформа TwoAction с группами и каналами проверена временем, к
-                нам с радостью возвращаются клиенты за добавкой
-              </div>
+          <div
+            class="advantages__advantage-item"
+            data-aos="fade-down"
+            data-aos-delay="300"
+          >
+            <div class="advantages__advantage-item-icon">
+              <img src="~/assets/img/icons/quality.svg" alt="" />
+            </div>
+            <div class="advantages__advantage-item-title">
+              Качественный сервис
+            </div>
+            <div class="advantages__advantage-item-description">
+              Платформа TwoAction с группами и каналами проверена временем, к
+              нам с радостью возвращаются клиенты за добавкой
             </div>
           </div>
         </div>
@@ -76,6 +86,10 @@
 .advantages {
   &__wrap {
     padding: rem(80px 0);
+
+    @include media-breakpoint-down(md) {
+      padding: rem(28px 0);
+    }
   }
 
   &__primary {
@@ -112,6 +126,12 @@
       margin: auto;
       margin-bottom: rem(18px);
 
+      @include media-breakpoint-down(md) {
+        width: 80px;
+        height: 80px;
+        margin-bottom: rem(14px);
+      }
+
       img {
         width: 100%;
         height: 100%;
@@ -123,6 +143,11 @@
       font-weight: 500;
       font-size: rem(20px);
       margin-bottom: rem(16px);
+
+      @include media-breakpoint-down(md) {
+        font-size: rem(16px);
+        margin-bottom: rem(14px);
+      }
     }
 
     &-description {
@@ -130,6 +155,11 @@
       line-height: 180%;
       max-width: 300px;
       margin: auto;
+
+      @include media-breakpoint-down(md) {
+        font-size: rem(12px);
+        margin-bottom: rem(18px);
+      }
     }
   }
 }

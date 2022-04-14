@@ -34,6 +34,10 @@ export default Vue.extend({
     font-size: rem(14px);
     margin-bottom: rem(26px);
     color: #fff;
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: rem(16px);
+    }
   }
 
   &__list {
@@ -42,6 +46,10 @@ export default Vue.extend({
 
   &__item {
     margin-bottom: rem(8px);
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: rem(4px);
+    }
 
     &:last-of-type {
       margin-bottom: 0;

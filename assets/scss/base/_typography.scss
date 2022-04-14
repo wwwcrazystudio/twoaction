@@ -12,7 +12,8 @@ h1 {
   }
 
   @include media-breakpoint-down(sm) {
-    font-size: rem(24px);
+    font-size: rem(26px);
+    line-height: 130%;
   }
 }
 
@@ -29,7 +30,7 @@ h2 {
   }
 
   @include media-breakpoint-down(sm) {
-    font-size: rem(12px);
+    font-size: rem(18px);
   }
 }
 
@@ -46,6 +47,6 @@ h3 {
   }
 
   @include media-breakpoint-down(sm) {
-    font-size: rem(12px);
+    font-size: rem(16px);
   }
 }
