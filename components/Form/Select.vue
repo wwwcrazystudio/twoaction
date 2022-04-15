@@ -13,6 +13,9 @@
         @focus="focus = true"
         @blur="focus = false"
       >
+        <option disabled :selected="!val.label">
+          {{ label }}
+        </option>
         <option v-for="option in options" :key="option.value" :value="option">
           {{ option.label }}
         </option>
@@ -24,7 +27,7 @@
         :class="focus && 'select__value--focus'"
         @click.stop="focus = !focus"
       >
-        {{ val.label }}
+        {{ val.label || label }}
       </div>
       <Dropdown
         :show="focus"
@@ -104,14 +107,14 @@ export default Vue.extend({
 
   &__control,
   &__value {
-    padding: rem(4px 14px);
-    padding-right: rem(26px);
-    background-color: $main;
-    border-radius: 12px;
-    font-size: rem(13px);
+    padding: rem(14px 24px);
+    padding-right: rem(32px);
+    background-color: #fff;
+    font-size: rem(14px);
     width: 100%;
-    color: #fff;
-    border: 1px solid transparent;
+    color: $main;
+    border: 1px solid rgba(186, 186, 186, 0.2);
+    border-radius: 8px;
     transition: 350ms;
     font-weight: 500;
     appearance: none;
@@ -119,6 +122,13 @@ export default Vue.extend({
     background-repeat: no-repeat;
     background-position: calc(100% - 8px);
     cursor: pointer;
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
   }
 }
 </style>

@@ -57,7 +57,7 @@ export default Vue.extend({
           {
             name: 'offset',
             options: {
-              offset: [0, 10],
+              offset: [0, 0],
             },
           },
         ],
@@ -92,10 +92,12 @@ export default Vue.extend({
   }
 
   &__btn {
-    padding: rem(12px 16px);
-    font-size: rem(15px);
+    padding: rem(10px 24px);
+    font-size: rem(14px);
+    font-weight: 300;
     width: 100%;
     text-align: left;
+    color: $main;
     transition: 350ms;
 
     &--active {

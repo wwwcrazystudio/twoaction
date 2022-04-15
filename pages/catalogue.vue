@@ -86,7 +86,7 @@
             </div>
             <div class="groups-list__col">
               <aside class="groups-list__sidebar">
-                <Filters class="groups-list__filters" />
+                <CatalogueFilters class="groups-list__filters" />
               </aside>
             </div>
           </div>

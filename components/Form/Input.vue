@@ -1,19 +1,23 @@
 <template>
   <div class="input">
-    <label
-      :for="id"
-      class="input__label"
-      :class="!showLabel && 'input__label--hidden'"
-    >
-      {{ label }}
-    </label>
-    <input
-      :id="id"
-      :type="type"
-      class="input__control"
-      :name="label"
-      :placeholder="label"
-    />
+    <div class="input__wrap" :class="focus && 'input__wrap--focus'">
+      <label
+        :for="id"
+        class="input__label"
+        :class="!showLabel && 'input__label--hidden'"
+      >
+        {{ label }}
+      </label>
+      <input
+        :id="id"
+        :type="type"
+        class="input__control"
+        :name="label"
+        :placeholder="label"
+        @focus="focus = true"
+        @blur="focus = false"
+      />
+    </div>
   </div>
 </template>
 
@@ -39,6 +43,7 @@ export default Vue.extend({
   data() {
     return {
       id: undefined,
+      focus: false,
     }
   },
   mounted(this: any) {
@@ -49,10 +54,36 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .input {
+  &__wrap {
+    position: relative;
+
+    &--focus {
+      .input__label {
+        font-size: rem(11px);
+        bottom: unset;
+        top: 4px;
+        transition: 350ms;
+      }
+
+      .input__control {
+        padding-bottom: rem(8px);
+        padding-top: rem(20px);
+      }
+    }
+  }
+
   &__label {
     font-weight: 500;
-    font-size: rem(15px);
-    margin-bottom: rem(20px);
+    font-size: rem(14px);
+    position: absolute;
+    color: $main;
+    left: rem(24px);
+    top: 10px;
+    margin: auto;
+    pointer-events: none;
+    transition: 350ms;
+    display: flex;
+    align-items: center;
 
     &--hidden {
       position: absolute;
@@ -71,12 +102,12 @@ export default Vue.extend({
     padding-right: rem(12px);
     color: $main;
     font-size: rem(13px);
-    border-radius: 15px;
+    border-radius: 8px;
     width: 100%;
     background: rgba(0, 133, 229, 0.08);
 
     &::placeholder {
-      color: rgba($main, 0.8);
+      opacity: 0;
     }
   }
 }
