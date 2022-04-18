@@ -66,7 +66,7 @@ export default Vue.extend({
     return {
       id: undefined,
       focus: false,
-      masked: undefined,
+      masked: undefined as any,
     }
   },
   computed: {
@@ -117,7 +117,7 @@ export default Vue.extend({
     initMask() {
       const input = this.$refs.input as HTMLInputElement
 
-      let options = {}
+      let options: any
 
       switch (this.mask) {
         case 'currency':
