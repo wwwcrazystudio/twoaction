@@ -87,8 +87,40 @@ export default Vue.extend({
     border-radius: 12px;
     width: max-content;
     min-width: 100%;
-    overflow: hidden;
+    overflow: auto;
     z-index: 10;
+    max-height: 175px;
+
+    &::-webkit-scrollbar {
+      width: 22px;
+      border: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #0085e5;
+      border: none;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(0, 133, 229, 0.04);
+    }
+
+    &::-webkit-scrollbar-button:single-button {
+      background-color: transparent;
+      border: none;
+      height: 16px;
+      width: 16px;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    &::-webkit-scrollbar-button:single-button:vertical:decrement {
+      background-image: url('~/assets/img/icons/bararrow.png');
+    }
+
+    &::-webkit-scrollbar-button:single-button:vertical:increment {
+      background-image: url('~/assets/img/icons/bararrow2.png');
+    }
   }
 
   &__btn {

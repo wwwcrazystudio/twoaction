@@ -76,12 +76,20 @@
                   </button>
                 </div>
               </div>
-              <ul class="groups-list__list">
-                <CatalogueGroupItem class="groups-list__group-item" />
-                <CatalogueGroupItem class="groups-list__group-item" />
-                <CatalogueGroupItem class="groups-list__group-item" />
-                <CatalogueGroupItem class="groups-list__group-item" />
-                <CatalogueGroupItem class="groups-list__group-item" />
+              <ul
+                class="groups-list__list"
+                :class="[
+                  view === 'list' && 'groups-list__list--view--list',
+                  view === 'grid' && 'groups-list__list--view--grid',
+                ]"
+              >
+                <CatalogueGroupItem
+                  v-for="(item, key) in items"
+                  :key="key"
+                  :view="view"
+                  :item="item"
+                  class="groups-list__group-item"
+                />
               </ul>
             </div>
             <div class="groups-list__col">
@@ -129,6 +137,152 @@ export default Vue.extend({
       ],
       page: 1,
       view: 'grid',
+      items: [
+        {
+          img: require('~/assets/img/placeholder/group1.png'),
+          title: 'Business marketing',
+          excerpt:
+            'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
+          subscribers: '1 268 846',
+          meta: {
+            ERP: '26,32%',
+            CPV: '3,22 ₽',
+            clients: '100%',
+          },
+        },
+        {
+          img: require('~/assets/img/placeholder/group2.png'),
+          title: 'Фармер',
+          excerpt:
+            'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
+          subscribers: '1 268 846',
+          meta: {
+            ERP: '26,32%',
+            CPV: '3,22 ₽',
+            clients: '100%',
+          },
+        },
+        {
+          img: require('~/assets/img/placeholder/group3.png'),
+          title: 'UFC',
+          excerpt:
+            'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
+          subscribers: '1 268 846',
+          meta: {
+            ERP: '26,32%',
+            CPV: '3,22 ₽',
+            clients: '100%',
+          },
+        },
+        {
+          img: require('~/assets/img/placeholder/group4.png'),
+          title: 'ForkLog',
+          excerpt:
+            'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
+          subscribers: '1 268 846',
+          meta: {
+            ERP: '26,32%',
+            CPV: '3,22 ₽',
+            clients: '100%',
+          },
+        },
+        {
+          img: require('~/assets/img/placeholder/group1.png'),
+          title: 'Business marketing',
+          excerpt:
+            'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
+          subscribers: '1 268 846',
+          meta: {
+            ERP: '26,32%',
+            CPV: '3,22 ₽',
+            clients: '100%',
+          },
+        },
+        {
+          img: require('~/assets/img/placeholder/group2.png'),
+          title: 'Фармер',
+          excerpt:
+            'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
+          subscribers: '1 268 846',
+          meta: {
+            ERP: '26,32%',
+            CPV: '3,22 ₽',
+            clients: '100%',
+          },
+        },
+        {
+          img: require('~/assets/img/placeholder/group3.png'),
+          title: 'UFC',
+          excerpt:
+            'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
+          subscribers: '1 268 846',
+          meta: {
+            ERP: '26,32%',
+            CPV: '3,22 ₽',
+            clients: '100%',
+          },
+        },
+        {
+          img: require('~/assets/img/placeholder/group4.png'),
+          title: 'ForkLog',
+          excerpt:
+            'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
+          subscribers: '1 268 846',
+          meta: {
+            ERP: '26,32%',
+            CPV: '3,22 ₽',
+            clients: '100%',
+          },
+        },
+        {
+          img: require('~/assets/img/placeholder/group1.png'),
+          title: 'Business marketing',
+          excerpt:
+            'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
+          subscribers: '1 268 846',
+          meta: {
+            ERP: '26,32%',
+            CPV: '3,22 ₽',
+            clients: '100%',
+          },
+        },
+        {
+          img: require('~/assets/img/placeholder/group2.png'),
+          title: 'Фармер',
+          excerpt:
+            'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
+          subscribers: '1 268 846',
+          meta: {
+            ERP: '26,32%',
+            CPV: '3,22 ₽',
+            clients: '100%',
+          },
+        },
+        {
+          img: require('~/assets/img/placeholder/group3.png'),
+          title: 'UFC',
+          excerpt:
+            'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
+          subscribers: '1 268 846',
+          meta: {
+            ERP: '26,32%',
+            CPV: '3,22 ₽',
+            clients: '100%',
+          },
+        },
+        {
+          img: require('~/assets/img/placeholder/group4.png'),
+          title: 'ForkLog',
+          excerpt:
+            'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
+          subscribers: '1 268 846',
+          meta: {
+            ERP: '26,32%',
+            CPV: '3,22 ₽',
+            clients: '100%',
+          },
+        },
+      ],
     }
   },
   created(this: any) {
@@ -156,6 +310,10 @@ export default Vue.extend({
     font-size: rem(13.5px);
     color: rgba(72, 72, 72, 0.6);
 
+    @include media-breakpoint-down(md) {
+      display: none;
+    }
+
     var {
       font-style: normal;
       color: $main;
@@ -168,26 +326,66 @@ export default Vue.extend({
     display: grid;
     grid-template-columns: auto 325px;
     gap: rem(46px);
+
+    @include media-breakpoint-down(xl) {
+      gap: 0;
+      display: flex;
+      flex-direction: column-reverse;
+    }
   }
 
   &__head {
     display: flex;
     align-items: center;
     margin-bottom: rem(28px);
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: rem(16px);
+    }
   }
 
   &__tabs {
     margin-right: auto;
+
+    @include media-breakpoint-down(md) {
+      width: 100%;
+
+      &::v-deep {
+        .tabs__list {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .tabs__link {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    }
   }
 
   &__pagination {
     margin-left: rem(28px);
+
+    @include media-breakpoint-down(md) {
+      display: none;
+    }
+  }
+
+  &__col {
+    @include media-breakpoint-down(xl) {
+      margin-bottom: rem(22px);
+    }
   }
 
   &__view {
     margin-left: rem(12px);
     display: flex;
     align-items: center;
+
+    @include media-breakpoint-down(lg) {
+      display: none;
+    }
 
     &-btn {
       opacity: 0.4;
@@ -206,12 +404,37 @@ export default Vue.extend({
     }
   }
 
+  &__num-to-show {
+    @include media-breakpoint-down(md) {
+      display: none;
+    }
+  }
+
   &__list {
     @include unlist;
 
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: rem(24px 20px);
+
+    &--view {
+      &--list {
+        grid-template-columns: repeat(1, 1fr);
+        gap: rem(18px);
+      }
+
+      &--grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: rem(24px 20px);
+
+        @include media-breakpoint-down(xxl) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include media-breakpoint-down(md) {
+          grid-template-columns: repeat(1, 1fr);
+          gap: rem(20px);
+        }
+      }
+    }
   }
 }
 
@@ -224,6 +447,24 @@ export default Vue.extend({
   &__title {
     font-size: rem(13.5px);
     margin-right: rem(10px);
+  }
+
+  &__select {
+    &::v-deep {
+      .select__value,
+      .select__control {
+        font-size: rem(13px);
+        font-weight: 500;
+        background-color: $main;
+        background-position: calc(100% - 8px);
+        background-image: url("data:image/svg+xml,%3Csvg width='8' height='6' viewBox='0 0 8 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.75 5.5L0 0.5H7.5L3.75 5.5Z' fill='%23fff'/%3E%3C/svg%3E%0A");
+
+        color: #fff;
+        padding: rem(4px 14px);
+        padding-right: rem(26px);
+        border-radius: 20px;
+      }
+    }
   }
 }
 </style>
