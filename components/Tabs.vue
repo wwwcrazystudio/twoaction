@@ -62,6 +62,10 @@ export default Vue.extend({
     font-size: rem(13.5px);
     border-bottom: 2px solid rgba(0, 133, 229, 0.06);
 
+    @include media-breakpoint-down(md) {
+      font-size: rem(12px);
+    }
+
     &--active {
       border-bottom-color: $main;
       color: $main;

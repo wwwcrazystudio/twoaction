@@ -57,7 +57,7 @@ export default Vue.extend({
           {
             name: 'offset',
             options: {
-              offset: [0, 10],
+              offset: [0, 0],
             },
           },
         ],
@@ -87,15 +87,49 @@ export default Vue.extend({
     border-radius: 12px;
     width: max-content;
     min-width: 100%;
-    overflow: hidden;
+    overflow: auto;
     z-index: 10;
+    max-height: 175px;
+
+    &::-webkit-scrollbar {
+      width: 22px;
+      border: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #0085e5;
+      border: none;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(0, 133, 229, 0.04);
+    }
+
+    &::-webkit-scrollbar-button:single-button {
+      background-color: transparent;
+      border: none;
+      height: 16px;
+      width: 16px;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    &::-webkit-scrollbar-button:single-button:vertical:decrement {
+      background-image: url('~/assets/img/icons/bararrow.png');
+    }
+
+    &::-webkit-scrollbar-button:single-button:vertical:increment {
+      background-image: url('~/assets/img/icons/bararrow2.png');
+    }
   }
 
   &__btn {
-    padding: rem(12px 16px);
-    font-size: rem(15px);
+    padding: rem(10px 24px);
+    font-size: rem(14px);
+    font-weight: 300;
     width: 100%;
     text-align: left;
+    color: $main;
     transition: 350ms;
 
     &--active {
