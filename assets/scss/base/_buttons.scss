@@ -23,3 +23,10 @@
   background-color: $main;
   color: #fff;
 }
+
+%btn-light {
+  @extend %btn;
+  background-color: $accent;
+  color: $main;
+  background: #f8f8fd;
+}
