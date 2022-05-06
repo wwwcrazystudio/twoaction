@@ -16,3 +16,13 @@
 @import '~/assets/scss/base/typography';
 @import '~/assets/scss/base/fonts';
 </style>
+
+<style lang="scss">
+body {
+  padding-top: rem(160px);
+
+  @include media-breakpoint-down(md) {
+    padding-top: rem(95px);
+  }
+}
+</style>

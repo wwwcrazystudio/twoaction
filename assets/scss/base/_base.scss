@@ -28,14 +28,9 @@ body {
   overflow-x: hidden;
   font-family: 'Cera Pro', sans-serif;
   color: #484848;
-  padding-top: rem(160px);
 
   @include media-breakpoint-down(sm) {
     font-size: 12px;
-  }
-
-  @include media-breakpoint-down(md) {
-    padding-top: rem(85px);
   }
 }
 
