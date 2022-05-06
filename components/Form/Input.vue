@@ -117,7 +117,7 @@ export default Vue.extend({
     initMask() {
       const input = this.$refs.input as HTMLInputElement
 
-      let options: any
+      let options: any = {}
 
       switch (this.mask) {
         case 'currency':
@@ -138,7 +138,7 @@ export default Vue.extend({
           return
       }
 
-      this.masked = IMask(input, options)
+      this.masked = IMask(input, options) as any
 
       this.masked.on('accept', this.handleMaskChange)
     },
