@@ -4,12 +4,21 @@
       <ul class="tabs__list">
         <li v-for="tab in tabs" :key="tab.label" class="tabs__item">
           <button
+            v-if="type === 'buttons'"
             class="tabs__link"
             :class="active.label === tab.label && 'tabs__link--active'"
             @click="$emit('click', tab)"
           >
             {{ tab.label }}
           </button>
+          <NuxtLink
+            v-if="type === 'links'"
+            :to="tab.val"
+            class="tabs__link"
+            active-class="tabs__link--active"
+          >
+            {{ tab.label }}
+          </NuxtLink>
         </li>
       </ul>
     </div>
@@ -23,6 +32,10 @@ export default Vue.extend({
     tabs: {
       type: Array,
       required: true,
+    },
+    type: {
+      type: String,
+      default: 'buttons',
     },
     active: {
       type: Object,
@@ -61,6 +74,7 @@ export default Vue.extend({
     padding: rem(8px 16px);
     font-size: rem(13.5px);
     border-bottom: 2px solid rgba(0, 133, 229, 0.06);
+    text-decoration: none;
 
     @include media-breakpoint-down(md) {
       font-size: rem(12px);

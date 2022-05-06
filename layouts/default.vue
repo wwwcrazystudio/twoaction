@@ -22,7 +22,7 @@ body {
   padding-top: rem(160px);
 
   @include media-breakpoint-down(md) {
-    padding-top: rem(85px);
+    padding-top: rem(95px);
   }
 }
 </style>
