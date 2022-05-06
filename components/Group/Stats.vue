@@ -58,8 +58,8 @@ export default Vue.extend({
       const next = this.$refs.next as HTMLElement
 
       const args = {
-        slidesPerView: 1.1,
-        spaceBetween: 16,
+        slidesPerView: 1.2,
+        spaceBetween: 20,
         loop: true,
         breakpoints: {
           991: {
@@ -90,12 +90,20 @@ export default Vue.extend({
     margin-bottom: rem(30px);
     display: flex;
     align-items: center;
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: rem(22px);
+    }
   }
 
   &__heading {
     font-size: rem(18px);
     font-weight: 500;
     margin-bottom: 0;
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(16px);
+    }
   }
 
   &__btn {
@@ -105,10 +113,18 @@ export default Vue.extend({
     font-size: rem(12px);
     margin-left: auto;
     border-radius: 10px;
+
+    @include media-breakpoint-down(md) {
+      display: none;
+    }
   }
 
   &__content {
     position: relative;
+
+    @include media-breakpoint-down(md) {
+      margin-right: -20px;
+    }
   }
 
   &__control {

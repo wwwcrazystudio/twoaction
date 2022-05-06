@@ -12,7 +12,7 @@
 
         <div class="group-info__count"><var>1 268 846</var> подписчика</div>
 
-        <div class="group-info__type group-info__type--inst">
+        <div v-if="!isTablet" class="group-info__type group-info__type--inst">
           <div class="group-info__type-icon">
             <svg
               width="12"
@@ -51,7 +51,7 @@
               />
             </svg>
 
-            Добавить в избранное
+            В избранное
           </div>
         </div>
 
@@ -81,6 +81,24 @@
         <NuxtLink to="/" class="group-info__link">
           Посмотреть все группы владельца
         </NuxtLink>
+
+        <div v-if="isTablet" class="group-info__type group-info__type--inst">
+          <div class="group-info__type-icon">
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 12 12"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 3.5625C4.64297 3.5625 3.53906 4.66641 3.53906 6.02344C3.53906 7.38047 4.64297 8.48438 6 8.48438C7.35703 8.48438 8.46094 7.38047 8.46094 6.02344C8.46094 4.66641 7.35703 3.5625 6 3.5625ZM6 3.5625C4.64297 3.5625 3.53906 4.66641 3.53906 6.02344C3.53906 7.38047 4.64297 8.48438 6 8.48438C7.35703 8.48438 8.46094 7.38047 8.46094 6.02344C8.46094 4.66641 7.35703 3.5625 6 3.5625ZM10.2422 0H1.75781C0.7875 0 0 0.7875 0 1.75781V10.2422C0 11.2125 0.7875 12 1.75781 12H10.2422C11.2125 12 12 11.2125 12 10.2422V1.75781C12 0.7875 11.2125 0 10.2422 0ZM6 9.1875C4.25627 9.1875 2.83594 7.76716 2.83594 6.02344C2.83594 4.27966 4.25627 2.85938 6 2.85938C7.74373 2.85938 9.16406 4.27966 9.16406 6.02344C9.16406 7.76716 7.74373 9.1875 6 9.1875ZM9.86719 2.85938C9.48047 2.85938 9.16406 2.54297 9.16406 2.15625C9.16406 1.76953 9.48047 1.45312 9.86719 1.45312C10.2539 1.45312 10.5703 1.76953 10.5703 2.15625C10.5703 2.54297 10.2539 2.85938 9.86719 2.85938ZM6 3.5625C4.64297 3.5625 3.53906 4.66641 3.53906 6.02344C3.53906 7.38047 4.64297 8.48438 6 8.48438C7.35703 8.48438 8.46094 7.38047 8.46094 6.02344C8.46094 4.66641 7.35703 3.5625 6 3.5625ZM6 3.5625C4.64297 3.5625 3.53906 4.66641 3.53906 6.02344C3.53906 7.38047 4.64297 8.48438 6 8.48438C7.35703 8.48438 8.46094 7.38047 8.46094 6.02344C8.46094 4.66641 7.35703 3.5625 6 3.5625ZM6 3.5625C4.64297 3.5625 3.53906 4.66641 3.53906 6.02344C3.53906 7.38047 4.64297 8.48438 6 8.48438C7.35703 8.48438 8.46094 7.38047 8.46094 6.02344C8.46094 4.66641 7.35703 3.5625 6 3.5625Z"
+                fill="white"
+              />
+            </svg>
+          </div>
+          Instagram страница
+        </div>
       </div>
     </div>
   </div>
@@ -95,6 +113,11 @@ export default Vue.extend({
       required: true,
     },
   },
+  computed: {
+    isTablet(this: any) {
+      return this.$isTablet()
+    },
+  },
 })
 </script>
 
@@ -106,11 +129,33 @@ export default Vue.extend({
     box-shadow: 0px 6px 26px rgba(117, 117, 117, 0.1);
     border-radius: 22px;
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-start;
+
+    @include media-breakpoint-down(md) {
+      padding: rem(26px 16px);
+      align-items: center;
+    }
   }
 
   &__col {
     margin: rem(0 12px);
+
+    &:not(:first-of-type) {
+      flex-grow: 1;
+    }
+
+    @include media-breakpoint-down(md) {
+      margin: 0;
+
+      &:nth-of-type(1) {
+        flex: 0 0 60px;
+      }
+
+      &:nth-of-type(2) {
+        flex: 1 0 50%;
+      }
+    }
   }
 
   &__icon {
@@ -118,12 +163,13 @@ export default Vue.extend({
     height: 74px;
     border: 1px solid #ecf7ff;
     border-radius: 50%;
-    margin: auto;
     margin-bottom: rem(18px);
 
     @include media-breakpoint-down(md) {
       width: 60px;
       height: 60px;
+      margin-right: rem(12px);
+      margin-bottom: rem(14px);
     }
 
     img {
@@ -138,12 +184,22 @@ export default Vue.extend({
     font-size: rem(22px);
     font-weight: 500;
     margin-bottom: rem(8px);
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(17px);
+      margin-bottom: 0;
+    }
   }
 
   &__count {
     font-weight: 400;
     font-size: rem(13px);
     margin-bottom: rem(22px);
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(11px);
+      margin-bottom: rem(14px);
+    }
 
     var {
       color: $main;
@@ -158,6 +214,21 @@ export default Vue.extend({
     position: relative;
     font-size: rem(13.5px);
     border-radius: 12px;
+    width: max-content;
+
+    @include media-breakpoint-down(xxl) {
+      margin-bottom: rem(20px);
+    }
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(12px);
+      margin-bottom: 0;
+      padding: rem(8px 14px);
+      padding-left: rem(32px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
     &-icon {
       position: absolute;
@@ -191,10 +262,11 @@ export default Vue.extend({
     border-radius: 20px;
     width: max-content;
     margin-bottom: rem(34px);
+    white-space: nowrap;
 
     @include media-breakpoint-down(md) {
       font-size: rem(11px);
-      margin-bottom: rem(8px);
+      margin-bottom: rem(20px);
     }
   }
 
@@ -203,6 +275,12 @@ export default Vue.extend({
     color: $main;
     font-size: rem(14px);
     margin-left: auto;
+    white-space: nowrap;
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(12px);
+      margin-bottom: rem(20px);
+    }
 
     svg {
       opacity: 0.4;
@@ -213,6 +291,10 @@ export default Vue.extend({
     max-width: 325px;
     font-size: rem(12px);
     color: rgba(72, 72, 72, 0.8);
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: rem(26px);
+    }
   }
 
   &__group-meta {
@@ -222,6 +304,12 @@ export default Vue.extend({
   &__link {
     font-size: rem(13.5px);
     color: $main;
+    display: block;
+
+    @include media-breakpoint-down(xl) {
+      font-size: rem(12px);
+      margin-bottom: rem(20px);
+    }
   }
 }
 
@@ -242,6 +330,11 @@ export default Vue.extend({
     padding: rem(18px 12px);
     text-align: center;
     white-space: nowrap;
+
+    @include media-breakpoint-down(md) {
+      padding: rem(18px 8px);
+      white-space: normal;
+    }
 
     var {
       font-size: rem(14.5px);
