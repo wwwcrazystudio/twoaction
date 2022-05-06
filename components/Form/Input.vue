@@ -66,7 +66,7 @@ export default Vue.extend({
     return {
       id: undefined,
       focus: false,
-      masked: undefined as any,
+      masked: null as any,
     }
   },
   computed: {
