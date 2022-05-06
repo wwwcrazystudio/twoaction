@@ -35,8 +35,131 @@
           />
           <div class="service-item__form-price">от <span>550 ₽</span></div>
         </div>
-        <button class="service-item__btn">Заказать рекламу</button>
       </div>
+
+      <button class="service-item__btn">Заказать рекламу</button>
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.service-item {
+  &__wrap {
+    padding: rem(34px);
+    background: #ffffff;
+    box-shadow: 0px 10px 50px rgba(117, 117, 117, 0.06),
+      0px 10px 30px rgba(29, 29, 29, 0.04);
+    border-radius: 20px;
+
+    @include media-breakpoint-down(md) {
+      padding: rem(24px);
+    }
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    margin-bottom: rem(22px);
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: rem(20px);
+    }
+  }
+
+  &__icon {
+    margin-right: rem(20px);
+    width: 52px;
+    height: 52px;
+    background-color: $main;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 9px 20px rgba(0, 98, 169, 0.2);
+    border-radius: 14px;
+
+    @include media-breakpoint-down(md) {
+      margin-right: rem(16px);
+    }
+  }
+
+  &__title {
+    font-size: rem(22px);
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(16px);
+    }
+  }
+
+  &__description {
+    font-size: rem(13px);
+    margin-bottom: rem(24px);
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(12px);
+      margin-bottom: rem(20px);
+    }
+  }
+
+  &__form {
+    margin-bottom: rem(36px);
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: rem(20px);
+    }
+
+    &-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    &-label {
+      font-weight: 500;
+      font-size: rem(14px);
+      max-width: 100px;
+
+      @include media-breakpoint-down(md) {
+        font-size: rem(13px);
+        width: 100%;
+        max-width: none;
+        margin-bottom: rem(12px);
+      }
+    }
+
+    &-price {
+      color: $main;
+      font-size: rem(14px);
+
+      @include media-breakpoint-down(md) {
+        font-size: rem(12px);
+      }
+
+      span {
+        font-size: rem(20px);
+        font-weight: 500;
+
+        @include media-breakpoint-down(md) {
+          font-size: rem(18px);
+        }
+      }
+    }
+  }
+
+  &__select {
+    margin: rem(0 16px);
+    max-width: 180px;
+    flex: 1 1 50%;
+
+    @include media-breakpoint-down(md) {
+      margin: 0;
+      margin-right: rem(16px);
+    }
+  }
+
+  &__btn {
+    @extend %btn-main;
+
+    width: 100%;
+  }
+}
+</style>

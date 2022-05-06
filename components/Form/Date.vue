@@ -81,6 +81,10 @@ $primary-color: $main;
 .mx-datepicker-main {
   font: rem(15px) 'Cera Pro';
   font-weight: 500;
+
+  @include media-breakpoint-down(md) {
+    font-size: rem(12px);
+  }
 }
 
 .mx-btn {
@@ -93,12 +97,20 @@ $primary-color: $main;
   border-radius: 8px;
   padding: rem(16px 20px);
   width: 265px;
+
+  @include media-breakpoint-down(md) {
+    padding: rem(8px 12px);
+  }
 }
 
 .mx-table-date td,
 .mx-table-date th {
   font-size: rem(14px);
   border-radius: 50%;
+
+  @include media-breakpoint-down(md) {
+    font-size: rem(12px);
+  }
 }
 
 .mx-table-date td {
@@ -156,7 +168,8 @@ $primary-color: $main;
 
     @include media-breakpoint-down(md) {
       font-size: rem(12px);
-      padding: rem(14px 22px);
+      padding: rem(8px 16px);
+      padding-right: rem(24px);
     }
   }
 }

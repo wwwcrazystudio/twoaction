@@ -911,16 +911,16 @@ export default Vue.extend({
       const next = this.$refs.next as HTMLElement
 
       const args = {
-        slidesPerView: 1.1,
-        spaceBetween: 16,
+        slidesPerView: 1.5,
+        spaceBetween: 20,
         loop: true,
         breakpoints: {
-          991: {
+          1400: {
             slidesPerView: 7,
             spaceBetween: 24,
           },
           640: {
-            slidesPerView: 2,
+            slidesPerView: 4,
             spaceBetween: 24,
           },
         },
@@ -942,17 +942,38 @@ export default Vue.extend({
   &__head {
     margin-bottom: rem(30px);
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: rem(22px);
+    }
   }
 
   &__heading {
     font-size: rem(18px);
     font-weight: 500;
     margin-bottom: 0;
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(16px);
+      margin-bottom: rem(22px);
+      width: 100%;
+    }
+  }
+
+  &__content {
+    @include media-breakpoint-down(md) {
+      margin-right: -20px;
+    }
   }
 
   &__datepicker {
     margin-left: auto;
+
+    @include media-breakpoint-down(md) {
+      margin-left: 0;
+    }
   }
 
   &__carousel-controls {

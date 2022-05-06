@@ -9,7 +9,10 @@
           <GroupServices class="group-page__group-services" />
         </div>
         <aside class="group-page__sidebar">
-          <GroupReviews class="group-page__group-reviews" />
+          <GroupReviews
+            class="group-page__group-reviews"
+            :reviews="group.reviews"
+          />
         </aside>
       </div>
     </div>
@@ -33,6 +36,56 @@ export default Vue.extend({
           CPV: '3,22 ₽',
           clients: '100%',
         },
+        reviews: [
+          {
+            img: require('~/assets/img/placeholder/group1.png'),
+            author: 'Николай',
+            date: '18.11.2021',
+            title: 'Рекалмный пост',
+            content:
+              'Отличная и коммуникабельная администрация! Очень оперативно и осторожно исполнили заказ. Обязательно буду обращаться еще.',
+          },
+          {
+            img: require('~/assets/img/placeholder/group2.png'),
+            author: 'Алексей',
+            date: '08.11.2021',
+            title: 'Реклама в сториз',
+            content:
+              'Отличная и коммуникабельная администрация! Очень оперативно и осторожно исполнили заказ. Обязательно буду обращаться еще.',
+          },
+          {
+            img: require('~/assets/img/placeholder/group3.png'),
+            author: 'Юрий',
+            date: '24.10.2021',
+            title: 'Накрутка подписчиков',
+            content:
+              'Отличная и коммуникабельная администрация! Очень оперативно и осторожно исполнили заказ. Обязательно буду обращаться еще.',
+          },
+          {
+            img: require('~/assets/img/placeholder/group1.png'),
+            author: 'Николай',
+            date: '18.11.2021',
+            title: 'Рекалмный пост',
+            content:
+              'Отличная и коммуникабельная администрация! Очень оперативно и осторожно исполнили заказ. Обязательно буду обращаться еще.',
+          },
+          {
+            img: require('~/assets/img/placeholder/group2.png'),
+            author: 'Алексей',
+            date: '08.11.2021',
+            title: 'Реклама в сториз',
+            content:
+              'Отличная и коммуникабельная администрация! Очень оперативно и осторожно исполнили заказ. Обязательно буду обращаться еще.',
+          },
+          {
+            img: require('~/assets/img/placeholder/group3.png'),
+            author: 'Юрий',
+            date: '24.10.2021',
+            title: 'Накрутка подписчиков',
+            content:
+              'Отличная и коммуникабельная администрация! Очень оперативно и осторожно исполнили заказ. Обязательно буду обращаться еще.',
+          },
+        ],
       },
     }
   },
@@ -45,6 +98,11 @@ export default Vue.extend({
     display: grid;
     grid-template-columns: auto 325px;
     gap: rem(46px);
+    margin-bottom: rem(70px);
+
+    @include media-breakpoint-down(xl) {
+      display: block;
+    }
   }
 
   &__content {
@@ -61,6 +119,12 @@ export default Vue.extend({
 
   &__group-schedule {
     margin-bottom: rem(34px);
+  }
+
+  &__sidebar {
+    @include media-breakpoint-down(lg) {
+      margin-top: rem(32px);
+    }
   }
 }
 </style>
