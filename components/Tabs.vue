@@ -52,6 +52,12 @@ export default Vue.extend({
 
     display: flex;
     align-items: center;
+
+    @include media-breakpoint-down(md) {
+      overflow: auto;
+      margin-right: -20px;
+      padding-bottom: 8px;
+    }
   }
 
   &__item {
@@ -75,6 +81,7 @@ export default Vue.extend({
     font-size: rem(13.5px);
     border-bottom: 2px solid rgba(0, 133, 229, 0.06);
     text-decoration: none;
+    white-space: nowrap;
 
     @include media-breakpoint-down(md) {
       font-size: rem(12px);

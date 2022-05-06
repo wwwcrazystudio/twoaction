@@ -85,6 +85,7 @@ export default Vue.extend({
 .support-page {
   &__wrap {
     padding-bottom: rem(117px);
+
     @include media-breakpoint-down(md) {
       padding-bottom: rem(36px);
     }
@@ -94,22 +95,30 @@ export default Vue.extend({
     margin-bottom: rem(20px);
   }
 
+  &__tabs {
+    width: 100%;
+  }
+
   &__head {
     display: flex;
     justify-content: space-between;
     margin-bottom: rem(32px);
     align-items: center;
   }
+
   &__list {
     @include unlist;
+
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 64px;
     grid-row-gap: 30px;
+
     @include media-breakpoint-down(lg) {
       grid-column-gap: 20px;
       grid-row-gap: 20px;
     }
+
     @include media-breakpoint-down(md) {
       display: block;
     }
@@ -120,10 +129,12 @@ export default Vue.extend({
       margin-bottom: rem(22px);
     }
   }
+
   &__btn {
     @extend %btn-main;
     width: 100%;
     max-width: 216px;
+
     @include media-breakpoint-down(lg) {
       display: none;
     }
