@@ -52,5 +52,17 @@ export default Vue.extend({
   &__list {
     @include unlist;
   }
+
+  &__order-item {
+    margin-bottom: rem(30px);
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: rem(20px);
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
 }
 </style>

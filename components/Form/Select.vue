@@ -58,6 +58,10 @@ export default Vue.extend({
       type: Array,
       required: true,
     },
+    preselect: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -82,7 +86,7 @@ export default Vue.extend({
   },
   created(this: any) {
     if (this.value) this.innerVal = this.value
-    else this.innerVal = this.options[0]
+    else if (this.preselect) this.innerVal = this.options[0]
   },
   mounted() {
     this.id = uuid() as string

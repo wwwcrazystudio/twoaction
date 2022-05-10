@@ -26,19 +26,19 @@ export default Vue.extend({
       tabs: [
         {
           label: 'Мои заказы',
-          val: 'orders',
+          val: '/account/orders',
         },
         {
           label: 'Шаблоны',
-          val: 'templates',
+          val: '/account/templates',
         },
         {
           label: 'Профиль',
-          val: 'profile',
+          val: '/account/profile',
         },
         {
           label: 'Безопасность',
-          val: 'security',
+          val: '/account/security',
         },
       ],
       activeTab: {},
@@ -55,6 +55,10 @@ export default Vue.extend({
 
   &__tabs {
     margin-bottom: rem(30px);
+  }
+
+  &__content {
+    padding-bottom: rem(270px);
   }
 }
 </style>

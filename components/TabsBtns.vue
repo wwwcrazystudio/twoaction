@@ -39,10 +39,20 @@ export default Vue.extend({
 
     display: flex;
     align-items: center;
+
+    @include media-breakpoint-down(md) {
+      overflow: auto;
+      margin-right: -20px;
+      padding-bottom: 8px;
+    }
   }
 
   &__item {
     margin-right: rem(12px);
+
+    @include media-breakpoint-down(md) {
+      margin-right: rem(10px);
+    }
 
     &:last-of-type {
       margin-right: 0;
@@ -60,9 +70,11 @@ export default Vue.extend({
     border: 1px solid $main;
     transition: 350ms;
     border-radius: 8px;
+    white-space: nowrap;
 
     @include media-breakpoint-down(md) {
       font-size: rem(12px);
+      padding: rem(12px 20px);
     }
 
     &--active {
