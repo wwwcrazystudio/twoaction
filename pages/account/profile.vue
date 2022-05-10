@@ -14,7 +14,7 @@
       <ProfileVerification class="profile__profile-verification" />
     </div>
 
-    <ProfileReviews class="profile__profile-reviews" :reviews="reviews" />
+    <Reviews class="profile__profile-reviews" :reviews="reviews" />
   </div>
 </template>
 

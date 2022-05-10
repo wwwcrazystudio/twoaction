@@ -1,22 +1,19 @@
 <template>
-  <div class="profile-reviews">
-    <h2 class="profile-reviews__heading">
+  <div class="reviews">
+    <h2 class="reviews__heading">
       Отзывы <span>{{ reviews.length }}</span>
     </h2>
 
-    <div class="profile-reviews__content">
-      <button
-        ref="next"
-        class="profile-reviews__control profile-reviews__control--next"
-      >
+    <div class="reviews__content">
+      <button ref="next" class="reviews__control reviews__control--next">
         <img src="~/assets/img/icons/arrow.png" alt="" />
       </button>
-      <div ref="wrap" class="profile-reviews__list-wrap swiper">
-        <ul class="profile-reviews__list swiper-wrapper">
+      <div ref="wrap" class="reviews__list-wrap swiper">
+        <ul class="reviews__list swiper-wrapper">
           <li
             v-for="(review, key) in reviews"
             :key="key"
-            class="profile-reviews__review-item review-item swiper-slide"
+            class="reviews__review-item review-item swiper-slide"
           >
             <div class="review-item__wrap">
               <div class="review-item__head">
@@ -34,10 +31,7 @@
           </li>
         </ul>
       </div>
-      <button
-        ref="prev"
-        class="profile-reviews__control profile-reviews__control--prev"
-      >
+      <button ref="prev" class="reviews__control reviews__control--prev">
         <img src="~/assets/img/icons/arrow.png" alt="" />
       </button>
     </div>
@@ -97,7 +91,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.profile-reviews {
+.reviews {
   &__heading {
     font-size: rem(18px);
     font-weight: 500;
