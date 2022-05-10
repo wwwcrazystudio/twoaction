@@ -71,7 +71,7 @@ export default Vue.extend({
     transition: 350ms;
 
     @include media-breakpoint-down(md) {
-      font-size: rem(14px);
+      font-size: rem(12px);
       padding: rem(10px 24px);
     }
 

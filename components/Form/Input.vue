@@ -18,7 +18,8 @@
         :placeholder="label"
         :min="min"
         :max="max"
-        @focus="focus = true"
+        :readonly="readonly"
+        @focus="!readonly ? (focus = true) : null"
         @blur="focus = false"
         @input="handleInput"
       />
@@ -60,6 +61,10 @@ export default Vue.extend({
     max: {
       type: Number,
       default: 100,
+    },
+    readonly: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {

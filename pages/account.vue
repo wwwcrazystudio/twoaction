@@ -3,13 +3,7 @@
     <div class="container">
       <h1 class="account-page__heading">Личный кабинет</h1>
 
-      <Tabs
-        class="account-page__tabs"
-        :tabs="tabs"
-        :active="activeTab"
-        type="links"
-        @click="activeTab = $event"
-      />
+      <Tabs class="account-page__tabs" :tabs="tabs" type="links" />
 
       <div class="account-page__content">
         <NuxtChild />
