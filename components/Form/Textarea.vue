@@ -9,7 +9,6 @@
     </label>
     <textarea
       :id="id"
-      :type="type"
       class="textarea__control"
       :name="label"
       :placeholder="label"
