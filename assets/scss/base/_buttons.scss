@@ -30,3 +30,8 @@
   color: $main;
   background: #f8f8fd;
 }
+
+%btn-rectangle {
+  @extend %btn;
+  border-radius: 8px;
+}
