@@ -9,50 +9,34 @@
           <th>Бюджет</th>
         </thead>
         <tbody>
-          <tr>
-            <td class="wallet-table__count">01</td>
-            <td>Рекламный пост в сообществе Instagram «Marvel/DC»</td>
-            <td class="wallet-table__medium">10.10.2021, 14:33</td>
-            <td class="wallet-table__medium">12.10.2021, 17:08</td>
-            <td class="wallet-table__accent">2 850 ₽</td>
-          </tr>
-          <tr>
-            <td class="wallet-table__count">02</td>
-            <td>Рекламный пост в сообществе Instagram «Marvel/DC»</td>
-            <td class="wallet-table__medium">10.10.2021, 14:33</td>
-            <td class="wallet-table__medium">12.10.2021, 17:08</td>
-            <td class="wallet-table__accent">2 850 ₽</td>
-          </tr>
-          <tr>
-            <td class="wallet-table__count">03</td>
-            <td>Рекламный пост в сообществе Instagram «Marvel/DC»</td>
-            <td class="wallet-table__medium">10.10.2021, 14:33</td>
-            <td class="wallet-table__medium">12.10.2021, 17:08</td>
-            <td class="wallet-table__accent">2 850 ₽</td>
-          </tr>
-          <tr>
-            <td class="wallet-table__count">04</td>
-            <td>Рекламный пост в сообществе Instagram «Marvel/DC»</td>
-            <td class="wallet-table__medium">10.10.2021, 14:33</td>
-            <td class="wallet-table__medium">12.10.2021, 17:08</td>
-            <td class="wallet-table__accent">2 850 ₽</td>
-          </tr>
-          <tr>
-            <td class="wallet-table__count">05</td>
-            <td>Рекламный пост в сообществе Instagram «Marvel/DC»</td>
-            <td class="wallet-table__medium">10.10.2021, 14:33</td>
-            <td class="wallet-table__medium">12.10.2021, 17:08</td>
-            <td class="wallet-table__accent">2 850 ₽</td>
-          </tr>
-          <tr>
-            <td class="wallet-table__count">06</td>
-            <td>Рекламный пост в сообществе Instagram «Marvel/DC»</td>
-            <td class="wallet-table__medium">10.10.2021, 14:33</td>
-            <td class="wallet-table__medium">12.10.2021, 17:08</td>
-            <td class="wallet-table__accent">2 850 ₽</td>
+          <tr v-for="(item, key) in items" :key="key">
+            <td>
+              <div class="wallet-table__count">01</div>
+            </td>
+            <td>
+              <div class="wallet-table__title">
+                {{ item.title }}
+              </div>
+            </td>
+            <td>
+              <div class="wallet-table__medium" data-title="Дата создания">
+                {{ item.creationDate }}
+              </div>
+            </td>
+            <td>
+              <div class="wallet-table__medium" data-title="Дата исполнения">
+                {{ item.executionDate }}
+              </div>
+            </td>
+            <td>
+              <div class="wallet-table__accent" data-title="Бюджет">
+                {{ item.budget }}
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
+      <button class="wallet-table__btn">Показать еще</button>
       <div class="wallet-table__footer">
         <div class="wallet-table__total">Всего: <var>26</var> операции</div>
 
@@ -70,7 +54,7 @@
         <Pagination
           :count="8"
           :active="page"
-          class="groups-list__pagination"
+          class="wallet-table__pagination"
           @change="page = $event"
         />
       </div>
@@ -81,6 +65,12 @@
 <script lang="ts">
 import Vue from 'vue'
 export default Vue.extend({
+  props: {
+    items: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {
       numToShow: {},
@@ -110,17 +100,115 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .wallet-table {
   &__wrap {
-    padding-top: 38px;
+    padding-top: rem(38px);
     border: 1px solid rgba(244, 190, 190, 0.2);
     box-shadow: 0px 6px 26px rgba(117, 117, 117, 0.1);
     border-radius: 22px;
+    @include media-breakpoint-down(xl) {
+      padding-top: 0;
+    }
+    thead {
+      @include media-breakpoint-down(xl) {
+        display: none;
+      }
+    }
+    table {
+      @include media-breakpoint-down(lg) {
+        display: block;
+      }
+    }
+    tbody {
+      @include media-breakpoint-down(lg) {
+        display: block;
+      }
+    }
+
+    th {
+      padding-bottom: rem(28px);
+      font-size: rem(15px);
+      border-bottom: 1px solid rgba(186, 186, 186, 0.2);
+      &:first-of-type {
+        padding-left: rem(44px);
+        @include media-breakpoint-down(lg) {
+          padding: 10px;
+        }
+      }
+      &:last-of-type {
+        padding-right: rem(62px);
+        @include media-breakpoint-down(xxl) {
+          padding-right: rem(32px);
+        }
+      }
+    }
+
+    td {
+      padding: rem(30px 0);
+      font-size: rem(14px);
+      &:first-of-type {
+        padding-left: rem(44px);
+        @include media-breakpoint-down(xl) {
+          padding-left: rem(26px);
+        }
+      }
+      &:last-of-type {
+        padding-right: rem(62px);
+      }
+      @include media-breakpoint-down(xl) {
+        display: block;
+        padding-top: 0;
+        padding-bottom: rem(10px);
+        padding-left: rem(26px);
+        padding-right: rem(26px);
+        font-size: rem(12px);
+      }
+      @include media-breakpoint-down(md) {
+      }
+    }
+
+    td div[data-title] {
+      @include media-breakpoint-down(xl) {
+        &::before {
+          content: attr(data-title) ': ';
+          color: $dark;
+        }
+      }
+    }
+
+    tr {
+      border-bottom: 1px solid rgba(186, 186, 186, 0.2);
+      @include media-breakpoint-down(xl) {
+        display: block;
+        padding-top: rem(26px);
+        padding-bottom: rem(16px);
+      }
+    }
+    table {
+      width: 100%;
+    }
   }
-  table {
-    width: 100%;
+  &__num-to-show,
+  &__pagination {
+    @include media-breakpoint-down(lg) {
+      display: none;
+    }
   }
+
   &__count {
     color: lightblue;
+    @include media-breakpoint-down(md) {
+      font-size: 14px;
+    }
   }
+
+  &__title {
+    @include media-breakpoint-down(xl) {
+      padding-bottom: rem(10px);
+    }
+    @include media-breakpoint-down(md) {
+      font-size: 13px;
+    }
+  }
+
   &__accent {
     color: $main;
     font-weight: 500;
@@ -133,6 +221,9 @@ export default Vue.extend({
     padding: rem(44px);
     padding-right: rem(62px);
     background: rgba(0, 133, 229, 0.04);
+    @include media-breakpoint-down(lg) {
+      padding: rem(19px 26px);
+    }
   }
   &__num-to-show {
     margin-left: auto;
@@ -146,30 +237,20 @@ export default Vue.extend({
       font-weight: 500;
     }
   }
-  th {
-    padding-bottom: rem(28px);
-    font-size: rem(15px);
-    border-bottom: 1px solid rgba(186, 186, 186, 0.2);
-    &:first-of-type {
-      padding-left: rem(44px);
-    }
-    &:last-of-type {
-      padding-right: rem(62px);
-    }
-  }
-  td {
-    padding: rem(30px 0);
-    font-size: rem(14px);
-    &:first-of-type {
-      padding-left: rem(44px);
-    }
-    &:last-of-type {
-      padding-right: rem(62px);
+
+  &__btn {
+    display: none;
+    @extend %btn-main;
+    @include media-breakpoint-down(xl) {
+      display: block;
+      margin: 0 rem(26px);
+      text-align: center;
+      width: calc(100% - rem(52px));
+      margin-top: rem(24px);
+      margin-bottom: rem(32px);
     }
   }
-  tr {
-    border-bottom: 1px solid rgba(186, 186, 186, 0.2);
-  }
+
   .num-to-show {
     &__wrap {
       display: flex;

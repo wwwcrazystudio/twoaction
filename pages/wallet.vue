@@ -27,7 +27,7 @@
               />
             </div>
 
-            <WalletTable class="wallet-page__wallet-table" />
+            <WalletTable :items="items" class="wallet-page__wallet-table" />
           </div>
         </div>
       </div>
@@ -59,6 +59,42 @@ export default Vue.extend({
           },
         ],
       },
+      items: [
+        {
+          title: 'Рекламный пост в сообществе Instagram «Marvel/DC»',
+          creationDate: '10.10.2021, 14:33',
+          executionDate: '12.10.2021, 17:08',
+          budget: '2 850 ₽',
+        },
+        {
+          title: 'Пополнение баланса с карты',
+          executionDate: '12.10.2021, 17:08',
+          budget: '3 500 ₽',
+        },
+        {
+          title: 'Рекламный пост в сообществе Instagram Crypto BIT',
+          creationDate: '10.10.2021, 14:33',
+          executionDate: '12.10.2021, 17:08',
+          budget: '750 ₽',
+        },
+        {
+          title: 'Реклама в сторис в сообществе Instagram Фармер',
+          creationDate: '10.10.2021, 14:33',
+          executionDate: '12.10.2021, 17:08',
+          budget: '2 130 ₽',
+        },
+        {
+          title: 'Пополнение баланса с карты',
+          executionDate: '12.10.2021, 17:08',
+          budget: '18 000 ₽',
+        },
+        {
+          title: 'Реклама в сторис в сообществе Instagram DeCenter',
+          creationDate: '10.10.2021, 14:33',
+          executionDate: '12.10.2021, 17:08',
+          budget: '2 130 ₽',
+        },
+      ],
     }
   },
 })
@@ -68,11 +104,25 @@ export default Vue.extend({
 .wallet-page {
   &__wrap {
     padding-bottom: rem(200px);
+    @include media-breakpoint-down(xl) {
+      display: block;
+      padding-bottom: rem(100px);
+    }
+    @include media-breakpoint-down(md) {
+      padding-bottom: rem(38px);
+    }
   }
   &__row {
     display: grid;
     grid-template-columns: 325px auto;
     grid-column-gap: 68px;
+    @include media-breakpoint-down(xxl) {
+      grid-column-gap: 32px;
+      grid-template-columns: 260px auto;
+    }
+    @include media-breakpoint-down(xl) {
+      display: block;
+    }
   }
 
   &__table-head {
@@ -81,12 +131,17 @@ export default Vue.extend({
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @include media-breakpoint-down(xl) {
+      display: block;
+      margin-bottom: rem(20px);
+    }
   }
 
   &__select {
     &::v-deep {
-      .select__value {
-        background-color: rgba(0, 133, 229, 0.04);
+      .select__value,
+      .select__control {
+        background-color: rgba(35, 43, 48, 0.04);
         padding-right: rem(60px);
       }
     }
@@ -95,6 +150,9 @@ export default Vue.extend({
   &__story {
     font-size: rem(24px);
     font-weight: 500;
+    @include media-breakpoint-down(lg) {
+      margin-bottom: rem(20px);
+    }
   }
 
   &__heading {
@@ -110,9 +168,13 @@ export default Vue.extend({
     border-radius: 22px;
     position: relative;
     text-align: center;
+    @include media-breakpoint-down(lg) {
+      margin-bottom: rem(38px);
+    }
 
     @include media-breakpoint-down(md) {
-      padding: rem(24px 16px);
+      padding: rem(26px);
+      padding-bottom: rem(38px);
       border-radius: 14px;
     }
   }
@@ -142,12 +204,18 @@ export default Vue.extend({
     @extend %btn-main;
     border-radius: 8px;
     width: 100%;
+    @include media-breakpoint-down(xl) {
+      border-radius: 16px;
+    }
   }
 
   &__info {
     font-size: rem(15px);
     font-weight: 500;
     margin-bottom: rem(10px);
+    @include media-breakpoint-down(md) {
+      margin-bottom: rem(8px);
+    }
   }
 
   &__total {
@@ -155,6 +223,9 @@ export default Vue.extend({
     color: $main;
     font-weight: 500;
     margin-bottom: rem(32px);
+    @include media-breakpoint-down(md) {
+      margin-bottom: rem(20px);
+    }
   }
 }
 </style>
