@@ -22,7 +22,9 @@
           {{ item.info }}
         </div>
       </div>
-      <NuxtLink to="/" class="support-item__link">Перейти в чат</NuxtLink>
+      <NuxtLink to="/ticket/123" class="support-item__link"
+        >Перейти в чат</NuxtLink
+      >
     </div>
   </li>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <li class="group-item" :class="view === 'list' && 'group-item--list'">
-    <div class="group-item__wrap">
+    <NuxtLink to="/group/123" class="group-item__wrap">
       <div class="group-item__icon">
         <img :src="item.img" :alt="item.title" />
       </div>
@@ -70,7 +70,7 @@
           </li>
         </ul>
       </div>
-    </div>
+    </NuxtLink>
   </li>
 </template>
 
@@ -102,6 +102,11 @@ export default Vue.extend({
     border-radius: 22px;
     position: relative;
     text-align: center;
+    transition: 350ms;
+    border: 1px solid transparent;
+    text-decoration: none;
+    color: $dark;
+    display: block;
 
     @include media-breakpoint-down(md) {
       padding: rem(24px 16px);

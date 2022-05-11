@@ -50,7 +50,7 @@ export default Vue.extend({
       required: true,
     },
     value: {
-      type: Date,
+      type: [Date, String],
       default: '',
     },
   },

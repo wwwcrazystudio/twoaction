@@ -182,10 +182,12 @@ export default Vue.extend({
         padding-bottom: rem(16px);
       }
     }
+
     table {
       width: 100%;
     }
   }
+
   &__num-to-show,
   &__pagination {
     @include media-breakpoint-down(lg) {

@@ -50,7 +50,6 @@ export default Vue.extend({
       const args = {
         slidesPerView: 1.1,
         spaceBetween: 20,
-
         breakpoints: {
           991: {
             slidesPerView: 5,
@@ -72,7 +71,7 @@ export default Vue.extend({
           nextEl: next,
           prevEl: prev,
         },
-      }
+      } as any
 
       this.carouselRowFirst = new Swiper(wrap, args)
     })

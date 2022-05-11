@@ -141,8 +141,10 @@ export default Vue.extend({
     &::v-deep {
       .select__value,
       .select__control {
-        background-color: rgba(35, 43, 48, 0.04);
+        background-color: rgba(0, 133, 229, 0.04);
+        border-radius: 8px;
         padding-right: rem(60px);
+        border: 1px solid transparent;
       }
     }
   }

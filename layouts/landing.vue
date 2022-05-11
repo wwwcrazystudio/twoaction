@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <LayoutHeader type="landing" :routes="routes" />
+  <div class="landing">
+    <LayoutHeader header-type="landing" :routes="routes" />
     <Nuxt />
     <LayoutFooter />
   </div>
@@ -16,19 +16,19 @@ export default Vue.extend({
       routes: [
         {
           label: 'Услуги',
-          route: '/',
+          route: '/#services',
         },
         {
           label: 'Рекламодателю',
-          route: '/',
+          route: '/#promotion',
         },
         {
           label: 'Площадке',
-          route: '/',
+          route: '/#client-promotion',
         },
         {
           label: 'Отзывы',
-          route: '/',
+          route: '/#testimonials',
         },
       ],
     }

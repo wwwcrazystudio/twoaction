@@ -2,7 +2,11 @@
   <nav v-if="links.length" class="header-menu">
     <ul class="header-menu__list">
       <li v-for="link in links" :key="link.route" class="header-menu__item">
-        <NuxtLink :to="link.route" class="header-menu__link">
+        <NuxtLink
+          :to="link.route"
+          class="header-menu__link"
+          active-class="header-menu__link--active"
+        >
           {{ link.label }}
         </NuxtLink>
       </li>
@@ -70,6 +74,10 @@ export default Vue.extend({
     font-size: rem(14px);
     color: #484848;
     text-decoration: none;
+
+    &--active {
+      color: $main;
+    }
 
     @include media-breakpoint-down(xl) {
       font-size: rem(24px);

@@ -1,10 +1,34 @@
 <template>
-  <div>
-    <LayoutHeader />
+  <div class="app">
+    <LayoutHeader header-type="platform" :routes="routes" />
     <Nuxt />
     <LayoutFooter />
   </div>
 </template>
+
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
+  data() {
+    return {
+      routes: [
+        {
+          label: 'Мои заказы',
+          route: '/profile/orders',
+        },
+        {
+          label: 'Каталог сообществ',
+          route: '/catalogue',
+        },
+        {
+          label: 'Служба поддержки',
+          route: '/support',
+        },
+      ],
+    }
+  },
+})
+</script>
 
 <style lang="scss">
 @import '~bootstrap/scss/reboot';
@@ -17,8 +41,8 @@
 @import '~/assets/scss/base/fonts';
 </style>
 
-<style lang="scss">
-body {
+<style lang="scss" scoped>
+.app {
   padding-top: rem(160px);
 
   @include media-breakpoint-down(md) {

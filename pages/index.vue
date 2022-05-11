@@ -2,7 +2,7 @@
   <main class="frontpage">
     <LandingHero class="frontpage__hero" />
     <LandingAdvantages class="frontpage__advantages" />
-    <LandingServices class="frontpage__services" />
+    <LandingServices id="services" class="frontpage__services" />
     <LandingBestGroups
       class="frontpage__best-groups frontpage__best-groups--tg"
       heading="Самые надежные каналы Telegram"
@@ -20,11 +20,15 @@
       color="accent"
     />
     <LandingTestimonials
+      id="testimonials"
       class="frontpage__testimonials"
       :items="testimonials"
     />
-    <LandingPromotion class="frontpage__promotion" />
-    <LandingClientPromotion class="frontpage__client-promotion" />
+    <LandingPromotion id="promotion" class="frontpage__promotion" />
+    <LandingClientPromotion
+      id="client-promotion"
+      class="frontpage__client-promotion"
+    />
     <LandingBanners class="frontpage__banners" />
   </main>
 </template>

@@ -86,7 +86,9 @@
         </div>
 
         <div class="order-item__col">
-          <NuxtLink to="/" class="order-item__link"> Подробнее </NuxtLink>
+          <NuxtLink to="/order/123" class="order-item__link">
+            Подробнее
+          </NuxtLink>
 
           <client-only>
             <button v-if="isMobile" class="order-item__btn">
