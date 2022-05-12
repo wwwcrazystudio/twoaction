@@ -160,13 +160,16 @@ export default Vue.extend({
       if (val) document.documentElement.classList.add('locked')
       else document.documentElement.classList.remove('locked')
     },
+    $route() {
+      if (this.isTablet) {
+        this.showMenu = false
+        this.showSearchBar = false
+      }
+    },
   },
   created() {
     this.showMenu = !this.isTablet
-  },
-  mounted() {
-    if (window.matchMedia('(max-width: 991px)').matches)
-      this.showSearchBar = false
+    this.showSearchBar = !this.isTablet
   },
 })
 </script>

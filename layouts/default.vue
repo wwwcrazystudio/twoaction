@@ -14,7 +14,7 @@ export default Vue.extend({
       routes: [
         {
           label: 'Мои заказы',
-          route: '/profile/orders',
+          route: '/account/orders',
         },
         {
           label: 'Каталог сообществ',

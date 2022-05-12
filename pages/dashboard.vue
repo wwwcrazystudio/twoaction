@@ -261,6 +261,10 @@ export default Vue.extend({
       @include media-breakpoint-down(xxl) {
         grid-column: 1 / span 2;
       }
+
+      @include media-breakpoint-down(md) {
+        grid-column: auto;
+      }
     }
   }
 

@@ -92,31 +92,31 @@ export default Vue.extend({
       menu1: [
         {
           label: 'Услуги',
-          route: '/',
+          route: '/#services',
         },
         {
           label: 'Отзывы',
-          route: '/',
+          route: '/#testimonials',
         },
       ],
       menu2: [
         {
           label: 'Рекламодателю',
-          route: '/',
+          route: '/#promotion',
         },
         {
           label: 'Площадке',
-          route: '/',
+          route: '/#client-promotion',
         },
       ],
       menu3: [
         {
           label: 'Частые вопросы',
-          route: '/',
+          route: '/faq',
         },
         {
           label: 'Партнерская программа',
-          route: '/',
+          route: '/partnership',
         },
       ],
     }

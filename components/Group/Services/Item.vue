@@ -30,6 +30,7 @@
         <div class="service-item__form-row">
           <div class="service-item__form-label">Формат размещения</div>
           <FormSelect
+            label="Формат размещения"
             class="service-item__select"
             :options="[{ label: '123', value: '123' }]"
           />

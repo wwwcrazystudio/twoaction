@@ -187,14 +187,15 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .profile-page {
   &__content {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: rem(34px);
+
+    @include media-breakpoint-down(md) {
+      grid-template-columns: 1fr;
+    }
   }
-  &__user-card {
-    margin-right: rem(35px);
-  }
-  &__info {
-    width: 325px;
-  }
+
   &__reviews {
     margin-top: rem(50px);
   }
@@ -206,6 +207,7 @@ export default Vue.extend({
     font-weight: 700;
     margin-bottom: rem(6px);
   }
+
   &__online-status {
     font-size: rem(14px);
     font-weight: 400;
@@ -312,8 +314,6 @@ export default Vue.extend({
   }
 }
 
-/* meta */
-
 .profile-info {
   &__meta {
     @include unlist;
@@ -357,37 +357,6 @@ export default Vue.extend({
         align-items: center;
         justify-content: center;
         margin-right: rem(14px);
-      }
-    }
-  }
-}
-
-/* reviews */
-
-.profile {
-  &__wrap {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: rem(60px 75px);
-    margin-bottom: rem(120px);
-
-    @include media-breakpoint-down(xl) {
-      grid-template-columns: 1fr 1fr;
-      gap: rem(36px);
-    }
-
-    @include media-breakpoint-down(lg) {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  &__profile {
-    &-verification {
-      grid-column: 1 / span 2;
-
-      @include media-breakpoint-down(lg) {
-        grid-column: 1/1;
-        grid-row-start: 2;
       }
     }
   }
