@@ -37,7 +37,7 @@
     "sass-rem": "^3.0.0",
     "swiper": "^8.1.0",
     "uuid": "^8.3.2",
-    "vue": "^2.6.14",
+    "vue": "^3.2.35",
     "vue-progress-circle": "^1.1.2",
     "vue-server-renderer": "^2.6.14",
     "vue-slider-component": "^3.2.15",
