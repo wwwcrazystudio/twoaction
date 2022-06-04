@@ -66,11 +66,11 @@ export default Vue.extend({
     padding-right: rem(12px);
     color: $main;
     font-size: rem(13px);
-    border-radius: 15px;
+    border-radius: 8px;
     width: 100%;
     background: rgba(0, 133, 229, 0.08);
     resize: none;
-    height: 100%;
+    height: 145px;
 
     &::placeholder {
       color: rgba($main, 0.8);

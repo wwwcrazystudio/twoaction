@@ -1,11 +1,13 @@
 <template>
   <div class="input">
-    <div class="input__wrap" :class="hasFocus && 'input__wrap--focus'">
-      <label
-        :for="id"
-        class="input__label"
-        :class="!showLabel && 'input__label--hidden'"
-      >
+    <div
+      class="input__wrap"
+      :class="[
+        hasFocus && 'input__wrap--focus',
+        showLabel && 'input__wrap--simple',
+      ]"
+    >
+      <label :for="id" class="input__label">
         {{ label }}
       </label>
       <input
@@ -16,7 +18,7 @@
         :class="type === 'search' && 'input__control--search'"
         :value="value"
         :name="label"
-        :placeholder="label"
+        :placeholder="placeholder || label"
         :min="min"
         :max="max"
         :readonly="readonly"
@@ -100,6 +102,10 @@ export default Vue.extend({
     readonly: {
       type: Boolean,
       default: false,
+    },
+    placeholder: {
+      type: String,
+      default: '',
     },
   },
   data() {
@@ -198,16 +204,34 @@ export default Vue.extend({
     position: relative;
 
     &--focus {
+      .input__wrap:not(.input-wrap__simple) {
+        .input__label {
+          font-size: rem(11px);
+          bottom: unset;
+          top: 4px;
+          transition: 350ms;
+        }
+
+        .input__control {
+          padding-bottom: rem(8px);
+          padding-top: rem(20px);
+        }
+      }
+    }
+
+    &--simple {
       .input__label {
-        font-size: rem(11px);
-        bottom: unset;
-        top: 4px;
-        transition: 350ms;
+        position: static;
+        font-weight: 500;
+        font-size: rem(15px);
+        margin-bottom: rem(20px);
+        color: $dark;
       }
 
       .input__control {
-        padding-bottom: rem(8px);
-        padding-top: rem(20px);
+        &::placeholder {
+          opacity: 1;
+        }
       }
     }
   }
@@ -229,17 +253,6 @@ export default Vue.extend({
       top: 14px;
       left: rem(22px);
     }
-
-    &--hidden {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      border: 0;
-    }
   }
 
   &__control {
@@ -258,6 +271,7 @@ export default Vue.extend({
 
     &::placeholder {
       opacity: 0;
+      color: $main;
     }
 
     &--search {

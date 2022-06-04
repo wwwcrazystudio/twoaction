@@ -1,9 +1,12 @@
 <template>
   <li class="group-item" :class="view === 'list' && 'group-item--list'">
     <NuxtLink to="/group/123" class="group-item__wrap">
-      <div class="group-item__icon">
-        <img :src="item.img" :alt="item.title" />
-      </div>
+      <Picture
+        v-if="item.logo"
+        :srcset="item.logo"
+        :alt="item.title"
+        class="group-item__icon"
+      />
 
       <div class="group-item__info">
         <div class="group-item__title-wrap">
@@ -39,33 +42,33 @@
           </div>
           <h2 class="group-item__title">{{ item.title }}</h2>
         </div>
-        <div class="group-item__cat">кино и игры</div>
+        <div class="group-item__cat">{{ item.category }}</div>
       </div>
 
       <div v-if="view === 'grid'" class="group-item__count">
-        <var>{{ item.subscribers }}</var> подписчика
+        <var>{{ item.subscibers }}</var> подписчиков
       </div>
 
       <div class="group-item__excerpt">
-        {{ item.excerpt }}
+        {{ item.description }}
       </div>
 
       <div class="group-item__group-meta group-meta">
         <ul class="group-meta__list">
           <li v-if="view === 'list'" class="group-meta__item">
-            <var>{{ item.subscribers }}</var>
-            подписчика
+            <var>{{ item.subscibers }}</var>
+            подписчиков
           </li>
           <li class="group-meta__item">
-            <var>{{ item.meta.ERP }}</var>
+            <var>0</var>
             ERP
           </li>
           <li class="group-meta__item">
-            <var>{{ item.meta.CPV }}</var>
+            <var>0</var>
             CPV
           </li>
           <li class="group-meta__item">
-            <var>{{ item.meta.clients }}</var>
+            <var>0</var>
             довольных клиентов
           </li>
         </ul>
@@ -149,6 +152,7 @@ export default Vue.extend({
     border-radius: 50%;
     margin: auto;
     margin-bottom: rem(18px);
+    display: block;
 
     @include media-breakpoint-down(md) {
       width: 60px;

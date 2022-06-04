@@ -1,15 +1,15 @@
 <template>
-  <div class="radio-btn">
+  <div class="checkbox-btn">
     <input
       :id="id"
-      type="radio"
+      type="checkbox"
+      :value="value"
       :name="name"
       :checked="checked"
-      class="radio-btn__control"
+      class="checkbox-btn__control"
       @change="handleChange"
     />
-    <label :for="id" class="radio-btn__label">
-      <slot name="icon"></slot>
+    <label :for="id" class="checkbox-btn__label">
       {{ label }}
     </label>
   </div>
@@ -29,9 +29,13 @@ export default Vue.extend({
       type: String,
       required: true,
     },
-    checked: {
-      type: Boolean,
-      default: false,
+    value: {
+      type: String,
+      required: true,
+    },
+    list: {
+      type: Array,
+      default: undefined,
     },
   },
   data() {
@@ -40,19 +44,33 @@ export default Vue.extend({
       focus: false,
     }
   },
+  computed: {
+    checked(): boolean {
+      return this.list.includes(this.value)
+    },
+  },
   mounted(this: any) {
     this.id = uuid() as string
   },
   methods: {
     handleChange() {
-      this.$emit('change', this.label)
+      let list = [...this.list]
+
+      if (this.checked) {
+        list = list.filter((el) => el !== this.value)
+      } else {
+        list.push(this.value)
+      }
+
+      this.$emit('update:list', list)
+      this.$emit('change', this.value)
     },
   },
 })
 </script>
 
 <style lang="scss" scoped>
-.radio-btn {
+.сheckbox-btn {
   &__control {
     position: absolute;
     z-index: -999;

@@ -2,7 +2,7 @@
   <div class="auth">
     <div class="auth__wrap">
       <div class="container">
-        <div class="auth__content">
+        <form class="auth__content" @submit.prevent="submit()">
           <h1 class="auth__heading">{{ heading }}</h1>
 
           <div v-if="subheading" class="auth__subheading">{{ subheading }}</div>
@@ -18,16 +18,15 @@
             <FormInput
               class="auth__input"
               type="password"
-              :value.sync="form.pw"
+              :value.sync="form.password"
               label="Ваш пароль"
             />
 
-            <button
-              class="auth__btn"
-              @click.prevent="$router.push('/account/orders')"
-            >
-              Войти
-            </button>
+            <div v-if="msg" class="auth__msg">
+              {{ msg }}
+            </div>
+
+            <button class="auth__btn">Войти</button>
 
             <div class="auth__foot">
               <button class="auth__link" @click="type = 'reg'">
@@ -45,11 +44,15 @@
                 class="auth__radio-btn"
                 label="Рекламодатель"
                 name="type"
+                :checked="form.type === 'Рекламодатель'"
+                @change="form.type = $event"
               />
               <FormRadioBtn
                 class="auth__radio-btn"
                 label="Площадка"
                 name="type"
+                :checked="form.type === 'Площадка'"
+                @change="form.type = $event"
               />
             </div>
 
@@ -59,6 +62,10 @@
               :value.sync="form.email"
               label="Ваш E-mail"
             />
+
+            <div v-if="msg" class="auth__msg">
+              {{ msg }}
+            </div>
 
             <button class="auth__btn">Зарегистрироваться</button>
 
@@ -78,9 +85,13 @@
               label="Ваш E-mail"
             />
 
+            <div v-if="msg" class="auth__msg">
+              {{ msg }}
+            </div>
+
             <button class="auth__btn">Отправить код</button>
           </template>
-        </div>
+        </form>
       </div>
     </div>
   </div>
@@ -88,15 +99,24 @@
 
 <script lang="ts">
 import Vue from 'vue'
+
+interface Credentials {
+  email?: string
+  tel?: string
+  password?: string
+}
+
 export default Vue.extend({
   layout: 'landing',
   data() {
     return {
       type: 'login',
       form: {
-        pw: '',
+        password: '',
         email: '',
+        type: 'Рекламодатель',
       },
+      msg: '',
     }
   },
   computed: {
@@ -125,6 +145,65 @@ export default Vue.extend({
         default:
           return ''
       }
+    },
+  },
+  methods: {
+    submit() {
+      if (this.type === 'login') this.signIn()
+      if (this.type === 'reg') this.signUp()
+      if (this.type === 'forgot') this.recover()
+    },
+    async signIn(this: any) {
+      const { email, password }: Credentials = this.form
+      const response = await this.$userAuth.login({ email, password })
+      let token: string = ''
+
+      console.log(response)
+
+      if (response.error) {
+        this.msg = response.error
+        return
+      }
+
+      token = response.success
+
+      this.$cookies.set('token', token, {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7,
+      })
+
+      const tokenResponse = await this.$store.dispatch('user/getUser', token)
+
+      if (!tokenResponse) {
+        this.msg =
+          'Ваш аккаунт был деактивирован. Свяжитесь со службой поддержки'
+      }
+
+      this.redirect('/account/orders')
+    },
+    async signUp(this: any) {
+      const { email }: Credentials = this.form
+      const response = await this.$userAuth.signUp({ email })
+      console.log(response)
+
+      if (response.error) {
+        this.msg = response.error
+        return
+      }
+
+      this.msg = response.success
+    },
+    async recover(this: any) {
+      const { email }: Credentials = this.form
+      const response = await this.$userAuth.recover({ email })
+      console.log(response)
+
+      if (response.error) {
+        this.msg = response.error
+        return
+      }
+
+      this.msg = response.success
     },
   },
 })
@@ -194,6 +273,11 @@ export default Vue.extend({
       font-size: rem(12px);
       margin-bottom: rem(18px);
     }
+  }
+
+  &__msg {
+    text-align: center;
+    font-size: 12px;
   }
 
   &__input {

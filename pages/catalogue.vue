@@ -107,6 +107,13 @@
 <script lang="ts">
 import Vue from 'vue'
 export default Vue.extend({
+  async asyncData({ $getApiData }) {
+    const items = await $getApiData('/channel')
+
+    return {
+      items,
+    }
+  },
   data() {
     return {
       tabs: [
