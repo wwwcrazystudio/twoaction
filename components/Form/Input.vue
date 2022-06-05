@@ -4,62 +4,76 @@
       class="input__wrap"
       :class="[
         hasFocus && 'input__wrap--focus',
-        showLabel && 'input__wrap--simple',
+        simple && 'input__wrap--simple',
+        !showLabel && 'input__wrap--hidden-label',
       ]"
     >
       <label :for="id" class="input__label">
         {{ label }}
       </label>
-      <input
-        :id="id"
-        ref="input"
-        :type="inputType"
-        class="input__control"
-        :class="type === 'search' && 'input__control--search'"
-        :value="value"
-        :name="label"
-        :placeholder="placeholder || label"
-        :min="min"
-        :max="max"
-        :readonly="readonly"
-        @focus="!readonly ? (focus = true) : null"
-        @blur="focus = false"
-        @input="handleInput"
-      />
+      <div class="input__control-wrap">
+        <div class="input__icon">
+          <slot name="icon" />
+        </div>
+        <input
+          :id="id"
+          ref="input"
+          :type="inputType"
+          class="input__control"
+          :class="type === 'search' && 'input__control--search'"
+          :value="value"
+          :name="label"
+          :placeholder="placeholder || label"
+          :min="min"
+          :max="max"
+          :readonly="readonly"
+          @focus="!readonly ? (focus = true) : null"
+          @blur="focus = false"
+          @input="handleInput"
+        />
 
-      <button
-        v-if="type === 'password'"
-        class="input__show-pwd"
-        @click.stop="showPW = !showPW"
-      >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 16 16"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+        <button
+          v-if="type === 'password'"
+          class="input__show-pwd"
+          @click.prevent="showPW = !showPW"
         >
-          <g clip-path="url(#clip0_4177_244)">
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M11.8274 12.0336C13.8021 10.9017 15.2602 9.22198 15.8135 8.53316C16.0622 8.23127 16.0622 7.78732 15.8135 7.46768C14.9434 6.38444 11.8357 2.85059 8 2.85059C7.10722 2.85059 6.25389 3.04203 5.45903 3.34945L6.39903 4.63127C6.8841 4.40042 7.42693 4.27123 8 4.27123C10.0599 4.27123 11.7292 5.94049 11.7292 8.00042C11.7292 8.98136 11.3507 9.87371 10.7317 10.5394L11.8274 12.0336ZM5.27023 5.45941C4.65012 6.12531 4.27081 7.01848 4.27081 8.00042C4.27081 10.0604 5.94007 11.7296 8 11.7296C8.57406 11.7296 9.11777 11.6 9.60347 11.3684L10.5436 12.6504C9.74799 12.9584 8.89376 13.1503 8 13.1503C4.16426 13.1503 1.0566 9.6164 0.18646 8.53316C-0.0621532 8.21352 -0.0621532 7.76956 0.18646 7.46768C0.74 6.77858 2.19902 5.09775 4.17495 3.96584L5.27023 5.45941Z"
-              fill="#0085E5"
-            />
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M10.0306 9.58343C10.372 9.14652 10.5756 8.59686 10.5756 8.00022C10.5756 6.57957 9.42135 5.42529 8.00071 5.42529C7.68405 5.42529 7.38063 5.48264 7.10027 5.5875L10.0306 9.58343ZM5.97166 6.4159C5.62972 6.85298 5.42578 7.40307 5.42578 8.00022C5.42578 9.42086 6.58006 10.5751 8.00071 10.5751C8.31786 10.5751 8.62173 10.5176 8.90245 10.4124L5.97166 6.4159Z"
-              fill="#0085E5"
-            />
-          </g>
-          <defs>
-            <clipPath id="clip0_4177_244">
-              <rect width="16" height="16" fill="white" />
-            </clipPath>
-          </defs>
-        </svg>
-      </button>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g clip-path="url(#clip0_4177_244)">
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M11.8274 12.0336C13.8021 10.9017 15.2602 9.22198 15.8135 8.53316C16.0622 8.23127 16.0622 7.78732 15.8135 7.46768C14.9434 6.38444 11.8357 2.85059 8 2.85059C7.10722 2.85059 6.25389 3.04203 5.45903 3.34945L6.39903 4.63127C6.8841 4.40042 7.42693 4.27123 8 4.27123C10.0599 4.27123 11.7292 5.94049 11.7292 8.00042C11.7292 8.98136 11.3507 9.87371 10.7317 10.5394L11.8274 12.0336ZM5.27023 5.45941C4.65012 6.12531 4.27081 7.01848 4.27081 8.00042C4.27081 10.0604 5.94007 11.7296 8 11.7296C8.57406 11.7296 9.11777 11.6 9.60347 11.3684L10.5436 12.6504C9.74799 12.9584 8.89376 13.1503 8 13.1503C4.16426 13.1503 1.0566 9.6164 0.18646 8.53316C-0.0621532 8.21352 -0.0621532 7.76956 0.18646 7.46768C0.74 6.77858 2.19902 5.09775 4.17495 3.96584L5.27023 5.45941Z"
+                fill="#0085E5"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M10.0306 9.58343C10.372 9.14652 10.5756 8.59686 10.5756 8.00022C10.5756 6.57957 9.42135 5.42529 8.00071 5.42529C7.68405 5.42529 7.38063 5.48264 7.10027 5.5875L10.0306 9.58343ZM5.97166 6.4159C5.62972 6.85298 5.42578 7.40307 5.42578 8.00022C5.42578 9.42086 6.58006 10.5751 8.00071 10.5751C8.31786 10.5751 8.62173 10.5176 8.90245 10.4124L5.97166 6.4159Z"
+                fill="#0085E5"
+              />
+            </g>
+            <defs>
+              <clipPath id="clip0_4177_244">
+                <rect width="16" height="16" fill="white" />
+              </clipPath>
+            </defs>
+          </svg>
+        </button>
+
+        <button
+          v-if="canRemove"
+          class="input__remove"
+          @click.prevent="$emit('remove')"
+        >
+          <img src="~/assets/img/icons/closewhite.png" alt="" />
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -106,6 +120,14 @@ export default Vue.extend({
     placeholder: {
       type: String,
       default: '',
+    },
+    simple: {
+      type: Boolean,
+      default: true,
+    },
+    canRemove: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -186,6 +208,20 @@ export default Vue.extend({
             },
           }
           break
+        case 'percentage':
+          options = {
+            mask: 'num %',
+            eager: true,
+            blocks: {
+              num: {
+                mask: Number,
+                min: this.min,
+                max: this.max,
+                thousandsSeparator: '',
+              },
+            },
+          }
+          break
         default:
           return
       }
@@ -203,19 +239,17 @@ export default Vue.extend({
   &__wrap {
     position: relative;
 
-    &--focus {
-      .input__wrap:not(.input-wrap__simple) {
-        .input__label {
-          font-size: rem(11px);
-          bottom: unset;
-          top: 4px;
-          transition: 350ms;
-        }
+    &--focus:not(.input__wrap--simple) {
+      .input__label {
+        font-size: rem(11px);
+        bottom: unset;
+        top: 4px;
+        transition: 350ms;
+      }
 
-        .input__control {
-          padding-bottom: rem(8px);
-          padding-top: rem(20px);
-        }
+      .input__control {
+        padding-bottom: rem(8px);
+        padding-top: rem(20px);
       }
     }
 
@@ -226,12 +260,31 @@ export default Vue.extend({
         font-size: rem(15px);
         margin-bottom: rem(20px);
         color: $dark;
+
+        @include media-breakpoint-down(md) {
+          font-size: rem(13px);
+          margin-bottom: rem(12px);
+        }
       }
 
       .input__control {
         &::placeholder {
           opacity: 1;
         }
+      }
+    }
+
+    &--hidden-label {
+      .input__label {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+        margin-bottom: 0;
       }
     }
   }
@@ -263,6 +316,7 @@ export default Vue.extend({
     border-radius: 8px;
     width: 100%;
     background: rgba(0, 133, 229, 0.08);
+    -moz-appearance: textfield;
 
     @include media-breakpoint-down(md) {
       font-size: rem(12px);
@@ -281,6 +335,12 @@ export default Vue.extend({
       background-repeat: no-repeat;
       padding-right: rem(32px);
     }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
   }
 
   &__show-pwd {
@@ -289,6 +349,10 @@ export default Vue.extend({
     top: 0;
     bottom: 0;
     margin: auto;
+  }
+
+  &__remove {
+    margin-left: rem(14px);
   }
 }
 </style>

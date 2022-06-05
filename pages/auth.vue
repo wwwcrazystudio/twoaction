@@ -13,6 +13,7 @@
               type="email"
               :value.sync="form.email"
               label="Ваш E-mail"
+              :show-label="false"
             />
 
             <FormInput
@@ -20,6 +21,7 @@
               type="password"
               :value.sync="form.password"
               label="Ваш пароль"
+              :show-label="false"
             />
 
             <div v-if="msg" class="auth__msg">
@@ -61,6 +63,7 @@
               type="email"
               :value.sync="form.email"
               label="Ваш E-mail"
+              :show-label="false"
             />
 
             <div v-if="msg" class="auth__msg">
@@ -83,6 +86,7 @@
               type="email"
               :value.sync="form.email"
               label="Ваш E-mail"
+              :show-label="false"
             />
 
             <div v-if="msg" class="auth__msg">
@@ -179,7 +183,7 @@ export default Vue.extend({
           'Ваш аккаунт был деактивирован. Свяжитесь со службой поддержки'
       }
 
-      this.redirect('/account/orders')
+      this.$router.push('/account/orders')
     },
     async signUp(this: any) {
       const { email }: Credentials = this.form

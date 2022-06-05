@@ -13,6 +13,7 @@
                 label="Описание"
                 placeholder="Составьте краткое описание шаблона"
                 :max="150"
+                :value.sync="form.description"
               />
             </div>
             <div class="group-form__row">
@@ -21,6 +22,7 @@
                   class="group-form__input"
                   type="number"
                   label="Количество подписчиков"
+                  :value.sync="form.subscribers"
                 />
               </div>
               <div class="group-form__input-group">
@@ -28,6 +30,7 @@
                   class="group-form__input"
                   type="number"
                   label="Средний охват публикации"
+                  :value.sync="form.coverage"
                 />
               </div>
               <div class="group-form__input-group">
@@ -35,6 +38,7 @@
                   class="group-form__input"
                   type="number"
                   label="Среднее количество просмотров/сутки"
+                  :value.sync="form.views"
                 />
               </div>
               <div class="group-form__input-group">
@@ -42,6 +46,7 @@
                   class="group-form__input"
                   type="number"
                   label="Частота публикаций/сутки"
+                  :value.sync="form.posts"
                 />
               </div>
               <div class="group-form__input-group">
@@ -53,11 +58,13 @@
                     class="group-form__input"
                     type="number"
                     label="ER"
+                    :value.sync="form.er"
                   />
                   <FormInput
                     class="group-form__input"
                     type="number"
                     label="CPV"
+                    :value.sync="form.cpv"
                   />
                 </div>
               </div>
@@ -66,13 +73,17 @@
                 <div class="group-form__input-group-row">
                   <FormInput
                     class="group-form__input"
-                    type="number"
+                    type="text"
                     label="Мужской"
+                    mask="percentage"
+                    :value.sync="form.male"
                   />
                   <FormInput
                     class="group-form__input"
-                    type="number"
+                    type="text"
                     label="Женский"
+                    mask="percentage"
+                    :value.sync="form.female"
                   />
                 </div>
               </div>
@@ -85,12 +96,12 @@
             <div class="group-form__input-group">
               <FormMultiFile
                 label="Актуальная статистика сообщества"
-                :files.sync="stats"
+                :files.sync="form.stats"
               />
             </div>
 
             <div class="group-form__input-group">
-              <div class="group-form__input-group-title">Прайс лист</div>
+              <div class="group-form__input-group-label">Прайс лист</div>
 
               <div class="group-form__services-list">
                 <div class="group-form__service-item service-item">
@@ -106,25 +117,40 @@
                       <div class="service-item__input-group-title">
                         Доступные форматы размещения
                       </div>
-                      <div class="services-item__input-group-row">
-                        {{ duration }}
+                      <div class="service-item__input-group-row">
                         <FormCheckboxBtn
                           label="Пост на 24 часа"
                           name="duration"
                           value="24"
-                          :list.sync="duration"
+                          :list.sync="form.duration"
                         />
                         <FormCheckboxBtn
                           label="Пост на 48 часа"
                           name="duration"
                           value="48"
-                          :list.sync="duration"
+                          :list.sync="form.duration"
                         />
                         <FormCheckboxBtn
                           label="Пост на 72 часа"
                           name="duration"
                           value="72"
-                          :list.sync="duration"
+                          :list.sync="form.duration"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="service-item__input-group">
+                      <div class="service-item__input-group-title">
+                        Фиксированная цена
+                      </div>
+                      <div class="service-item__input-group-row">
+                        <FormInput
+                          label="Фиксированная цена"
+                          name="duration"
+                          type="text"
+                          :value.sync="form.price"
+                          :show-label="false"
+                          mask="currency"
                         />
                       </div>
                     </div>
@@ -132,6 +158,13 @@
                 </div>
               </div>
             </div>
+          </div>
+
+          <div class="group-form__foot">
+            <button class="group-form__btn">Применить и сохранить</button>
+            <button class="group-form__btn group-form__btn--light">
+              Сохранить и перейти в Каталог
+            </button>
           </div>
         </form>
       </div>
@@ -150,52 +183,20 @@ export default Vue.extend({
           title: 'logoOne',
         },
       ],
-      countries: [
-        {
-          name: 'Россия',
-          percent: '28 %',
-        },
-        {
-          name: 'Азербайджан',
-          percent: '9 %',
-        },
-        {
-          name: 'Армения',
-          percent: '26 %',
-        },
-        {
-          name: 'Грузия',
-          percent: '7 %',
-        },
-        {
-          name: 'Казахстан',
-          percent: '12 %',
-        },
-        {
-          name: 'Киргизия',
-          percent: '5 %',
-        },
-        {
-          name: 'Молдавия',
-          percent: '10 %',
-        },
-        {
-          name: 'Таджикистан',
-          percent: '3 %',
-        },
-      ],
-      citys: [
-        {
-          name: 'Москва',
-          percent: '76 %',
-        },
-        {
-          name: 'Ереван',
-          percent: '24 %',
-        },
-      ],
-      stats: {} as FileList,
-      duration: [] as Array<string>,
+      form: {
+        description: '',
+        subscribers: '',
+        coverage: '',
+        views: '',
+        posts: '',
+        er: '',
+        cpv: '',
+        male: 0,
+        female: 0,
+        stats: {} as FileList,
+        duration: [] as Array<string>,
+        price: 100,
+      },
     }
   },
 })
@@ -207,6 +208,11 @@ export default Vue.extend({
     font-size: rem(36px);
     margin-bottom: rem(32px);
     text-align: center;
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(26px);
+      margin-bottom: rem(14px);
+    }
   }
 
   &__wrap {
@@ -219,14 +225,42 @@ export default Vue.extend({
     box-shadow: 0px 4px 50px rgba(117, 117, 117, 0.08),
       0px 10px 30px rgba(29, 29, 29, 0.04);
     border-radius: 20px;
+    margin-bottom: rem(120px);
+    margin-top: rem(50px);
+
+    @include media-breakpoint-down(lg) {
+      padding: rem(42px 64px);
+    }
+
+    @include media-breakpoint-down(md) {
+      padding: rem(24px);
+      margin: 24px auto;
+    }
   }
 
   &__group-info {
     margin-bottom: rem(32px);
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: rem(20px);
+    }
+  }
+
+  &__subheading {
+    font-size: rem(22px);
+    margin-bottom: rem(32px);
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: rem(20px);
+    }
   }
 
   &__input-group {
     margin-bottom: rem(32px);
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: rem(20px);
+    }
 
     &-label {
       font-weight: 500;
@@ -235,6 +269,7 @@ export default Vue.extend({
 
       @include media-breakpoint-down(md) {
         font-size: rem(12px);
+        margin-bottom: rem(12px);
       }
     }
 
@@ -242,6 +277,10 @@ export default Vue.extend({
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: rem(14px);
+
+      @include media-breakpoint-down(md) {
+        grid-template-columns: 1fr 1fr;
+      }
 
       &::v-deep {
         label {
@@ -255,148 +294,80 @@ export default Vue.extend({
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: rem(12px);
+
+    @include media-breakpoint-down(md) {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
   }
 
-  &__input-info {
-    margin-bottom: rem(20px);
-    font-size: rem(15px);
-    font-weight: 500;
-  }
-
-  &__info {
-    margin-bottom: rem(18px);
-  }
-
-  &__age-categories {
-    margin-bottom: rem(20px);
-  }
-
-  &__sex {
+  &__foot {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-column-gap: 14px;
-  }
+    grid-template-columns: 1fr 1fr;
+    gap: rem(12px);
 
-  &__sex-item {
-    display: block;
-    margin-bottom: rem(32px);
-    span {
-      display: block;
-      font-size: rem(13px);
-      margin-bottom: rem(13px);
+    @include media-breakpoint-down(md) {
+      grid-template-columns: 1fr;
     }
   }
 
-  &__sex-wrap {
-    display: flex;
-    justify-content: center;
-    border: 1px solid $main;
-    width: 100%;
-    color: $main;
-    margin: 0;
-    padding: rem(14px 0);
-    border-radius: 8px;
-    svg {
-      width: 18px;
-      height: 18px;
-      display: block;
-      margin-right: rem(8px);
+  &__btn {
+    @extend %btn-main;
+
+    &--light {
+      @extend %btn-light;
+    }
+  }
+}
+
+.service-item {
+  &__wrap {
+    background: #ffffff;
+    border: 1px solid rgba(186, 186, 186, 0.2);
+    border-radius: 16px;
+    padding: rem(24px);
+    padding-top: rem(30px);
+
+    @include media-breakpoint-down(md) {
+      padding: rem(16px);
     }
   }
 
-  &__group-geography {
-    margin-bottom: rem(32px);
+  &__title {
+    font-weight: 500;
+    font-size: rem(14px);
+    line-height: 140%;
+    margin-bottom: rem(16px);
+    color: $dark;
   }
 
-  .group-coverage {
-    &__row {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      margin-bottom: rem(40px);
-    }
-
-    &__item {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      span {
-        font-size: rem(13px);
-        display: block;
-        margin-right: rem(14px);
-        font-weight: 500;
-      }
-      var {
-        display: flex;
-        justify-content: center;
-        border: 1px solid $main;
-        width: 100%;
-        max-width: 92px;
-        padding: rem(14px 0);
-        border-radius: 8px;
-      }
-    }
+  &__description {
+    font-size: rem(12px);
+    line-height: 140%;
+    color: rgba(72, 72, 72, 0.8);
+    margin-bottom: rem(20px);
   }
 
-  .age-categories {
-    &__list {
-      @include unlist;
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      grid-column-gap: 14px;
+  &__input-group {
+    margin-bottom: rem(20px);
+
+    &:last-of-type {
+      margin-bottom: 0;
     }
 
-    &__item {
-      display: block;
-    }
-
-    &__age {
-      display: block;
+    &-title {
       margin-bottom: rem(12px);
       font-size: rem(13px);
+      color: rgba(72, 72, 72, 0.8);
     }
-    &__percent {
-      display: flex;
-      justify-content: center;
-      border: 1px solid $main;
-      width: 100%;
-      color: $main;
-      padding: rem(14px 0);
-      border-radius: 8px;
-    }
-  }
 
-  .group-geography {
-    &__list {
-      @include unlist;
+    &-row {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
+      grid-template-columns: 1fr 1fr;
+      gap: rem(12px);
 
-    &__item {
-      border-radius: 8px;
-      background: $main;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: $white;
-      width: 100%;
-      padding: rem(8px 24px);
-      padding-right: rem(18px);
-      font-size: rem(13px);
-      line-height: 20px;
-      span {
-        display: block;
-      }
-
-      var {
-        background: rgba(255, 255, 255, 0.1);
-        width: 100%;
-        max-width: 160px;
-        display: flex;
-        justify-content: center;
-        padding: rem(8px 0);
-        border-radius: 8px;
+      @include media-breakpoint-down(md) {
+        grid-template-columns: 1fr;
       }
     }
   }

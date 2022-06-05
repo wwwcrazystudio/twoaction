@@ -1,25 +1,36 @@
 <template>
-  <div class="grid-info">
-    <div class="grid-info__content">
-      <div class="grid-info__logos">
-        <div v-for="logo in logos" :key="logo.title" class="grid-info__logo">
-          <img :src="logo.src" />
+  <div class="group-info">
+    <div class="group-info__content">
+      <div class="group-info__logo">
+        <div
+          v-for="logo in logos"
+          :key="logo.title"
+          class="group-info__logo-item"
+        >
+          <img :src="logo.src" alt="Crypto BIT" />
         </div>
       </div>
 
-      <h2 class="grid-info__subscribers">
-        Число подписчиков <var>1 268 846</var>
-      </h2>
+      <div class="group-info__info">
+        <div class="group-info__title">Crypto BIT</div>
+        <div class="group-info__count"><var>1 268 846</var> подписчика</div>
+        <div class="group-info__cat">кино и игры</div>
+      </div>
 
-      <div class="grid-info__meta-wrap">
-        <div class="grid-info__meta">
-          <var>26,32%</var>
-          ERP
+      <div class="group-info__meta">
+        <div class="group-info__meta-list">
+          <div class="group-info__meta-item">
+            <var>26,32%</var>
+            ERP
+          </div>
+          <div class="group-info__meta-item">
+            <var>3,22 ₽</var>
+            CPV
+          </div>
         </div>
-        <div class="grid-info__meta">
-          <var>3,22 ₽</var>
-          CPV
-        </div>
+        <NuxtLink to="/" class="group-info__link">
+          Открыть в отдельном окне
+        </NuxtLink>
       </div>
     </div>
   </div>
@@ -42,7 +53,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.grid-info {
+.group-info {
   &__content {
     padding: rem(20px 24px);
     display: flex;
@@ -50,26 +61,64 @@ export default Vue.extend({
     background: $lightblue;
     border-radius: 8px;
     flex: 1;
-  }
 
-  &__subscribers {
-    var {
-      display: block;
+    @include media-breakpoint-down(sm) {
+      flex-direction: column;
     }
   }
 
-  &__col {
-    display: flex;
+  &__count {
+    font-size: rem(13px);
+    var {
+      font-weight: 500;
+      color: $main;
+    }
   }
 
-  &__logos {
-    margin-right: rem(18px);
-    display: flex;
+  &__title {
+    font-size: rem(22px);
+    font-weight: 500;
+    margin-bottom: rem(8px);
+
+    @include media-breakpoint-down(sm) {
+      text-align: center;
+    }
+  }
+
+  &__cat {
+    font-weight: 500;
+    font-size: rem(13px);
+    padding: rem(4px 24px);
+    background-color: $main;
+    color: #fff;
+    border-radius: 20px;
+    width: max-content;
+    margin-top: rem(12px);
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(11px);
+      margin-bottom: rem(8px);
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin: 8px auto;
+    }
   }
 
   &__logo {
+    margin-right: rem(24px);
+    display: flex;
+
+    @include media-breakpoint-down(sm) {
+      margin-right: 0;
+      margin-bottom: rem(18px);
+    }
+  }
+
+  &__logo-item {
     display: flex;
     margin-left: rem(-15px);
+
     img {
       width: 74px;
       height: 74px;
@@ -86,36 +135,55 @@ export default Vue.extend({
   &__subscribers {
     font-size: rem(15px);
     margin-bottom: rem(6px);
+
     var {
       color: $main;
       font-size: rem(13px);
     }
   }
 
-  &__meta-wrap {
-    margin-left: auto;
-    display: grid;
-    grid-template-columns: 114px 114px;
-    grid-column-gap: 8px;
+  &__meta {
+    flex-grow: 1;
+
+    &-list {
+      @include unlist;
+
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-radius: 10px;
+      background: $main;
+      color: #fff;
+      width: 100%;
+      max-width: 114px;
+      font-size: 11px;
+      text-transform: uppercase;
+      padding: rem(17px);
+      line-height: 18px;
+      margin-left: rem(8px);
+
+      var {
+        font-size: rem(14.5px);
+        display: block;
+      }
+
+      @include media-breakpoint-down(md) {
+        max-width: 80px;
+      }
+    }
   }
 
-  &__meta {
+  &__link {
+    font-size: rem(13.5px);
+    margin-top: rem(8px);
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 10px;
-    background: $main;
-    color: #fff;
-    width: 100%;
-    max-width: 114px;
-    font-size: 11px;
-    text-transform: uppercase;
-    padding: rem(17px);
-    line-height: 18px;
-    var {
-      font-size: rem(14.5px);
-      display: block;
-    }
+    justify-content: flex-end;
   }
 }
 </style>

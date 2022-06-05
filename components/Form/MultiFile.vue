@@ -175,6 +175,10 @@ export default Vue.extend({
     color: rgba(72, 72, 72, 0.8);
     cursor: pointer;
 
+    @include media-breakpoint-down(md) {
+      font-size: rem(11px);
+    }
+
     &-text {
       max-width: 420px;
       width: 80%;
@@ -192,6 +196,11 @@ export default Vue.extend({
     grid-template-columns: 1fr 1fr;
     gap: rem(12px);
     margin-top: rem(14px);
+
+    @include media-breakpoint-down(md) {
+      grid-template-columns: 1fr;
+      gap: rem(8px);
+    }
   }
 
   &__item {
@@ -203,6 +212,10 @@ export default Vue.extend({
     display: flex;
     align-items: center;
     font-size: rem(13.5px);
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(12px);
+    }
 
     &-title {
       text-decoration: underline;
