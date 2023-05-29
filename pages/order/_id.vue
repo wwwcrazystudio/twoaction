@@ -4,11 +4,11 @@
       <div class="order-page__head">
         <h1 class="order-page__heading">Рекламный пост</h1>
         <div class="order-page__id">
-          Номер заказа: <var>4860 2268 0846 1479</var>
+          Номер заказа: <var>{{ orderData.order_id}}</var>
         </div>
       </div>
       <div class="order-page__info-wrap">
-        <GroupInfo class="order-page__group-info" :group="group" />
+        <GroupInfo class="order-page__group-info" :group="groupData" />
         <OrderStatus
           class="order-page__order-status"
           :status="status"
@@ -24,50 +24,30 @@
             <ul class="order-meta__list">
               <li class="order-meta__item">
                 <div class="order-meta__item-title">Дата открытия заказа:</div>
-                <div class="order-meta__item-value">10.10.2021</div>
+                <div class="order-meta__item-value">{{formattedDate}}</div>
               </li>
               <li class="order-meta__item">
                 <div class="order-meta__item-title">Формат размещения:</div>
-                <div class="order-meta__item-value">Пост на 12 часов</div>
+                <div class="order-meta__item-value">Пост на {{hoursCount}} часов</div>
               </li>
               <li class="order-meta__item">
                 <div class="order-meta__item-title">Рекламный бюджет:</div>
-                <div class="order-meta__item-value">2 850 ₽</div>
+                <div class="order-meta__item-value">{{orderData.budget}} ₽</div>
               </li>
             </ul>
           </div>
 
-          <div class="order-page__order-description order-description">
+          <div class="order-page__order-description order-description" v-if="orderData.description">
             <div class="order-description__title">Сопроводительное письмо:</div>
             <div class="order-description__text">
-              <p>
-                Либо спокойная жизнь без разбазаривания ресурса и умение сказать
-                «нет», либо, условно говоря, фоткаешься со всеми желающими на
-                конференции, как обезьянка. И никто потом на тему твоего отказа
-                не снимает 20 сториз. Денег может становиться больше, душевного
-                спокойствия — меньше.
-              </p>
-              <p>
-                Рост нужен не всем, он может твое качество жизни растаскивать в
-                совершенно разные стороны. Либо спокойная жизнь без
-                разбазаривания ресурса и умение сказать «нет», либо, условно
-                говоря, фоткаешься со всеми желающими на конференции, как
-                обезьянка.
-              </p>
-              <p>
-                Рост нужен не всем, он может твое качество жизни растаскивать в
-                совершенно разные стороны. Либо спокойная жизнь без
-                разбазаривания ресурса и умение сказать «нет», либо, условно
-                говоря, фоткаешься со всеми желающими на конференции, как
-                обезьянка.
-              </p>
+               {{orderData.description}}
             </div>
           </div>
 
-          <Messenger class="order-page__messenger" :dialogue="dialogue" />
+          <!-- <Messenger class="order-page__messenger" :dialogue="dialogue" /> -->
         </div>
 
-        <aside class="order-page__sidebar">
+        <aside class="order-page__sidebar" v-if="orderData.documents">
           <OrderCreatives
             class="order-page__order-creatives"
             :creatives="creatives"
@@ -124,27 +104,28 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
+import { DateTime } from 'luxon'
 export default Vue.extend({
+  async asyncData({ $getApiData, route }) {
+    const { params } = route
+
+    const req = await $getApiData(`/order/${params.id}`)
+
+    console.log(req[0])
+
+    return {
+      orderData: req[0],
+      groupData: req[0].channel[0]
+    }
+  },
   data() {
     return {
+      orderData: {},
       showSurchargeModal: false,
       showReviewModal: false,
-      status: Math.floor(Math.random() * 5) + 1,
-      group: {
-        img: require('~/assets/img/placeholder/group1.png'),
-        title: 'Business marketing',
-        type: 'inst',
-        cat: 'кино и игры',
-        description:
-          'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
-        meta: {
-          ERP: '26,32%',
-          CPV: '3,22 ₽',
-          clients: '100%',
-        },
-      },
+      status: 0,
       dialogue: [
         {
           date: '12.01.2022, 12:52',
@@ -181,6 +162,18 @@ export default Vue.extend({
       ],
     }
   },
+  computed: {
+    formattedDate() {
+      if (!this.orderData.date_start) return
+      return DateTime.fromSQL(this.orderData.date_start).toFormat('dd.LL.yyyy')
+    } ,
+    hoursCount() {
+      const start = DateTime.fromSQL(this.orderData.date_start)
+      const end = DateTime.fromSQL(this.orderData.date_end)
+
+      return end.diff(start, ["hours"]).toFormat('hh')
+    }
+  }
 })
 </script>
 

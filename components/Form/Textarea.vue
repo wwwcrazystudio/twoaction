@@ -11,7 +11,9 @@
       :id="id"
       class="textarea__control"
       :name="label"
+      :value="value"
       :placeholder="label"
+      @change="$emit('update:value', $event.target.value)"
     />
   </div>
 </template>
@@ -29,6 +31,10 @@ export default Vue.extend({
     label: {
       type: String,
       required: true,
+    },
+    value: {
+      type: String,
+      default: '',
     },
   },
   data() {

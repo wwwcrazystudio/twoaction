@@ -47,8 +47,8 @@ import Swiper from 'swiper'
 
 export default Vue.extend({
   props: {
-    reviews: {
-      type: Array,
+    group: {
+      type: Object,
       required: true,
     },
   },

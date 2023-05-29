@@ -39,7 +39,7 @@
         </div>
       </div>
 
-      <button class="service-item__btn" @click="$emit('order')">Заказать рекламу</button>
+      <NuxtLink :to="`/group/${group.channel_id}/neworder`" class="service-item__btn">Заказать рекламу</NuxtLink>
     </div>
   </div>
 </template>

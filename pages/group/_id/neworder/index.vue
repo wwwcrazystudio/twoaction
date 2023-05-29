@@ -19,9 +19,6 @@
                     </button> -->
           <div class="new-order__block">
             <div class="new-order__block-title">Дата публикации</div>
-            {{ selectedDate }}
-            {{ selectedTime }}
-            {{ selectedService }}
             <div class="new-order__row">
               <FormDate
                 class="new-order__datepicker"
@@ -34,8 +31,8 @@
                 :value.sync="selectedTime"
                 :options="times"
               />
-              <div class="new-order__time-status">
-                <svg
+              <div class="new-order__time-status" >
+                <svg v-if="timeStatus"
                   width="17"
                   height="16"
                   viewBox="0 0 17 16"
@@ -63,7 +60,12 @@
                     </clipPath>
                   </defs>
                 </svg>
-                Статус
+                <template v-if="selectedDate && selectedTime">
+                {{ timeStatus ? 'Время свободно' : 'Время занято' }}
+                </template>
+                <template v-else>
+                  Выберите время
+                </template>
               </div>
             </div>
           </div>
@@ -126,6 +128,7 @@
           Итоговая стоимость:
           <span v-if="!selectedDate">Выберите дату</span>
           <span v-else-if="!selectedTime">Выберите время</span>
+          <span v-else-if="!timeStatus">Выбранное время недоступно</span>
           <span v-else-if="!selectedService">Выберите формат размещения</span>
           <span v-else>{{ selectedService.value }} ₽</span>
         </div>
@@ -217,28 +220,45 @@ export default Vue.extend({
       return date
     },
     timeStatus() {
-      return this.groupData.schedule.find
+        if (!this.selectedDate || !this.selectedTime) return
+
+       const date = DateTime.fromJSDate(this.selectedDate).toSQLDate()
+      const hour = this.selectedTime?.value
+      const scheduleDay =  this.groupData.schedule.find(el => el.date === date)
+      const scheduleHour = Object.entries(scheduleDay?.hours).find(([hourTime]) => hourTime === hour.toString().padStart(2, '0')) 
+
+      if (!scheduleHour) return
+
+      return scheduleHour[1] === 'open'
     },
     disabled() {
-        if (!this.selectedDate || !this.selectedTime || !this.selectedService) return true
+        if (!this.selectedDate || !this.selectedTime || !this.selectedService || !this.timeStatus) return true
 
         return false
-    }
+    },
   },
   methods: {
     async handleOrder() {
+      console.log("async handleOrder")
       const token = this.$cookies.get('token')
       const dateStart = this.preparedTime.toSQL()
       const dateEnd = this.preparedTime.plus({hours: this.selectedService.hours}).toSQL()
-      const req = await this.$postApiData(`/order`, {
+
+      const resp = await this.$postMultipartApiData(`/order`, {
         token,
         description: this.message,
         budget: parseInt(this.budget),
         channel_id: this.groupData.channel_id,
         date_start: dateStart,
         date_end: dateEnd,
+        files: [...this.files]
       })
-      console.log(req)
+
+      console.log(resp)
+     
+     if (resp.success) {
+      this.$router.push(`/order/${resp.success}`)
+     }
     }
   },
 })

@@ -9,12 +9,11 @@
           <GroupServices class="group-page__group-services" :group="groupData" :service.sync="selectedService" @order="handleOrder($event)" />
         </div>
         <aside class="group-page__sidebar">
-          {{ selectedService }}
-          {{ selectedTime }}{{ groupData }}
-          <!-- <GroupReviews
+          <GroupReviews
+            v-if="groupData.reviews"
             class="group-page__group-reviews"
             :reviews="groupData.reviews"
-          /> -->
+          />
         </aside>
       </div>
     </div>

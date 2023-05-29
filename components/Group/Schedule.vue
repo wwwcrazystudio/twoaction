@@ -282,9 +282,11 @@ export default Vue.extend({
       margin-bottom: 0;
     }
 
-    &--active {
+    &--occupied {
+      opacity: 1;
       background: $main;
       color: #fff;
+      cursor: not-allowed;
     }
   }
 }

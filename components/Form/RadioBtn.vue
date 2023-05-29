@@ -35,7 +35,6 @@ export default Vue.extend({
     },
     model: {
       type: String,
-      required: true,
     },
   },
   data() {

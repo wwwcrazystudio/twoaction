@@ -2,12 +2,14 @@
 import { Plugin } from '@nuxt/types'
 import { unpack } from 'msgpackr'
 import { stringify } from 'qs'
+import FormData from 'form-data'
 
 declare module 'vue/types/vue' {
   // this.$myInjectedFunction inside Vue components
   interface Vue {
     $getApiData(url: string): Promise<object>
     $postApiData(url: string, payload: object): Promise<object>
+    $postMultipartApiData(url: string, payload: object): Promise<object>
     $patchApiData(url: string, payload: object): Promise<object>
     $deleteApiData(url: string, payload: object): Promise<object>
   }
@@ -18,6 +20,7 @@ declare module '@nuxt/types' {
   interface NuxtAppOptions {
     $getApiData(url: string): Promise<object>
     $postApiData(url: string, payload: object): Promise<object>
+    $postMultipartApiData(url: string, payload: object): Promise<object>
     $patchApiData(url: string, payload: object): Promise<object>
     $deleteApiData(url: string, payload: object): Promise<object>
   }
@@ -25,6 +28,7 @@ declare module '@nuxt/types' {
   interface Context {
     $getApiData(url: string): Promise<object>
     $postApiData(url: string, payload: object): Promise<object>
+    $postMultipartApiData(url: string, payload: object): Promise<object>
     $patchApiData(url: string, payload: object): Promise<object>
     $deleteApiData(url: string, payload: object): Promise<object>
   }
@@ -35,6 +39,7 @@ declare module 'vuex/types/index' {
   interface Store<S> {
     $getApiData(url: string): Promise<object>
     $postApiData(url: string, payload: object): Promise<object>
+    $postMultipartApiData(url: string, payload: object): Promise<object>
     $patchApiData(url: string, payload: object): Promise<object>
     $deleteApiData(url: string, payload: object): Promise<object>
   }
@@ -60,6 +65,30 @@ const myPlugin: Plugin = ({ $axios }, inject) => {
   inject('postApiData', async (url: string, payload: object) => {
     responseData = await $axios.$post(url, stringify(payload), options)
     console.log(payload)
+
+    return unpack(Buffer.from(responseData))
+  })
+
+  inject('postMultipartApiData', async (url: string, payload: object) => {
+    const data = new FormData()
+
+    Object.entries(payload).forEach(([key, value]) => {
+
+      if (key === 'files') {
+        value.forEach((file) => {
+          data.append('files[]', value)
+        })
+      } else {
+        data.append(key, value)
+      }
+    })
+
+    responseData = await $axios.$post(url, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      },
+      responseType: 'arraybuffer',
+    })
 
     return unpack(Buffer.from(responseData))
   })
