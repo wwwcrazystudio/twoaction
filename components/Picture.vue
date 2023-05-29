@@ -1,5 +1,5 @@
 <template>
-  <picture>
+  <picture v-if="Array.isArray(srcset)">
     <img :src="srcs[0]" :alt="alt" />
     <source
       v-for="src in srcs.slice(1)"
@@ -8,6 +8,8 @@
       :type="getMimeType(src)"
     />
   </picture>
+
+  <img  v-else :src="srcset" :alt="alt" />
 </template>
 
 <script lang="ts">
@@ -15,7 +17,7 @@ import Vue from 'vue'
 export default Vue.extend({
   props: {
     srcset: {
-      type: Array,
+      type: [String, Array],
       required: true,
     },
     alt: {

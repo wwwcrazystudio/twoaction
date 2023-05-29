@@ -3,17 +3,22 @@
     <div class="group-info__wrap">
       <div class="group-info__col">
         <div class="group-info__icon">
-          <img :src="group.img" alt="" />
+          <Picture v-if="group.logo" :srcset="group.logo" :alt="group.title" />
         </div>
       </div>
 
       <div class="group-info__col">
         <h1 class="group-info__title">{{ group.title }}</h1>
 
-        <div class="group-info__count"><var>1 268 846</var> подписчика</div>
+        <div class="group-info__count">
+          <var>{{ group.subscibers }}</var> подписчика
+        </div>
 
-        <client-only>
-          <div v-if="!isTablet" class="group-info__type group-info__type--inst">
+        <client-only v-if="!isTablet">
+          <div
+            v-if="group.type === 'I'"
+            class="group-info__type group-info__type--inst"
+          >
             <div class="group-info__type-icon">
               <svg
                 width="12"
@@ -28,14 +33,41 @@
                 />
               </svg>
             </div>
+
             Instagram страница
+          </div>
+
+          <div
+            v-if="group.type === 'T'"
+            class="group-info__type group-info__type--tg"
+          >
+            <div class="group-info__type-icon">
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 16 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M14.9018 0.41763C13.8382 0.80888 0.730424 5.84456 0.537362 5.9361C-0.10417 6.24016 -0.17917 6.64178 0.354893 6.91344C0.406455 6.93966 1.29367 7.22338 2.32649 7.54394L4.20436 8.12675L8.46842 5.45935C10.8136 3.99225 12.7797 2.77544 12.8374 2.75535C12.9822 2.70485 13.1069 2.70957 13.165 2.76775C13.2058 2.80847 13.2075 2.82891 13.1751 2.88875C13.1537 2.92835 11.5963 4.34266 9.71427 6.03166C7.83224 7.72066 6.28733 9.11578 6.28111 9.13197C6.27492 9.14812 6.21127 9.99137 6.13964 11.0058L6.00946 12.8503L6.15092 12.8312C6.22874 12.8207 6.35196 12.7806 6.42474 12.742C6.49755 12.7034 6.98752 12.2596 7.51361 11.7557C8.03967 11.2518 8.48833 10.8326 8.51061 10.824C8.53286 10.8155 9.37064 11.4089 10.3723 12.1427C11.374 12.8766 12.272 13.5133 12.368 13.5576C12.6196 13.6739 12.903 13.6854 13.0871 13.5869C13.2516 13.4989 13.4123 13.2804 13.4799 13.0528C13.506 12.9647 14.0787 10.3187 14.7525 7.17288C15.8743 1.93519 15.9775 1.4281 15.9779 1.15625C15.9783 0.899411 15.9676 0.838317 15.8988 0.70313C15.8503 0.607817 15.7675 0.510505 15.6866 0.45363C15.5017 0.323568 15.1956 0.309536 14.9018 0.41763Z"
+                  fill="#fff"
+                />
+              </svg>
+            </div>
+
+            Telegram страница
           </div>
         </client-only>
       </div>
 
       <div class="group-info__col">
         <div class="group-info__row">
-          <div class="group-info__cat">кино и игры</div>
+          <div v-if="group.tags && group.tags.length" class="group-info__cat">
+            {{ group.tags[0].tag }}
+          </div>
 
           <div class="group-info__favourite">
             <svg
@@ -57,7 +89,7 @@
           </div>
         </div>
 
-        <div class="group-info__description">
+        <div v-if="group.description.length" class="group-info__description">
           {{ group.description }}
         </div>
       </div>
@@ -66,26 +98,29 @@
         <div class="group-info__group-meta group-meta">
           <ul class="group-meta__list">
             <li class="group-meta__item">
-              <var>{{ group.meta.ERP }}</var>
-              ERP
+              <var>{{ group.err }}%</var>
+              ERR
             </li>
             <li class="group-meta__item">
-              <var>{{ group.meta.CPV }}</var>
-              CPV
+              <var>{{ erp }}%</var>
+              ER%
             </li>
             <li class="group-meta__item">
-              <var>{{ group.meta.clients }}</var>
+              <var>0</var>
               довольных клиентов
             </li>
           </ul>
         </div>
 
-        <NuxtLink to="/" class="group-info__link">
+        <!--  <NuxtLink to="/" class="group-info__link">
           Посмотреть все группы владельца
-        </NuxtLink>
+        </NuxtLink> -->
 
-        <client-only>
-          <div v-if="isTablet" class="group-info__type group-info__type--inst">
+        <client-only v-if="isTablet">
+          <div
+            v-if="group.type === 'I'"
+            class="group-info__type group-info__type--inst"
+          >
             <div class="group-info__type-icon">
               <svg
                 width="12"
@@ -100,8 +135,34 @@
                 />
               </svg>
             </div>
+
             Instagram страница
           </div>
+
+          <div
+            v-if="group.type === 'T'"
+            class="group-info__type group-info__type--tg"
+          >
+            <div class="group-info__type-icon">
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 16 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M14.9018 0.41763C13.8382 0.80888 0.730424 5.84456 0.537362 5.9361C-0.10417 6.24016 -0.17917 6.64178 0.354893 6.91344C0.406455 6.93966 1.29367 7.22338 2.32649 7.54394L4.20436 8.12675L8.46842 5.45935C10.8136 3.99225 12.7797 2.77544 12.8374 2.75535C12.9822 2.70485 13.1069 2.70957 13.165 2.76775C13.2058 2.80847 13.2075 2.82891 13.1751 2.88875C13.1537 2.92835 11.5963 4.34266 9.71427 6.03166C7.83224 7.72066 6.28733 9.11578 6.28111 9.13197C6.27492 9.14812 6.21127 9.99137 6.13964 11.0058L6.00946 12.8503L6.15092 12.8312C6.22874 12.8207 6.35196 12.7806 6.42474 12.742C6.49755 12.7034 6.98752 12.2596 7.51361 11.7557C8.03967 11.2518 8.48833 10.8326 8.51061 10.824C8.53286 10.8155 9.37064 11.4089 10.3723 12.1427C11.374 12.8766 12.272 13.5133 12.368 13.5576C12.6196 13.6739 12.903 13.6854 13.0871 13.5869C13.2516 13.4989 13.4123 13.2804 13.4799 13.0528C13.506 12.9647 14.0787 10.3187 14.7525 7.17288C15.8743 1.93519 15.9775 1.4281 15.9779 1.15625C15.9783 0.899411 15.9676 0.838317 15.8988 0.70313C15.8503 0.607817 15.7675 0.510505 15.6866 0.45363C15.5017 0.323568 15.1956 0.309536 14.9018 0.41763Z"
+                  fill="#fff"
+                />
+              </svg>
+            </div>
+
+            Telegram страница
+          </div>
+
         </client-only>
       </div>
     </div>
@@ -121,6 +182,9 @@ export default Vue.extend({
     isTablet(this: any) {
       return this.$isTablet()
     },
+    erp(this: any) {
+      return (this.group.coverage / this.group.subscibers) * 100 / 10000 || 0
+    }
   },
 })
 </script>
@@ -168,6 +232,7 @@ export default Vue.extend({
     border: 1px solid #ecf7ff;
     border-radius: 50%;
     margin-bottom: rem(18px);
+    background-color: $main;
 
     @include media-breakpoint-down(md) {
       width: 60px;
@@ -219,6 +284,9 @@ export default Vue.extend({
     font-size: rem(13.5px);
     border-radius: 12px;
     width: max-content;
+    height: 32px;
+    display: flex;
+    align-items: center;
 
     @include media-breakpoint-down(xxl) {
       margin-bottom: rem(20px);
@@ -239,7 +307,6 @@ export default Vue.extend({
       position: absolute;
       left: 0;
       top: 0;
-      background: #ffa000;
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -251,6 +318,19 @@ export default Vue.extend({
     &--inst {
       color: $accent;
       background: rgba(255, 160, 0, 0.06);
+
+      .group-info__type-icon {
+        background: $accent;
+      }
+    }
+
+    &--tg {
+      color: $main;
+      background: rgba(0, 133, 229, 0.06);
+
+      .group-info__type-icon {
+        background: $main;
+      }
     }
   }
 

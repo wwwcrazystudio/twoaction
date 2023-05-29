@@ -4,7 +4,7 @@
       <div class="my-groups__wrap">
         <div class="my-groups__head">
           <h1 class="my-groups__heading">Сетка групп</h1>
-          <div class="my-groups__count">Всего: <var>6</var> групп</div>
+          <div class="my-groups__count">Всего: <var>{{ items.length }}</var> групп</div>
         </div>
         <div class="my-groups__groups-list groups-list">
           <div class="groups-list__head">
@@ -17,11 +17,11 @@
 
             <div class="groups-list__actions">
               <button class="groups-list__action">Добавить группу</button>
-              <button
+<!--               <button
                 class="groups-list__action groups-list__action--secondary"
               >
                 Создать сетку групп
-              </button>
+              </button> -->
             </div>
           </div>
           <div class="groups-list__wrap">
@@ -34,15 +34,16 @@
                 :class="
                   selected.includes(key) && 'groups-list__group-item--selected'
                 "
+                :is-owner="true"
                 @click.native="select(key)"
               />
             </ul>
 
-            <div class="groups-list__notice">
+<!--             <div class="groups-list__notice">
               Выберите не менее 2 групп для создания сетки
             </div>
 
-            <button class="groups-list__btn">Создать сетку</button>
+            <button class="groups-list__btn">Создать сетку</button> -->
           </div>
         </div>
       </div>
@@ -53,6 +54,17 @@
 <script lang="ts">
 import Vue from 'vue'
 export default Vue.extend({
+  // @ts-ignore
+  async asyncData({ $getApiData, $cookies }) {
+
+    const token = $cookies.get('token')
+
+    const resp = await $getApiData(`/channel/${token}`) as []
+
+    return {
+      items: resp.reduce((acc, item) => acc.concat(item), [])
+    }
+  },
   data() {
     return {
       tabs: [
@@ -60,158 +72,13 @@ export default Vue.extend({
           label: 'Мои группы',
           val: 'groups',
         },
-        {
+/*         {
           label: 'Моя сетка групп',
           val: 'grid',
-        },
+        }, */
       ],
       activeTab: {},
-      items: [
-        {
-          img: require('~/assets/img/placeholder/group1.png'),
-          title: 'Business marketing',
-          excerpt:
-            'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
-          subscribers: '1 268 846',
-          meta: {
-            ERP: '26,32%',
-            CPV: '3,22 ₽',
-            clients: '100%',
-          },
-        },
-        {
-          img: require('~/assets/img/placeholder/group2.png'),
-          title: 'Фармер',
-          excerpt:
-            'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
-          subscribers: '1 268 846',
-          meta: {
-            ERP: '26,32%',
-            CPV: '3,22 ₽',
-            clients: '100%',
-          },
-        },
-        {
-          img: require('~/assets/img/placeholder/group3.png'),
-          title: 'UFC',
-          excerpt:
-            'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
-          subscribers: '1 268 846',
-          meta: {
-            ERP: '26,32%',
-            CPV: '3,22 ₽',
-            clients: '100%',
-          },
-        },
-        {
-          img: require('~/assets/img/placeholder/group4.png'),
-          title: 'ForkLog',
-          excerpt:
-            'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
-          subscribers: '1 268 846',
-          meta: {
-            ERP: '26,32%',
-            CPV: '3,22 ₽',
-            clients: '100%',
-          },
-        },
-        {
-          img: require('~/assets/img/placeholder/group1.png'),
-          title: 'Business marketing',
-          excerpt:
-            'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
-          subscribers: '1 268 846',
-          meta: {
-            ERP: '26,32%',
-            CPV: '3,22 ₽',
-            clients: '100%',
-          },
-        },
-        {
-          img: require('~/assets/img/placeholder/group2.png'),
-          title: 'Фармер',
-          excerpt:
-            'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
-          subscribers: '1 268 846',
-          meta: {
-            ERP: '26,32%',
-            CPV: '3,22 ₽',
-            clients: '100%',
-          },
-        },
-        {
-          img: require('~/assets/img/placeholder/group3.png'),
-          title: 'UFC',
-          excerpt:
-            'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
-          subscribers: '1 268 846',
-          meta: {
-            ERP: '26,32%',
-            CPV: '3,22 ₽',
-            clients: '100%',
-          },
-        },
-        {
-          img: require('~/assets/img/placeholder/group4.png'),
-          title: 'ForkLog',
-          excerpt:
-            'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
-          subscribers: '1 268 846',
-          meta: {
-            ERP: '26,32%',
-            CPV: '3,22 ₽',
-            clients: '100%',
-          },
-        },
-        {
-          img: require('~/assets/img/placeholder/group1.png'),
-          title: 'Business marketing',
-          excerpt:
-            'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
-          subscribers: '1 268 846',
-          meta: {
-            ERP: '26,32%',
-            CPV: '3,22 ₽',
-            clients: '100%',
-          },
-        },
-        {
-          img: require('~/assets/img/placeholder/group2.png'),
-          title: 'Фармер',
-          excerpt:
-            'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
-          subscribers: '1 268 846',
-          meta: {
-            ERP: '26,32%',
-            CPV: '3,22 ₽',
-            clients: '100%',
-          },
-        },
-        {
-          img: require('~/assets/img/placeholder/group3.png'),
-          title: 'UFC',
-          excerpt:
-            'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
-          subscribers: '1 268 846',
-          meta: {
-            ERP: '26,32%',
-            CPV: '3,22 ₽',
-            clients: '100%',
-          },
-        },
-        {
-          img: require('~/assets/img/placeholder/group4.png'),
-          title: 'ForkLog',
-          excerpt:
-            'Группа посвященная творению компаний Marvel и DC. Также любим обозревать другие киношедевры.',
-          subscribers: '1 268 846',
-          meta: {
-            ERP: '26,32%',
-            CPV: '3,22 ₽',
-            clients: '100%',
-          },
-        },
-      ],
+      items: [],
       selected: [] as Array<number>,
     }
   },

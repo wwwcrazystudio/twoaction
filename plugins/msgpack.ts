@@ -46,7 +46,12 @@ const myPlugin: Plugin = ({ $axios }, inject) => {
   } as object
   let responseData: ArrayBuffer
 
-  inject('getApiData', async (url: string) => {
+  inject('getApiData', async (url: string, payload: object) => {
+    if (payload) {
+      const data = stringify(payload)
+      url = `${url}/?${data}`
+    }
+
     responseData = await $axios.$get(url, options)
 
     return unpack(Buffer.from(responseData))
@@ -54,6 +59,7 @@ const myPlugin: Plugin = ({ $axios }, inject) => {
 
   inject('postApiData', async (url: string, payload: object) => {
     responseData = await $axios.$post(url, stringify(payload), options)
+    console.log(payload)
 
     return unpack(Buffer.from(responseData))
   })

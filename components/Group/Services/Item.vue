@@ -22,8 +22,7 @@
       </div>
 
       <div class="service-item__description">
-        Размещение рекламного поста в Инстаграм с вашим креативом, на 12 или 24
-        часа
+        Размещение рекламного поста в телеграм с вашим креативом
       </div>
 
       <div class="service-item__form">
@@ -32,16 +31,66 @@
           <FormSelect
             label="Формат размещения"
             class="service-item__select"
-            :options="[{ label: '123', value: '123' }]"
+            :options="options"
+            :value="service"
+            @change="$emit('change', $event)"
           />
-          <div class="service-item__form-price">от <span>550 ₽</span></div>
+          <div class="service-item__form-price"><span>{{service ? service.value : `от ${options[0].value}`}} ₽</span></div>
         </div>
       </div>
 
-      <button class="service-item__btn">Заказать рекламу</button>
+      <button class="service-item__btn" @click="$emit('order')">Заказать рекламу</button>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    group: {
+      type: Object,
+      required: true,
+    },
+    service: {
+      type: Object,
+      default: null
+    }
+  },
+  computed: {
+    options() {
+      const options = []
+
+      if (parseInt(this.group.p24)) {
+        options.push({
+          label: '24 ч.',
+          hours: 24,
+          value: this.group.p24,
+        })
+      }
+
+      if (parseInt(this.group.p48)) {
+        options.push({
+          label: '48 ч.',
+          hours: 48,
+          value: this.group.p48,
+        })
+      }
+
+
+      if (parseInt(this.group.p72)) {
+        options.push({
+          label: '72 ч.',
+          hours: 72,
+          value: this.group.p72,
+        })
+      }
+
+
+      return options
+    },
+  },
+}
+</script>
 
 <style lang="scss" scoped>
 .service-item {

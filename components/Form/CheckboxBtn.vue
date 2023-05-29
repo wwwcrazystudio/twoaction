@@ -37,6 +37,10 @@ export default Vue.extend({
       type: Array,
       default: undefined,
     },
+    checked: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -44,26 +48,30 @@ export default Vue.extend({
       focus: false,
     }
   },
-  computed: {
-    checked(): boolean {
-      return this.list.includes(this.value)
-    },
-  },
   mounted(this: any) {
     this.id = uuid() as string
   },
   methods: {
-    handleChange() {
-      let list = [...this.list]
+    handleChange(e: Event) {
+      const target = e.target as HTMLInputElement
+      const { checked } = target
 
-      if (this.checked) {
-        list = list.filter((el) => el !== this.value)
-      } else {
-        list.push(this.value)
+      if (this.list) {
+        let list = [...this.list]
+
+        if (this.checked) {
+          list = list.filter((el) => el !== this.value)
+        } else {
+          list.push(this.value)
+        }
+
+        this.$emit('update:list', list)
       }
 
-      this.$emit('update:list', list)
-      this.$emit('change', this.value)
+      console.log(checked)
+
+      this.$emit('update:value', checked)
+      this.$emit('update:checked', checked)
     },
   },
 })

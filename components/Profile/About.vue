@@ -7,9 +7,7 @@
 
       <div class="profile-about__heading">О себе</div>
 
-      <div class="profile-about__description">
-        Отличная и коммуникабельная администрация! Очень оперативно и осторожно
-        исполнили заказ. Обязательно буду обращаться еще.
+      <div class="profile-about__description" v-if="userData.about" v-html="userData.about">
       </div>
 
       <ul class="profile-about__meta">
@@ -30,7 +28,7 @@
               />
             </svg>
           </div>
-          <var>12</var> созданных заказов
+          <var>0</var> созданных заказов
         </li>
         <li class="profile-about__meta-item">
           <div class="profile-about__meta-item-icon">
@@ -49,12 +47,22 @@
               />
             </svg>
           </div>
-          <var>4</var> повторных заказа
+          <var>0</var> повторных заказа
         </li>
       </ul>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    userData() {
+      return this.$store.state.user.userData
+    },
+  },
+}
+</script>
 
 <style lang="scss" scoped>
 .profile-about {
@@ -96,22 +104,19 @@
     font-size: rem(13.5px);
     line-height: 180%;
 
+    padding-bottom: rem(26px);
+    margin-bottom: rem(30px);
+    border-bottom: 1px solid rgba(186, 186, 186, 0.2);
+
     @include media-breakpoint-down(md) {
       font-size: rem(12px);
+      margin-bottom: rem(22px);
+      padding-bottom: rem(22px);
     }
   }
 
   &__meta {
     @include unlist;
-
-    padding-top: rem(26px);
-    margin-top: rem(30px);
-    border-top: 1px solid rgba(186, 186, 186, 0.2);
-
-    @include media-breakpoint-down(md) {
-      margin-top: rem(22px);
-      padding-top: rem(22px);
-    }
 
     &-item {
       display: flex;

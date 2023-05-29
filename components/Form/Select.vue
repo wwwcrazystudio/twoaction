@@ -79,6 +79,7 @@ export default Vue.extend({
     innerVal(val: object) {
       this.focus = false
       this.$emit('update:value', val)
+      this.$emit('change', val)
     },
     value(val: object) {
       this.innerVal = val
@@ -141,6 +142,9 @@ export default Vue.extend({
     background-repeat: no-repeat;
     background-position: calc(100% - 18px);
     cursor: pointer;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 
     @include media-breakpoint-down(md) {
       font-size: rem(12px);

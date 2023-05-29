@@ -1,12 +1,12 @@
 <template>
   <div class="group-stats">
     <div class="group-stats__head">
-      <h2 class="group-stats__heading">Статистика сообщества</h2>
+ <!--      <h2 class="group-stats__heading">Статистика сообщества</h2> -->
 
-      <button class="group-stats__btn">Полная статистика</button>
+      <!--       <button class="group-stats__btn">Полная статистика</button> -->
     </div>
 
-    <div class="group-stats__content">
+    <div v-if="group.type === 'I'" class="group-stats__content">
       <button
         ref="prev"
         class="group-stats__control group-stats__control--prev"
@@ -43,6 +43,13 @@
         <img src="~/assets/img/icons/arrow.png" alt="" />
       </button>
     </div>
+
+    <div v-if="group.type === 'T'" class="group-stats__content" >
+      <div class="group-stats__content-wrap">
+        <div class="group-stats__content-title">Статистика канала</div>
+        <img :src="widgetURL" alt="" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -51,6 +58,19 @@ import Vue from 'vue'
 import Swiper, { Navigation } from 'swiper'
 
 export default Vue.extend({
+  props: {
+    group: {
+      type: Object,
+      required: true,
+    },
+  },
+  computed: {
+    widgetURL(this: any) {
+      const groupName: string = new URL(this.group.hash).pathname
+
+      return `https://tgstat.ru/channel/${groupName}/stat-widget.png`
+    },
+  },
   mounted(this: any) {
     this.$nextTick(() => {
       const wrap = this.$refs.wrap as HTMLElement
@@ -78,7 +98,10 @@ export default Vue.extend({
         },
       }
 
-      this.carouselRowFirst = new Swiper(wrap, args)
+      if (wrap) {
+        this.carouselRowFirst = new Swiper(wrap, args)
+      }
+
     })
   },
 })
@@ -126,6 +149,28 @@ export default Vue.extend({
       margin-right: -20px;
     }
   }
+
+  &__content-wrap {
+    margin-bottom: rem(48px);
+    position: relative;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  
+  &__content-title {
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: #fff;
+      width: 50%;
+      height: 160px;
+      padding: rem(20px);
+      font-size: rem(20px);
+      font-weight: 600;
+    }
 
   &__control {
     background: $main;

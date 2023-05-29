@@ -13,12 +13,14 @@
               type="email"
               :value.sync="form.email"
               label="Ваш E-mail"
+              name="email"
               :show-label="false"
             />
 
             <FormInput
               class="auth__input"
               type="password"
+              name="password"
               :value.sync="form.password"
               label="Ваш пароль"
               :show-label="false"
@@ -61,6 +63,7 @@
             <FormInput
               class="auth__input"
               type="email"
+              name="email"
               :value.sync="form.email"
               label="Ваш E-mail"
               :show-label="false"
@@ -78,12 +81,22 @@
                 <NuxtLink to="/">правилами использования сервиса</NuxtLink>
               </div>
             </div>
+
+            <div class="auth__foot">
+              <button class="auth__link" @click.prevent="type = 'login'">
+                Вход в систему
+              </button>
+              <button class="auth__link" @click.prevent="type = 'forgot'">
+                Забыли пароль?
+              </button>
+            </div>
           </template>
 
           <template v-if="type === 'forgot'">
             <FormInput
               class="auth__input"
               type="email"
+              name="email"
               :value.sync="form.email"
               label="Ваш E-mail"
               :show-label="false"
@@ -94,6 +107,15 @@
             </div>
 
             <button class="auth__btn">Отправить код</button>
+
+            <div class="auth__foot">
+              <button class="auth__link" @click.prevent="type = 'login'">
+                Вход в систему
+              </button>
+              <button class="auth__link" @click.prevent="type = 'reg'">
+                Регистрация
+              </button>
+            </div>
           </template>
         </form>
       </div>
@@ -295,19 +317,19 @@ export default Vue.extend({
   &__btn {
     @extend %btn-main;
 
-    margin-top: rem(22px);
-    margin-bottom: rem(30px);
+    margin-top: rem(12px);
     width: 100%;
-
-    @include media-breakpoint-down(md) {
-      margin-bottom: rem(22px);
-    }
   }
 
   &__foot {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-top: rem(30px);
+
+    @include media-breakpoint-down(md) {
+      margin-top: rem(22px);
+    }
   }
 
   &__type {

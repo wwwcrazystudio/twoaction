@@ -1,6 +1,6 @@
 <template>
   <li class="group-item" :class="view === 'list' && 'group-item--list'">
-    <NuxtLink to="/group/123" class="group-item__wrap">
+    <NuxtLink :to="isOwner ? `/my-groups/${item.channel_id}` : `/group/${item.channel_id}`" class="group-item__wrap">
       <Picture
         v-if="item.logo"
         :srcset="item.logo"
@@ -8,7 +8,10 @@
         class="group-item__icon"
       />
 
+      <div v-else class="group-item__icon"></div>
+
       <div class="group-item__info">
+
         <div class="group-item__title-wrap">
           <button class="group-item__favourite">
             <svg
@@ -26,7 +29,11 @@
               />
             </svg>
           </button>
-          <div class="group-item__group-type group-item__group-type--inst">
+
+          <div
+            v-if="item.type === 'I'"
+            class="group-item__group-type group-item__group-type--inst"
+          >
             <svg
               width="12"
               height="12"
@@ -40,9 +47,34 @@
               />
             </svg>
           </div>
+
+          <div
+            v-if="item.type === 'T'"
+            class="group-item__group-type group-item__group-type--tg"
+          >
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 16 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M14.9018 0.41763C13.8382 0.80888 0.730424 5.84456 0.537362 5.9361C-0.10417 6.24016 -0.17917 6.64178 0.354893 6.91344C0.406455 6.93966 1.29367 7.22338 2.32649 7.54394L4.20436 8.12675L8.46842 5.45935C10.8136 3.99225 12.7797 2.77544 12.8374 2.75535C12.9822 2.70485 13.1069 2.70957 13.165 2.76775C13.2058 2.80847 13.2075 2.82891 13.1751 2.88875C13.1537 2.92835 11.5963 4.34266 9.71427 6.03166C7.83224 7.72066 6.28733 9.11578 6.28111 9.13197C6.27492 9.14812 6.21127 9.99137 6.13964 11.0058L6.00946 12.8503L6.15092 12.8312C6.22874 12.8207 6.35196 12.7806 6.42474 12.742C6.49755 12.7034 6.98752 12.2596 7.51361 11.7557C8.03967 11.2518 8.48833 10.8326 8.51061 10.824C8.53286 10.8155 9.37064 11.4089 10.3723 12.1427C11.374 12.8766 12.272 13.5133 12.368 13.5576C12.6196 13.6739 12.903 13.6854 13.0871 13.5869C13.2516 13.4989 13.4123 13.2804 13.4799 13.0528C13.506 12.9647 14.0787 10.3187 14.7525 7.17288C15.8743 1.93519 15.9775 1.4281 15.9779 1.15625C15.9783 0.899411 15.9676 0.838317 15.8988 0.70313C15.8503 0.607817 15.7675 0.510505 15.6866 0.45363C15.5017 0.323568 15.1956 0.309536 14.9018 0.41763Z"
+                fill="#0085E5"
+              />
+            </svg>
+          </div>
+
           <h2 class="group-item__title">{{ item.title }}</h2>
         </div>
-        <div class="group-item__cat">{{ item.category }}</div>
+
+        <div v-if="item.category" class="group-item__cat">
+          {{ item.category }}
+        </div>
+
       </div>
 
       <div v-if="view === 'grid'" class="group-item__count">
@@ -60,12 +92,12 @@
             подписчиков
           </li>
           <li class="group-meta__item">
-            <var>0</var>
-            ERP
+            <var>{{ item.err }}%</var>
+            ERR
           </li>
           <li class="group-meta__item">
-            <var>0</var>
-            CPV
+            <var>{{ erp }}%</var>
+            ER%
           </li>
           <li class="group-meta__item">
             <var>0</var>
@@ -86,9 +118,18 @@ export default Vue.extend({
       type: Object,
       required: true,
     },
+    isOwner: {
+      type: Boolean,
+      default: false
+    },
     view: {
       type: String,
       default: 'grid',
+    },
+  },
+  computed: {
+    erp(this: any) {
+      return ((this.item.coverage / this.item.subscibers) * 100) / 10000 || 0
     },
   },
 })
@@ -143,6 +184,10 @@ export default Vue.extend({
     &--inst {
       background: rgba(255, 160, 0, 0.06);
     }
+
+    &--tg {
+      background: rgba(0, 133, 229, 0.06);
+    }
   }
 
   &__icon {
@@ -153,6 +198,7 @@ export default Vue.extend({
     margin: auto;
     margin-bottom: rem(18px);
     display: block;
+    background-color: $main;
 
     @include media-breakpoint-down(md) {
       width: 60px;

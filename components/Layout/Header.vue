@@ -18,6 +18,41 @@
             :label="['Рекламодателям', 'Владельцу канала']"
             :value.sync="type"
           />
+        </template>
+
+        <template v-if="headerType === 'platform'">
+          <div v-show="showSearchBar" class="header__search-form search-form">
+            <FormInput
+              class="search-form__input"
+              label="Поиск"
+              type="search"
+              :show-label="false"
+            />
+          </div>
+          <button
+            class="header__search-btn"
+            @click="showSearchBar = !showSearchBar"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7.3016 1.84613C4.29438 1.84613 1.84766 4.29285 1.84766 7.30008C1.84766 10.3075 4.29438 12.754 7.3016 12.754C10.309 12.754 12.7555 10.3075 12.7555 7.30008C12.7555 4.29285 10.309 1.84613 7.3016 1.84613ZM7.3016 11.7472C4.84951 11.7472 2.85454 9.75219 2.85454 7.3001C2.85454 4.84801 4.84951 2.85301 7.3016 2.85301C9.75369 2.85301 11.7487 4.84798 11.7487 7.30008C11.7487 9.75217 9.75369 11.7472 7.3016 11.7472Z"
+                fill="#0085E5"
+              />
+              <path
+                d="M14.0817 13.3713L11.1953 10.4849C10.9986 10.2882 10.6801 10.2882 10.4834 10.4849C10.2868 10.6814 10.2868 11.0003 10.4834 11.1968L13.3699 14.0832C13.4682 14.1815 13.5969 14.2307 13.7258 14.2307C13.8545 14.2307 13.9834 14.1815 14.0817 14.0832C14.2784 13.8867 14.2784 13.5678 14.0817 13.3713Z"
+                fill="#0085E5"
+              />
+            </svg>
+          </button>
+        </template>
+
+        <template v-if="!isUserLoggedIn">
           <NuxtLink to="/auth" class="header__auth">
             <svg
               width="16"
@@ -40,33 +75,7 @@
           </NuxtLink>
         </template>
 
-        <template v-if="headerType === 'platform'">
-          <div v-show="showSearchBar" class="header__search-form search-form">
-            <FormInput class="search-form__input" label="Поиск" type="search" />
-          </div>
-
-          <button
-            class="header__search-btn"
-            @click="showSearchBar = !showSearchBar"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M7.3016 1.84613C4.29438 1.84613 1.84766 4.29285 1.84766 7.30008C1.84766 10.3075 4.29438 12.754 7.3016 12.754C10.309 12.754 12.7555 10.3075 12.7555 7.30008C12.7555 4.29285 10.309 1.84613 7.3016 1.84613ZM7.3016 11.7472C4.84951 11.7472 2.85454 9.75219 2.85454 7.3001C2.85454 4.84801 4.84951 2.85301 7.3016 2.85301C9.75369 2.85301 11.7487 4.84798 11.7487 7.30008C11.7487 9.75217 9.75369 11.7472 7.3016 11.7472Z"
-                fill="#0085E5"
-              />
-              <path
-                d="M14.0817 13.3713L11.1953 10.4849C10.9986 10.2882 10.6801 10.2882 10.4834 10.4849C10.2868 10.6814 10.2868 11.0003 10.4834 11.1968L13.3699 14.0832C13.4682 14.1815 13.5969 14.2307 13.7258 14.2307C13.8545 14.2307 13.9834 14.1815 14.0817 14.0832C14.2784 13.8867 14.2784 13.5678 14.0817 13.3713Z"
-                fill="#0085E5"
-              />
-            </svg>
-          </button>
-
+        <template v-else>
           <NuxtLink to="/favourites" class="header__link header__link--fav">
             <svg
               width="16"
@@ -102,12 +111,12 @@
               />
             </svg>
 
-            8 330 ₽
+            0 ₽
           </NuxtLink>
 
           <div class="header__profile">
             <NuxtLink to="/account/profile" class="header__profile-img">
-              <img src="~/assets/img/placeholder/profile.jpg" alt="" />
+              <img v-if="userData.avatar" :src="userData.avatar"  alt="" />
             </NuxtLink>
           </div>
         </template>
@@ -126,7 +135,7 @@
   </header>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 
 export default Vue.extend({
@@ -148,12 +157,18 @@ export default Vue.extend({
     }
   },
   computed: {
-    isTablet(this: any): boolean {
+    isTablet() {
       return this.$isTablet()
     },
-    isMobile(this: any): boolean {
+    isMobile() {
       return this.$isMobile()
     },
+    isUserLoggedIn() {
+      return this.$store.state.user.isLogged
+    },
+    userData() {
+      return this.$store.state.user.userData
+  },
   },
   watch: {
     showMenu(val) {
@@ -224,6 +239,7 @@ export default Vue.extend({
   }
 
   &__switchbox {
+    margin-right: auto;
     @include media-breakpoint-down(md) {
       display: none;
     }
@@ -372,6 +388,7 @@ export default Vue.extend({
       width: 50px;
       height: 50px;
       border-radius: 50%;
+      background: $main;
 
       @include media-breakpoint-down(md) {
         width: 32px;
@@ -382,6 +399,7 @@ export default Vue.extend({
         object-fit: cover;
         width: 100%;
         height: 100%;
+        border-radius: 50%;
       }
     }
   }

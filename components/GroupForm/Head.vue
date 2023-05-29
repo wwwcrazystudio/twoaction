@@ -1,34 +1,50 @@
 <template>
   <div class="group-info">
     <div class="group-info__content">
-      <div class="group-info__logo">
+      <!--       <div v-if="Array.isArray(groupData.logo)" class="group-info__logo">
         <div
-          v-for="logo in logos"
-          :key="logo.title"
+          v-for="logo in groupData.logo"
+          :key="logo"
           class="group-info__logo-item"
         >
-          <img :src="logo.src" alt="Crypto BIT" />
+          <img :src="logo.src" :alt="groupData.title" />
+        </div>
+      </div>
+ -->
+      <div class="group-info__logo">
+        <div class="group-info__logo-item">
+          <img :src="data.logo" :alt="data.title" />
         </div>
       </div>
 
       <div class="group-info__info">
-        <div class="group-info__title">Crypto BIT</div>
-        <div class="group-info__count"><var>1 268 846</var> подписчика</div>
-        <div class="group-info__cat">кино и игры</div>
+        <div class="group-info__title">{{ data.title }}</div>
+        <div class="group-info__count">
+          <var>{{ data.subscibers }}</var> подписчика
+        </div>
+        <div v-if="data.tags" class="group-info__cats">
+          <div
+            v-for="tag in data.tags"
+            :key="tag.tag_id"
+            class="group-info__cat"
+          >
+            {{ tag.tag }}
+          </div>
+        </div>
       </div>
 
       <div class="group-info__meta">
         <div class="group-info__meta-list">
           <div class="group-info__meta-item">
-            <var>26,32%</var>
-            ERP
+            <var>{{ data.err }}%</var>
+            ERR
           </div>
           <div class="group-info__meta-item">
-            <var>3,22 ₽</var>
-            CPV
+            <var>{{ erp }}%</var>
+            ER%
           </div>
         </div>
-        <NuxtLink to="/" class="group-info__link">
+        <NuxtLink target="_blank" :to="`/group/${data.channel_id}`" class="group-info__link">
           Открыть в отдельном окне
         </NuxtLink>
       </div>
@@ -40,15 +56,16 @@
 import Vue from 'vue'
 export default Vue.extend({
   props: {
-    logos: {
-      type: Array,
-      required: true,
-    },
-    /* info: {
+    data: {
       type: Object,
       required: true,
-    }, */
+    },
   },
+  computed: {
+    erp(this: any) {
+      return (this.data.coverage / this.data.subscibers) * 100 / 10000
+    }
+  }
 })
 </script>
 
@@ -65,6 +82,11 @@ export default Vue.extend({
     @include media-breakpoint-down(sm) {
       flex-direction: column;
     }
+  }
+
+  &__cats {
+    display: flex;
+    gap: 4px;
   }
 
   &__count {

@@ -6,6 +6,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 
   @include media-breakpoint-down(md) {
     font-size: rem(13px);

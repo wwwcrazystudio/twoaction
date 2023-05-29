@@ -1,6 +1,11 @@
 <template>
   <div class="multifile">
-    <div class="multifile__title">{{ label }}</div>
+    <div
+      class="multifile__title"
+      :class="!showLabel && 'multifile__title--hidden'"
+    >
+      {{ label }}
+    </div>
     <div class="multifile__wrap">
       <input
         :id="id"
@@ -31,10 +36,7 @@
           />
         </svg>
 
-        <span class="multifile__label-text">
-          <u>Загрузите</u> ваши условия размещения, или перетащите и отпустите в
-          эту форму для загрузки (.doc, .pdf до 10 мБ)
-        </span>
+        <span class="multifile__label-text" v-html="desc"> </span>
       </label>
 
       <ul v-if="files.length" class="multifile__list">
@@ -63,9 +65,18 @@ export default Vue.extend({
       type: String,
       required: true,
     },
+    showLabel: {
+      type: Boolean,
+      default: true,
+    },
     files: {
       type: undefined,
       required: true,
+    },
+    desc: {
+      type: String,
+      default: `<u>Загрузите</u> ваши условия размещения, или перетащите и отпустите в
+          эту форму для загрузки (.doc, .pdf до 10 мБ)`,
     },
   },
   data() {
@@ -143,6 +154,18 @@ export default Vue.extend({
     font-size: rem(15px);
     margin-bottom: rem(20px);
     color: $dark;
+
+        &--hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
 
     @include media-breakpoint-down(md) {
       font-size: rem(12px);

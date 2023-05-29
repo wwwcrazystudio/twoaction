@@ -3,10 +3,21 @@
     <h2 class="group-services__heading">Предоставляемые услуги</h2>
 
     <ul class="group-services__list">
-      <GroupServicesItem class="group-services__service-item" />
+      <GroupServicesItem class="group-services__service-item" :group="group" @change="$emit('update:service', $event)" @order="$emit('order')" />
     </ul>
   </div>
 </template>
+
+<script lang="ts">
+export default {
+  props: {
+    group: {
+      type: Object,
+      required: true
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .group-services {

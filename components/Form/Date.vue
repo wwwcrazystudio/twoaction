@@ -9,6 +9,7 @@
     </label>
     <DatePicker
       :value="value"
+      format="YYYY.MM.DD"
       :placeholder="label"
       :input-attr="{ id: id, class: 'datepicker__control' }"
       @input="handleInput"

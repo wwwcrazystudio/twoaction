@@ -19,7 +19,7 @@ export const actions = {
 
     if (!tokenResponse.error) {
       const userData = await this.$getApiData(`/profile/${token}`)
-      console.log(userData)
+      console.log(userData[0])
 
       commit('setUserData', userData[0])
       commit('setIsLogged', true)

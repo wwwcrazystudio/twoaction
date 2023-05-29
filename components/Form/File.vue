@@ -32,14 +32,6 @@ export default Vue.extend({
   },
   mounted(this: any) {
     this.id = uuid() as string
-
-    if (this.mask) {
-      this.initMask()
-
-      this.$nextTick(() => {
-        this.masked.typedValue = this.value.toString() as string
-      })
-    }
   },
   methods: {
     handleFile(e: any) {

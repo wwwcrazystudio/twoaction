@@ -1,13 +1,10 @@
 <template>
   <div class="input">
-    <div
-      class="input__wrap"
-      :class="[
-        hasFocus && 'input__wrap--focus',
-        simple && 'input__wrap--simple',
-        !showLabel && 'input__wrap--hidden-label',
-      ]"
-    >
+    <div class="input__wrap" :class="[
+      hasFocus && 'input__wrap--focus',
+      simple && 'input__wrap--simple',
+      !showLabel && 'input__wrap--hidden-label',
+    ]">
       <label :for="id" class="input__label">
         {{ label }}
       </label>
@@ -15,48 +12,20 @@
         <div class="input__icon">
           <slot name="icon" />
         </div>
-        <input
-          :id="id"
-          ref="input"
-          :type="inputType"
-          class="input__control"
-          :class="type === 'search' && 'input__control--search'"
-          :value="value"
-          :name="label"
-          :placeholder="placeholder || label"
-          :min="min"
-          :max="max"
-          :readonly="readonly"
-          @focus="!readonly ? (focus = true) : null"
-          @blur="focus = false"
-          @input="handleInput"
-        />
+        <input :id="id" ref="input" :type="inputType" class="input__control"
+          :class="type === 'search' && 'input__control--search'" :value="value" :name="name || label"
+          :placeholder="placeholder || label" :min="min" :max="max" :readonly="readonly"
+          @focus="!readonly ? (focus = true) : null" @blur="focus = false" @input="handleInput" />
 
-        <button
-          v-if="type === 'password'"
-          class="input__show-pwd"
-          @click.prevent="showPW = !showPW"
-        >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+        <button v-if="type === 'password'" class="input__show-pwd" @click.prevent="showPW = !showPW">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_4177_244)">
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+              <path fill-rule="evenodd" clip-rule="evenodd"
                 d="M11.8274 12.0336C13.8021 10.9017 15.2602 9.22198 15.8135 8.53316C16.0622 8.23127 16.0622 7.78732 15.8135 7.46768C14.9434 6.38444 11.8357 2.85059 8 2.85059C7.10722 2.85059 6.25389 3.04203 5.45903 3.34945L6.39903 4.63127C6.8841 4.40042 7.42693 4.27123 8 4.27123C10.0599 4.27123 11.7292 5.94049 11.7292 8.00042C11.7292 8.98136 11.3507 9.87371 10.7317 10.5394L11.8274 12.0336ZM5.27023 5.45941C4.65012 6.12531 4.27081 7.01848 4.27081 8.00042C4.27081 10.0604 5.94007 11.7296 8 11.7296C8.57406 11.7296 9.11777 11.6 9.60347 11.3684L10.5436 12.6504C9.74799 12.9584 8.89376 13.1503 8 13.1503C4.16426 13.1503 1.0566 9.6164 0.18646 8.53316C-0.0621532 8.21352 -0.0621532 7.76956 0.18646 7.46768C0.74 6.77858 2.19902 5.09775 4.17495 3.96584L5.27023 5.45941Z"
-                fill="#0085E5"
-              />
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fill="#0085E5" />
+              <path fill-rule="evenodd" clip-rule="evenodd"
                 d="M10.0306 9.58343C10.372 9.14652 10.5756 8.59686 10.5756 8.00022C10.5756 6.57957 9.42135 5.42529 8.00071 5.42529C7.68405 5.42529 7.38063 5.48264 7.10027 5.5875L10.0306 9.58343ZM5.97166 6.4159C5.62972 6.85298 5.42578 7.40307 5.42578 8.00022C5.42578 9.42086 6.58006 10.5751 8.00071 10.5751C8.31786 10.5751 8.62173 10.5176 8.90245 10.4124L5.97166 6.4159Z"
-                fill="#0085E5"
-              />
+                fill="#0085E5" />
             </g>
             <defs>
               <clipPath id="clip0_4177_244">
@@ -66,11 +35,7 @@
           </svg>
         </button>
 
-        <button
-          v-if="canRemove"
-          class="input__remove"
-          @click.prevent="$emit('remove')"
-        >
+        <button v-if="canRemove" class="input__remove" @click.prevent="$emit('remove')">
           <img src="~/assets/img/icons/closewhite.png" alt="" />
         </button>
       </div>
@@ -129,6 +94,10 @@ export default Vue.extend({
       type: Boolean,
       default: false,
     },
+    name: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
@@ -183,7 +152,7 @@ export default Vue.extend({
       }
     },
     handleMaskChange() {
-      const value = this.masked.typedValue as string
+      const value = this.masked.unmaskedValue as string
 
       this.$emit('update:value', value)
       this.$emit('input', value)
@@ -236,6 +205,10 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .input {
+  &__control-wrap {
+    position: relative;
+  }
+
   &__wrap {
     position: relative;
 
@@ -252,6 +225,7 @@ export default Vue.extend({
         padding-top: rem(20px);
       }
     }
+
 
     &--simple {
       .input__label {

@@ -5,12 +5,12 @@
         Расписание рекламных интеграций в сообществе
       </h2>
 
-      <FormDate
+<!--       <FormDate
         class="group-schedule__datepicker"
         :value.sync="date"
         :show-label="false"
         label="Выберите нужную дату"
-      />
+      /> -->
 
       <div class="group-schedule__carousel-controls">
         <button
@@ -58,22 +58,23 @@
       <div ref="wrap" class="group-schedule__carousel swiper">
         <div class="group-schedule__carousel-wrap swiper-wrapper">
           <div
-            v-for="day in schedule"
+            v-for="day in group.schedule"
             :key="day.date"
             class="group-schedule__schedule-item swiper-slide"
           >
             <div class="schedule-item__head">
-              Пн <var>{{ day.date }}</var>
+              {{getDayName(day.date) }} <var>{{ getDate(day.date) }}</var>
             </div>
             <div class="schedule-item__hours">
               <ul class="schedule-item__hours-list">
                 <li
-                  v-for="hour in day.hours"
-                  :key="day.date + hour.val"
+                  v-for="(hour, key) in day.hours"
+                  :key="day.date + hour"
                   class="schedule-item__hours-item"
-                  :class="hour.status && 'schedule-item__hours-item--active'"
+                  :class="hour !== 'open' && 'schedule-item__hours-item--occupied'"
+                  @click="$emit('update:time', `${day.date} ${key}:00:00` )"
                 >
-                  {{ hour.val }}
+                  {{ key }}:00
                 </li>
               </ul>
             </div>
@@ -89,819 +90,15 @@ import Vue from 'vue'
 import Swiper, { Navigation } from 'swiper'
 
 export default Vue.extend({
+  props: {
+    group: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
-      date: null,
-      schedule: [
-        {
-          date: '18.01.2022',
-          hours: [
-            {
-              val: '01:00',
-              status: false,
-            },
-            {
-              val: '02:00',
-              status: false,
-            },
-            {
-              val: '03:00',
-              status: true,
-            },
-            {
-              val: '04:00',
-              status: true,
-            },
-            {
-              val: '05:00',
-              status: false,
-            },
-            {
-              val: '06:00',
-              status: false,
-            },
-            {
-              val: '07:00',
-              status: false,
-            },
-            {
-              val: '08:00',
-              status: false,
-            },
-            {
-              val: '09:00',
-              status: false,
-            },
-            {
-              val: '10:00',
-              status: true,
-            },
-            {
-              val: '11:00',
-              status: true,
-            },
-            {
-              val: '12:00',
-              status: false,
-            },
-            {
-              val: '13:00',
-              status: false,
-            },
-            {
-              val: '14:00',
-              status: false,
-            },
-            {
-              val: '15:00',
-              status: false,
-            },
-            {
-              val: '16:00',
-              status: false,
-            },
-            {
-              val: '17:00',
-              status: false,
-            },
-            {
-              val: '18:00',
-              status: false,
-            },
-            {
-              val: '19:00',
-              status: false,
-            },
-            {
-              val: '20:00',
-              status: true,
-            },
-            {
-              val: '21:00',
-              status: true,
-            },
-            {
-              val: '22:00',
-              status: false,
-            },
-            {
-              val: '23:00',
-              status: true,
-            },
-            {
-              val: '24:00',
-              status: false,
-            },
-          ],
-        },
-        {
-          date: '19.01.2022',
-          hours: [
-            {
-              val: '01:00',
-              status: false,
-            },
-            {
-              val: '02:00',
-              status: false,
-            },
-            {
-              val: '03:00',
-              status: true,
-            },
-            {
-              val: '04:00',
-              status: true,
-            },
-            {
-              val: '05:00',
-              status: false,
-            },
-            {
-              val: '06:00',
-              status: false,
-            },
-            {
-              val: '07:00',
-              status: false,
-            },
-            {
-              val: '08:00',
-              status: false,
-            },
-            {
-              val: '09:00',
-              status: false,
-            },
-            {
-              val: '10:00',
-              status: true,
-            },
-            {
-              val: '11:00',
-              status: true,
-            },
-            {
-              val: '12:00',
-              status: false,
-            },
-            {
-              val: '13:00',
-              status: false,
-            },
-            {
-              val: '14:00',
-              status: false,
-            },
-            {
-              val: '15:00',
-              status: false,
-            },
-            {
-              val: '16:00',
-              status: false,
-            },
-            {
-              val: '17:00',
-              status: false,
-            },
-            {
-              val: '18:00',
-              status: false,
-            },
-            {
-              val: '19:00',
-              status: false,
-            },
-            {
-              val: '20:00',
-              status: true,
-            },
-            {
-              val: '21:00',
-              status: true,
-            },
-            {
-              val: '22:00',
-              status: false,
-            },
-            {
-              val: '23:00',
-              status: true,
-            },
-            {
-              val: '24:00',
-              status: false,
-            },
-          ],
-        },
-        {
-          date: '20.01.2022',
-          hours: [
-            {
-              val: '01:00',
-              status: false,
-            },
-            {
-              val: '02:00',
-              status: false,
-            },
-            {
-              val: '03:00',
-              status: true,
-            },
-            {
-              val: '04:00',
-              status: true,
-            },
-            {
-              val: '05:00',
-              status: false,
-            },
-            {
-              val: '06:00',
-              status: false,
-            },
-            {
-              val: '07:00',
-              status: false,
-            },
-            {
-              val: '08:00',
-              status: false,
-            },
-            {
-              val: '09:00',
-              status: false,
-            },
-            {
-              val: '10:00',
-              status: true,
-            },
-            {
-              val: '11:00',
-              status: true,
-            },
-            {
-              val: '12:00',
-              status: false,
-            },
-            {
-              val: '13:00',
-              status: false,
-            },
-            {
-              val: '14:00',
-              status: false,
-            },
-            {
-              val: '15:00',
-              status: false,
-            },
-            {
-              val: '16:00',
-              status: false,
-            },
-            {
-              val: '17:00',
-              status: false,
-            },
-            {
-              val: '18:00',
-              status: false,
-            },
-            {
-              val: '19:00',
-              status: false,
-            },
-            {
-              val: '20:00',
-              status: true,
-            },
-            {
-              val: '21:00',
-              status: true,
-            },
-            {
-              val: '22:00',
-              status: false,
-            },
-            {
-              val: '23:00',
-              status: true,
-            },
-            {
-              val: '24:00',
-              status: false,
-            },
-          ],
-        },
-        {
-          date: '21.01.2022',
-          hours: [
-            {
-              val: '01:00',
-              status: false,
-            },
-            {
-              val: '02:00',
-              status: false,
-            },
-            {
-              val: '03:00',
-              status: true,
-            },
-            {
-              val: '04:00',
-              status: true,
-            },
-            {
-              val: '05:00',
-              status: false,
-            },
-            {
-              val: '06:00',
-              status: false,
-            },
-            {
-              val: '07:00',
-              status: false,
-            },
-            {
-              val: '08:00',
-              status: false,
-            },
-            {
-              val: '09:00',
-              status: false,
-            },
-            {
-              val: '10:00',
-              status: true,
-            },
-            {
-              val: '11:00',
-              status: true,
-            },
-            {
-              val: '12:00',
-              status: false,
-            },
-            {
-              val: '13:00',
-              status: false,
-            },
-            {
-              val: '14:00',
-              status: false,
-            },
-            {
-              val: '15:00',
-              status: false,
-            },
-            {
-              val: '16:00',
-              status: false,
-            },
-            {
-              val: '17:00',
-              status: false,
-            },
-            {
-              val: '18:00',
-              status: false,
-            },
-            {
-              val: '19:00',
-              status: false,
-            },
-            {
-              val: '20:00',
-              status: true,
-            },
-            {
-              val: '21:00',
-              status: true,
-            },
-            {
-              val: '22:00',
-              status: false,
-            },
-            {
-              val: '23:00',
-              status: true,
-            },
-            {
-              val: '24:00',
-              status: false,
-            },
-          ],
-        },
-        {
-          date: '22.01.2022',
-          hours: [
-            {
-              val: '01:00',
-              status: false,
-            },
-            {
-              val: '02:00',
-              status: false,
-            },
-            {
-              val: '03:00',
-              status: true,
-            },
-            {
-              val: '04:00',
-              status: true,
-            },
-            {
-              val: '05:00',
-              status: false,
-            },
-            {
-              val: '06:00',
-              status: false,
-            },
-            {
-              val: '07:00',
-              status: false,
-            },
-            {
-              val: '08:00',
-              status: false,
-            },
-            {
-              val: '09:00',
-              status: false,
-            },
-            {
-              val: '10:00',
-              status: true,
-            },
-            {
-              val: '11:00',
-              status: true,
-            },
-            {
-              val: '12:00',
-              status: false,
-            },
-            {
-              val: '13:00',
-              status: false,
-            },
-            {
-              val: '14:00',
-              status: false,
-            },
-            {
-              val: '15:00',
-              status: false,
-            },
-            {
-              val: '16:00',
-              status: false,
-            },
-            {
-              val: '17:00',
-              status: false,
-            },
-            {
-              val: '18:00',
-              status: false,
-            },
-            {
-              val: '19:00',
-              status: false,
-            },
-            {
-              val: '20:00',
-              status: true,
-            },
-            {
-              val: '21:00',
-              status: true,
-            },
-            {
-              val: '22:00',
-              status: false,
-            },
-            {
-              val: '23:00',
-              status: true,
-            },
-            {
-              val: '24:00',
-              status: false,
-            },
-          ],
-        },
-        {
-          date: '23.01.2022',
-          hours: [
-            {
-              val: '01:00',
-              status: false,
-            },
-            {
-              val: '02:00',
-              status: false,
-            },
-            {
-              val: '03:00',
-              status: true,
-            },
-            {
-              val: '04:00',
-              status: true,
-            },
-            {
-              val: '05:00',
-              status: false,
-            },
-            {
-              val: '06:00',
-              status: false,
-            },
-            {
-              val: '07:00',
-              status: false,
-            },
-            {
-              val: '08:00',
-              status: false,
-            },
-            {
-              val: '09:00',
-              status: false,
-            },
-            {
-              val: '10:00',
-              status: true,
-            },
-            {
-              val: '11:00',
-              status: true,
-            },
-            {
-              val: '12:00',
-              status: false,
-            },
-            {
-              val: '13:00',
-              status: false,
-            },
-            {
-              val: '14:00',
-              status: false,
-            },
-            {
-              val: '15:00',
-              status: false,
-            },
-            {
-              val: '16:00',
-              status: false,
-            },
-            {
-              val: '17:00',
-              status: false,
-            },
-            {
-              val: '18:00',
-              status: false,
-            },
-            {
-              val: '19:00',
-              status: false,
-            },
-            {
-              val: '20:00',
-              status: true,
-            },
-            {
-              val: '21:00',
-              status: true,
-            },
-            {
-              val: '22:00',
-              status: false,
-            },
-            {
-              val: '23:00',
-              status: true,
-            },
-            {
-              val: '24:00',
-              status: false,
-            },
-          ],
-        },
-        {
-          date: '24.01.2022',
-          hours: [
-            {
-              val: '01:00',
-              status: false,
-            },
-            {
-              val: '02:00',
-              status: false,
-            },
-            {
-              val: '03:00',
-              status: true,
-            },
-            {
-              val: '04:00',
-              status: true,
-            },
-            {
-              val: '05:00',
-              status: false,
-            },
-            {
-              val: '06:00',
-              status: false,
-            },
-            {
-              val: '07:00',
-              status: false,
-            },
-            {
-              val: '08:00',
-              status: false,
-            },
-            {
-              val: '09:00',
-              status: false,
-            },
-            {
-              val: '10:00',
-              status: true,
-            },
-            {
-              val: '11:00',
-              status: true,
-            },
-            {
-              val: '12:00',
-              status: false,
-            },
-            {
-              val: '13:00',
-              status: false,
-            },
-            {
-              val: '14:00',
-              status: false,
-            },
-            {
-              val: '15:00',
-              status: false,
-            },
-            {
-              val: '16:00',
-              status: false,
-            },
-            {
-              val: '17:00',
-              status: false,
-            },
-            {
-              val: '18:00',
-              status: false,
-            },
-            {
-              val: '19:00',
-              status: false,
-            },
-            {
-              val: '20:00',
-              status: true,
-            },
-            {
-              val: '21:00',
-              status: true,
-            },
-            {
-              val: '22:00',
-              status: false,
-            },
-            {
-              val: '23:00',
-              status: true,
-            },
-            {
-              val: '24:00',
-              status: false,
-            },
-          ],
-        },
-        {
-          date: '25.01.2022',
-          hours: [
-            {
-              val: '01:00',
-              status: false,
-            },
-            {
-              val: '02:00',
-              status: false,
-            },
-            {
-              val: '03:00',
-              status: true,
-            },
-            {
-              val: '04:00',
-              status: true,
-            },
-            {
-              val: '05:00',
-              status: false,
-            },
-            {
-              val: '06:00',
-              status: false,
-            },
-            {
-              val: '07:00',
-              status: false,
-            },
-            {
-              val: '08:00',
-              status: false,
-            },
-            {
-              val: '09:00',
-              status: false,
-            },
-            {
-              val: '10:00',
-              status: true,
-            },
-            {
-              val: '11:00',
-              status: true,
-            },
-            {
-              val: '12:00',
-              status: false,
-            },
-            {
-              val: '13:00',
-              status: false,
-            },
-            {
-              val: '14:00',
-              status: false,
-            },
-            {
-              val: '15:00',
-              status: false,
-            },
-            {
-              val: '16:00',
-              status: false,
-            },
-            {
-              val: '17:00',
-              status: false,
-            },
-            {
-              val: '18:00',
-              status: false,
-            },
-            {
-              val: '19:00',
-              status: false,
-            },
-            {
-              val: '20:00',
-              status: true,
-            },
-            {
-              val: '21:00',
-              status: true,
-            },
-            {
-              val: '22:00',
-              status: false,
-            },
-            {
-              val: '23:00',
-              status: true,
-            },
-            {
-              val: '24:00',
-              status: false,
-            },
-          ],
-        },
-      ],
+      date: null
     }
   },
   mounted(this: any) {
@@ -913,7 +110,7 @@ export default Vue.extend({
       const args = {
         slidesPerView: 1.5,
         spaceBetween: 20,
-        loop: true,
+        loop: false,
         breakpoints: {
           1400: {
             slidesPerView: 7,
@@ -933,6 +130,22 @@ export default Vue.extend({
 
       this.carouselRowFirst = new Swiper(wrap, args)
     })
+  },
+  methods: {
+    getDayName(date:string) {
+      const dateObj = new Date(date)
+      return dateObj.toLocaleDateString('ru-RU' ,{
+        weekday: 'short',
+      })
+    },
+    getDate(date: string) {
+      const dateObj = new Date(date)
+      return dateObj.toLocaleDateString('ru-RU' ,{
+        month: 'short',
+        year: 'numeric',
+        day: 'numeric',
+      })
+    },
   },
 })
 </script>
@@ -954,6 +167,7 @@ export default Vue.extend({
     font-size: rem(18px);
     font-weight: 500;
     margin-bottom: 0;
+    margin-right: auto;
 
     @include media-breakpoint-down(md) {
       font-size: rem(16px);

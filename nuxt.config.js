@@ -1,39 +1,36 @@
 export default {
   target: 'static',
   generate: {
-    fallback: '404.html',
-  },
-  router: {
-    base: '/twoaction/',
+    fallback: '404.html'
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'twoaction',
     meta: [
       {
-        charset: 'utf-8',
+        charset: 'utf-8'
       },
       {
         name: 'viewport',
-        content: 'width=device-width, initial-scale=1',
+        content: 'width=device-width, initial-scale=1'
       },
       {
         hid: 'description',
         name: 'description',
-        content: '',
+        content: ''
       },
       {
         name: 'format-detection',
-        content: 'telephone=no',
-      },
+        content: 'telephone=no'
+      }
     ],
     link: [
       {
         rel: 'icon',
         type: 'image/x-icon',
-        href: '/favicon.ico',
-      },
-    ],
+        href: '/favicon.ico'
+      }
+    ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -44,7 +41,7 @@ export default {
     '~/plugins/media.ts',
     '~/plugins/mime.ts',
     '~/plugins/msgpack.ts',
-    '~/plugins/auth.ts',
+    '~/plugins/auth.ts'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -56,7 +53,7 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/stylelint
     '@nuxtjs/stylelint-module',
-    '@nuxtjs/style-resources',
+    '@nuxtjs/style-resources'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -66,32 +63,37 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    '@nuxtjs/proxy'
+  ],
+
+  proxy: [
+    'https://2a.vlad-i-slav.ru/api'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: 'https://2a.vlad-i-slav.ru/api/',
+    baseURL: 'http://localhost:3000/api'
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'ru',
-    },
+      lang: 'ru'
+    }
   },
 
   styleResources: {
-    scss: ['~/assets/scss/_essentials.scss'],
+    scss: ['~/assets/scss/_essentials.scss']
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     loaders: {
       scss: {
-        sourceMap: false,
-      },
+        sourceMap: false
+      }
     },
-    standalone: true,
-  },
+    standalone: true
+  }
 }

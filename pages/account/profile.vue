@@ -3,11 +3,7 @@
     <div class="profile__wrap">
       <ProfileInfo class="profile__profile-info" />
 
-      <ProfileForm
-        class="profile__profile-form"
-        heading="Личная информация"
-        :inputs="personalInputs"
-      />
+      <ProfileForm class="profile__profile-form" />
 
       <ProfileAbout class="profile__profile-about" />
 
@@ -23,23 +19,6 @@ import Vue from 'vue'
 export default Vue.extend({
   data() {
     return {
-      personalInputs: [
-        {
-          label: 'Ваш E-mail',
-          type: 'email',
-          value: 'kudryavtsevadarya@gmail.com',
-        },
-        {
-          label: 'Ваш номер телефона',
-          type: 'tel',
-          value: '+ 7 (940) 730 - 04 - 20 ',
-        },
-        {
-          label: 'Ваш логин',
-          type: 'text',
-          value: 'kudryavtsevadarya',
-        },
-      ],
       reviews: [
         {
           img: require('~/assets/img/placeholder/group1.png'),
@@ -91,6 +70,11 @@ export default Vue.extend({
         },
       ],
     }
+  },
+  computed: {
+    userData() {
+      return this.$store.state.user.userData
+    },
   },
 })
 </script>

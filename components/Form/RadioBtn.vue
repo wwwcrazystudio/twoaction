@@ -29,9 +29,13 @@ export default Vue.extend({
       type: String,
       required: true,
     },
-    checked: {
-      type: Boolean,
-      default: false,
+    value: {
+      type: String,
+      required: true,
+    },
+    model: {
+      type: String,
+      required: true,
     },
   },
   data() {
@@ -40,12 +44,18 @@ export default Vue.extend({
       focus: false,
     }
   },
+  computed: {
+    checked(): boolean {
+      return this.value === this.model
+    },
+  },
   mounted(this: any) {
     this.id = uuid() as string
   },
   methods: {
     handleChange() {
-      this.$emit('change', this.label)
+      this.$emit('update:model', this.value)
+      this.$emit('change', this.value)
     },
   },
 })

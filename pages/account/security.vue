@@ -8,6 +8,7 @@
             class="security-form__input"
             type="password"
             label="Старый пароль"
+            :value.sync="password"
           />
         </div>
 
@@ -17,15 +18,21 @@
             class="security-form__input"
             type="password"
             label="Придумайте новый пароль"
+            :value.sync="newpassword"
           />
           <FormInput
             class="security-form__input"
             type="password"
             label="Повторите новый пароль"
+            :value.sync="repeatpassword"
           />
         </div>
 
-        <button class="security-form__btn">Сменить пароль</button>
+        <div class="security-form__notice" v-if="notice.length">
+          {{ notice  }}
+        </div>
+
+        <button class="security-form__btn" @click="handlePasswordChange">Сменить пароль</button>
       </div>
 
       <ProfileForm
@@ -39,11 +46,15 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 export default Vue.extend({
   data() {
     return {
+      password: '',
+      newpassword: '',
+      repeatpassword: '',
+      notice: '',
       twoFAInputs: [
         {
           label: 'Номер телефона',
@@ -53,6 +64,40 @@ export default Vue.extend({
       ],
     }
   },
+  methods: {
+    async handlePasswordChange() {
+      this.notice = ''
+
+      const token = this.$cookies.get('token')
+      const { password, newpassword, repeatpassword } = this
+
+      if (!password) {
+        this.notice = 'Необходимо указать старый пароль'
+        return
+      }
+
+      if (!newpassword) {
+        this.notice = 'Необходимо указать новый пароль'
+        return
+      }
+
+      if (newpassword !== repeatpassword) {
+        this.notice = 'Новый и повторенный пароли не совпадают'
+        return
+      }
+
+      const req = await this.$patchApiData('/profile', {
+        token, password, newpassword
+      })
+
+      console.log(req)
+
+      if (req.error) {
+        this.notice = req.error
+      }
+
+    }
+  }
 })
 </script>
 
@@ -103,6 +148,12 @@ export default Vue.extend({
     &:last-of-type {
       margin-bottom: 0;
     }
+  }
+
+  &__notice {
+    font-size: rem(12px);
+    text-align: center;
+    margin-bottom: rem(16px);
   }
 
   &__btn {
